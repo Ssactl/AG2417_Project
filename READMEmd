@@ -3,3 +3,8 @@
 开发环境配置：  
 npm install react react-dom leaflet  
 npm install react-leaflet
+  
+  
+代码思路：
+位置state应该是在APP.js那里初始化，然后从这写一个更新state的eventhandler传到骰子组件，
+骰子的点击事件就是用的从App传过来的函数，点击事件触发后更新state，这样就能同时更新在大地图里的位置值。
