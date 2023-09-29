@@ -6,9 +6,21 @@ import BigMap from "./components/BIgMap";
 import { useState } from "react";
 import Dice from "./components/Dice";
 
+//for testing
+const stationLocationArr = [
+  [39.920514604261506, 116.39601129456929],
+  [31.24615161464742, 121.45993996461581],
+  [22.591414849772395, 114.04906736003136],
+  [30.655749955405586, 104.0562367934888],
+];
+const stationCount = stationLocationArr.length;
+
 //玩游戏的页面，放大地图，小地图和人物展示框这三个组件
 function App() {
-  const [currentLocationIndex, setCurrentLocationIndex] = useState(-1);
+  const [currentStationIndex, setCurrentStationIndex] = useState(0);
+
+  const updateCurrentStation = (newStation) =>
+    setCurrentStationIndex(newStation);
 
   return (
     // <Container className="container" fluid="true">
@@ -27,8 +39,15 @@ function App() {
 
     <div className="container">
       <div className="column--1">
-        <Dice />
-        <BigMap />
+        <Dice
+          currentStationIndex={currentStationIndex}
+          stationCount={stationCount}
+          updateCurrentStation={updateCurrentStation}
+        />
+        <BigMap
+          currentStationIndex={currentStationIndex}
+          stationLocationArr={stationLocationArr}
+        />
       </div>
       <div className="column--2">
         <div className="row--1">player display</div>
