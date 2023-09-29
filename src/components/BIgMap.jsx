@@ -6,10 +6,27 @@
 
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { useEffect, useRef, useState } from "react";
 
-function BigMap() {
+function BigMap({ currentStationIndex, stationLocationArr }) {
+  const mapRef = useRef(); //refer to map
+  const zoom = 13;
+
+  //when the currentStationIndex updates, move the map to the new center
+  useEffect(() => {
+    if (mapRef.current) {
+      // mapRef.current.setView(stationLocationArr[currentStationIndex], zoom);
+      mapRef.current.panTo(stationLocationArr[currentStationIndex]);
+    }
+  }, [currentStationIndex]);
+
   return (
-    <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+    <MapContainer
+      ref={mapRef}
+      center={stationLocationArr[currentStationIndex]}
+      zoom={zoom}
+      scrollWheelZoom={false}
+    >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
