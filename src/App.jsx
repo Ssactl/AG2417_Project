@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import BigMap from "./components/BIgMap";
 
 //玩游戏的页面，放大地图，小地图和人物展示框这三个组件
 function App() {
@@ -22,7 +22,9 @@ function App() {
     // </Container>
 
     <div className="container">
-      <div className="column--1">big map</div>
+      <div className="column--1">
+        <BigMap />
+      </div>
       <div className="column--2">
         <div className="row--1">player display</div>
         <div className="row--2">small map</div>

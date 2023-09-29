@@ -4,20 +4,17 @@
 //人物位置 从player拿
 //骰子
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 function BigMap() {
   return (
-    <>
-      <div>
-        <MapContainer center={{ lat: 48.71291, lng: 44.52693 }} zoom={13}>
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright%22%3EOpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-        </MapContainer>
-      </div>
-    </>
+    <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+    </MapContainer>
   );
 }
 
