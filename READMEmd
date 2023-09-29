@@ -1,1 +1,5 @@
 数据库的表：玩家表，站点表（城市表，功能表）
+
+开发环境配置：  
+npm install react react-dom leaflet  
+npm install react-leaflet
