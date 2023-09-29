@@ -1,0 +1,15 @@
+.dice {
+  width: 80px;
+  height: 80px;
+  /* background-color: blue; */
+  z-index: 9999;
+  bottom: 2px;
+  left: 2px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}

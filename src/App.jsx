@@ -3,9 +3,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BigMap from "./components/BIgMap";
+import { useState } from "react";
+import Dice from "./components/Dice";
 
 //玩游戏的页面，放大地图，小地图和人物展示框这三个组件
 function App() {
+  const [currentLocationIndex, setCurrentLocationIndex] = useState(-1);
+
   return (
     // <Container className="container" fluid="true">
     //   <Row>
@@ -23,6 +27,7 @@ function App() {
 
     <div className="container">
       <div className="column--1">
+        <Dice />
         <BigMap />
       </div>
       <div className="column--2">
