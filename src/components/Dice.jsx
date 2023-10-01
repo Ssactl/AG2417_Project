@@ -15,17 +15,27 @@ const diceImgURLArr = [
   dice6ImgURL,
 ];
 
-//需要从App.js传过来的参数是：当前地图的位置currentStationIndex，站数总数stationCount，位置state的更新函数updateCurrentStation
-function Dice({ currentStationIndex, stationCount, updateCurrentStation }) {
+//需要从App.js传过来的参数是：当前玩家currentPlayer，所有玩家的位置playersStationIndex，站数总数stationCount，玩家位置更新函数setplayerStation，大地图中心位置的更新函数updateCurrentStation
+function Dice({
+  currentPlayer,
+  playersStationIndex,
+  stationCount,
+  setplayerStation,
+  updateCurrentStation,
+}) {
   const [currentDiceURL, setCurrentDiceURL] = useState(dice1ImgURL);
 
-  //函数作用：当用户点击骰子，根据骰子点数计算移动步数，更新当前站点位置
+  //函数作用：当用户点击骰子，根据骰子点数计算移动步数，更新站点位置
   const diceClickingHandler = () => {
     let diceNumber = Math.floor(Math.random() * 6) + 1;
     // console.log(diceNumber);
 
-    //update currant station of the big map
-    let newStationIndex = (currentStationIndex + diceNumber) % stationCount;
+    //update currant player station
+    let newStationIndex =
+      (playersStationIndex[currentPlayer] + diceNumber) % stationCount;
+    setplayerStation[currentPlayer](newStationIndex);
+
+    //update currant center of the big map
     updateCurrentStation(newStationIndex);
 
     //update dice image

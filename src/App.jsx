@@ -35,6 +35,9 @@ function App() {
     stationLocationArr[player4StationIndex],
   ];
 
+  //current player
+  const [currentPlayer, setCurrentPlayer] = useState(0);
+
   return (
     // <Container className="container" fluid="true">
     //   <Row>
@@ -53,8 +56,20 @@ function App() {
     <div className="container">
       <div className="column--1">
         <Dice
-          currentStationIndex={currentStationIndex}
+          currentPlayer={currentPlayer}
+          playersStationIndex={[
+            player1StationIndex,
+            player2StationIndex,
+            player3StationIndex,
+            player4StationIndex,
+          ]}
           stationCount={stationCount}
+          setplayerStation={[
+            setplayer1StationIndex,
+            setplayer2StationIndex,
+            setplayer3StationIndex,
+            setplayer4StationIndex,
+          ]}
           updateCurrentStation={updateCurrentStation}
         />
         <BigMap
