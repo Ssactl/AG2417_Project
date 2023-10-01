@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import BigMap from "./components/BIgMap";
 import { useState } from "react";
 import Dice from "./components/Dice";
+import SmallMap from "./components/SmallMap";
 
 //for testing
 const stationLocationArr = [
@@ -51,7 +52,9 @@ function App() {
       </div>
       <div className="column--2">
         <div className="row--1">player display</div>
-        <div className="row--2">small map</div>
+        <div className="row--2">
+          <SmallMap />
+        </div>
       </div>
     </div>
   );
