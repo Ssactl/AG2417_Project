@@ -11,6 +11,7 @@ function SmallMap() {
       center={[35.03956537837425, 103.4895297672369]}
       zoom={3}
       scrollWheelZoom={false}
+      zoomControl={false}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
