@@ -18,10 +18,22 @@ const stationCount = stationLocationArr.length;
 
 //玩游戏的页面，放大地图，小地图和人物展示框这三个组件
 function App() {
+  //the current center of the main/big map
   const [currentStationIndex, setCurrentStationIndex] = useState(0);
-
   const updateCurrentStation = (newStation) =>
     setCurrentStationIndex(newStation);
+
+  //the current station of each player
+  const [player1StationIndex, setplayer1StationIndex] = useState(0);
+  const [player2StationIndex, setplayer2StationIndex] = useState(0);
+  const [player3StationIndex, setplayer3StationIndex] = useState(0);
+  const [player4StationIndex, setplayer4StationIndex] = useState(0);
+  const playerPositions = [
+    stationLocationArr[player1StationIndex],
+    stationLocationArr[player2StationIndex],
+    stationLocationArr[player3StationIndex],
+    stationLocationArr[player4StationIndex],
+  ];
 
   return (
     // <Container className="container" fluid="true">
@@ -53,7 +65,7 @@ function App() {
       <div className="column--2">
         <div className="row--1">player display</div>
         <div className="row--2">
-          <SmallMap />
+          <SmallMap playerPositions={playerPositions} />
         </div>
       </div>
     </div>
