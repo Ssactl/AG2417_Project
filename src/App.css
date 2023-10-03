@@ -33,18 +33,21 @@
 .column--2 {
   background-color: aqua;
   flex-grow: 1;
-  display: flex;
+  /* display: flex; */
+  width: 10%;
   flex-direction: column;
 }
 
 .row--1 {
-  background-color: aquamarine;
+  background-color: rgb(243, 247, 227);
   flex-grow: 1;
+  height: 40%;
 }
 
 .row--2 {
   background-color: blueviolet;
   flex-grow: 1;
+  height: 60%;
 }
 
 /* ===================================================== */

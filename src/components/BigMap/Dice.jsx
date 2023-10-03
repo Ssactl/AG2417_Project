@@ -1,10 +1,11 @@
 import { useState } from "react";
-import dice1ImgURL from "./../assets/dice1.png";
-import dice2ImgURL from "./../assets/dice2.png";
-import dice3ImgURL from "./../assets/dice3.png";
-import dice4ImgURL from "./../assets/dice4.png";
-import dice5ImgURL from "./../assets/dice5.png";
-import dice6ImgURL from "./../assets/dice6.png";
+import dice1ImgURL from "../../assets/dice/dice1.png";
+import dice2ImgURL from "../../assets/dice/dice2.png";
+import dice3ImgURL from "../../assets/dice/dice3.png";
+import dice4ImgURL from "../../assets/dice/dice4.png";
+import dice5ImgURL from "../../assets/dice/dice5.png";
+import dice6ImgURL from "../../assets/dice/dice6.png";
+import "./Dice.css"
 
 const diceImgURLArr = [
   dice1ImgURL,

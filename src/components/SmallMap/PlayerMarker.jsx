@@ -3,7 +3,7 @@
 import React from "react";
 import { Marker } from "react-leaflet";
 import L from "leaflet";
-import customMarkerIcon from "./../assets/dice6.png"; // 导入自定义标记图片
+import customMarkerIcon from "../../assets/dice/dice6.png"; // 导入自定义标记图片
 import { useEffect } from "react";
 
 function PlayerMarker({ position }) {
