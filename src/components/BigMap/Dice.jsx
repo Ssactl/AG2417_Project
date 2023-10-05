@@ -5,7 +5,7 @@ import dice3ImgURL from "../../assets/dice/dice3.png";
 import dice4ImgURL from "../../assets/dice/dice4.png";
 import dice5ImgURL from "../../assets/dice/dice5.png";
 import dice6ImgURL from "../../assets/dice/dice6.png";
-import "./Dice.css"
+import "./Dice.css";
 
 const diceImgURLArr = [
   dice1ImgURL,
@@ -23,6 +23,9 @@ function Dice({
   stationCount,
   setplayerStation,
   updateCurrentStation,
+  stations,
+  currentStationIndex,
+  updateStationClass,
 }) {
   const [currentDiceURL, setCurrentDiceURL] = useState(dice1ImgURL);
 
@@ -44,6 +47,8 @@ function Dice({
     // console.log(currentDiceURL);
 
     alert(`Moving forward ${diceNumber} steps!!!`);
+
+    updateStationClass(stations, currentStationIndex);
   };
 
   return (

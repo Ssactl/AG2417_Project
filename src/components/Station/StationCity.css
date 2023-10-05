@@ -1,4 +1,4 @@
-.station--city--buyers {
+.station {
   width: 40%;
   height: 60%;
   background-color: #d3d7d4;
@@ -8,4 +8,16 @@
   left: 10%;
   top: 20%;
   border-radius: 5%;
+}
+
+.station--hidden {
+  display: none;
+}
+
+.station--other {
+  background-color: antiquewhite;
+}
+
+.station--city--buyers {
+  background-color: red;
 }

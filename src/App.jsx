@@ -9,6 +9,10 @@ import Dice from "./components/BigMap/Dice";
 import PlayerBoard from "./components/PlayerBoard/PlayerBoard";
 import SmallMap from "./components/SmallMap/SmallMap";
 
+import StationCityForBuyers from "./components/Station/StationCityForBuyers";
+import StationCityForCustomers from "./components/Station/StationCityForCustomers";
+import StationOther from "./components/Station/StationOther";
+
 //table stations
 const stations = [
   {
@@ -42,6 +46,22 @@ const stations = [
     latitute: 104.0562367934888,
     players: 0,
     level: 0,
+  },
+  {
+    id: 4,
+    name: "kunming",
+    longitute: 24.88558106693481,
+    latitute: 102.83097940902874,
+    players: -9999,
+    level: 0,
+  },
+  {
+    id: 5,
+    name: "chongqin",
+    longitute: 29.56047860181214,
+    latitute: 106.5292432576508,
+    players: 0,
+    level: -9999,
   },
 ];
 const stationCount = stations.length;
@@ -84,22 +104,41 @@ function App() {
   const [player4StationIndex, setplayer4StationIndex] = useState(0);
   const playerPositions = [
     [
-      cities[player1StationIndex].longitute,
-      cities[player1StationIndex].latitute,
+      stations[player1StationIndex].longitute,
+      stations[player1StationIndex].latitute,
     ],
     [
-      cities[player2StationIndex].longitute,
-      cities[player2StationIndex].latitute,
+      stations[player2StationIndex].longitute,
+      stations[player2StationIndex].latitute,
     ],
     [
-      cities[player3StationIndex].longitute,
-      cities[player3StationIndex].latitute,
+      stations[player3StationIndex].longitute,
+      stations[player3StationIndex].latitute,
     ],
     [
-      cities[player4StationIndex].longitute,
-      cities[player4StationIndex].latitute,
+      stations[player4StationIndex].longitute,
+      stations[player4StationIndex].latitute,
     ],
   ];
+
+  //visibility state for station window
+  const [stationClassCustomers, setStationClassCustomers] =
+    useState("station--hidden");
+  const [stationClassBuyers, setStationClassBuyers] =
+    useState("station--hidden");
+  const [stationClassOther, setStationClassOther] = useState("station--hidden");
+  const updateStationClass = (stations, currentStationIndex) => {
+    stations[currentStationIndex] < 0
+      ? setStationClassOther("")
+      : stations[currentStationIndex] < 0 == 0
+      ? setStationClassBuyers("")
+      : setStationClassCustomers("");
+  };
+  const resetStationClass = () => {
+    setStationClassCustomers("station--hidden");
+    setStationClassBuyers("station--hidden");
+    setStationClassOther("station--hidden");
+  };
 
   //current player
   const [currentPlayer, setCurrentPlayer] = useState(0);
@@ -138,6 +177,16 @@ function App() {
 
     <div className="container">
       <div className="column--1">
+        <div className={stationClassCustomers}>
+          <StationCityForCustomers />
+        </div>
+        <div className={stationClassBuyers}>
+          <StationCityForBuyers />
+        </div>
+        <div className={stationClassOther}>
+          <StationOther />
+        </div>
+
         <Dice
           currentPlayer={currentPlayer}
           playersStationIndex={[
@@ -154,6 +203,9 @@ function App() {
             setplayer4StationIndex,
           ]}
           updateCurrentStation={updateCurrentStation}
+          stations={stations}
+          currentStationIndex={currentStationIndex}
+          updateStationClass={updateStationClass}
         />
         <BigMap currentStationIndex={currentStationIndex} stations={stations} />
       </div>
