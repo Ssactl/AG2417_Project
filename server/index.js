@@ -40,8 +40,9 @@ const pool = new Pool({
 // const playerRoutes = require('./routes/playerRoutes');
 // app.use('/api/players', playerRoutes);
 
+// get players data
 app.get('/player/get_players', (req, res) => {
-  pool.query("select * from players", (err, dbResponse) => {
+  pool.query("select * from players ORDER BY pid ASC", (err, dbResponse) => {
       if (err) console.log(err);
       // Your data processing logic goes here
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -49,6 +50,25 @@ app.get('/player/get_players', (req, res) => {
   });
 });
 
+// get stations data
+app.get('/stations/get_stations', (req, res) => {
+  pool.query("select * from stations ORDER BY cid ASC", (err, dbResponse) => {
+      if (err) console.log(err);
+      // Your data processing logic goes here
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.send(dbResponse.rows);
+  });
+});
+
+// get levelfeatures data
+app.get('/level/levelfeatures', (req, res) => {
+  pool.query("select * from levelfeatures", (err, dbResponse) => {
+      if (err) console.log(err);
+      // Your data processing logic goes here
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.send(dbResponse.rows);
+  });
+});
 
 const port = 5000; // Choose a suitable port
 app.listen(port, () => {
