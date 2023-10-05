@@ -8,22 +8,30 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef, useState } from "react";
 
-function BigMap({ currentStationIndex, stationLocationArr }) {
+function BigMap({ currentStationIndex, cities }) {
   const mapRef = useRef(); //refer to map
   const zoom = 13;
+
+  console.log(cities);
 
   //when the currentStationIndex updates, move the map to the new center
   useEffect(() => {
     if (mapRef.current) {
       // mapRef.current.setView(stationLocationArr[currentStationIndex], zoom);
-      mapRef.current.panTo(stationLocationArr[currentStationIndex]);
+      mapRef.current.panTo([
+        cities[currentStationIndex].longitute,
+        cities[currentStationIndex].latitute,
+      ]);
     }
   }, [currentStationIndex]);
 
   return (
     <MapContainer
       ref={mapRef}
-      center={stationLocationArr[currentStationIndex]}
+      center={[
+        cities[currentStationIndex].longitute,
+        cities[currentStationIndex].latitute,
+      ]}
       zoom={zoom}
       scrollWheelZoom={false}
     >
