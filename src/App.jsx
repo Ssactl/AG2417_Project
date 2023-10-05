@@ -15,30 +15,29 @@ const stationLocationArr = [
 ];
 const stationCount = stationLocationArr.length;
 
-// Testing
-// const players = [
-//   {
-//     name: 'Jiani1',
-//     avatar: "../src/assets/player/player1.png", // 头像图片的URL
-//     score: 1000,
-//   },
-//   {
-//     name: 'Lee2',
-//     avatar: "../src/assets/player/player2.png",
-//     score: 850,
-//   },
-//   {
-//     name: 'Meme3',
-//     avatar: "../src/assets/player/player3.png",
-//     score: 1200,
-//   },
-//   {
-//     name: 'Viva4',
-//     avatar: "../src/assets/player/player4.png",
-//     score: 750,
-//   },
-// ];
-
+// // Testing;
+const players = [
+  {
+    name: "Jiani1",
+    avatar: "../src/assets/player/player1.png", // 头像图片的URL
+    score: 1000,
+  },
+  {
+    name: "Lee2",
+    avatar: "../src/assets/player/player2.png",
+    score: 850,
+  },
+  {
+    name: "Meme3",
+    avatar: "../src/assets/player/player3.png",
+    score: 1200,
+  },
+  {
+    name: "Viva4",
+    avatar: "../src/assets/player/player4.png",
+    score: 750,
+  },
+];
 
 //玩游戏的页面，放大地图，小地图和人物展示框这三个组件
 function App() {
@@ -62,18 +61,18 @@ function App() {
   //current player
   const [currentPlayer, setCurrentPlayer] = useState(0);
 
-  // 定义用于存储玩家数据的状态
-  const [players, setPlayers] = useState([]);
+  // // 定义用于存储玩家数据的状态
+  // const [players, setPlayers] = useState([]);
 
-  // 使用 useEffect 来获取玩家数据并更新状态
-  useEffect(() => {
-    fetch('/api/players') // 向后端路由发送请求
-      .then((response) => response.json())
-      .then((data) => {
-        setPlayers(data); // Update state with player data
-      })
-      .catch((error) => console.error('Error fetching players', error));
-  }, []); // 空数组表示仅在组件加载时执行一次
+  // // 使用 useEffect 来获取玩家数据并更新状态
+  // useEffect(() => {
+  //   fetch("/api/players") // 向后端路由发送请求
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setPlayers(data); // Update state with player data
+  //     })
+  //     .catch((error) => console.error("Error fetching players", error));
+  // }, []); // 空数组表示仅在组件加载时执行一次
 
   return (
     // <Container className="container" fluid="true">
