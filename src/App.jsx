@@ -9,15 +9,15 @@ import Dice from "./components/BigMap/Dice";
 import PlayerBoard from "./components/PlayerBoard/PlayerBoard";
 import SmallMap from "./components/SmallMap/SmallMap";
 
-//table cities
-const cities = [
+//table stations
+const stations = [
   {
     id: 0,
     name: "Beijing",
     longitute: 39.920514604261506,
     latitute: 116.39601129456929,
     players: 0,
-    flag: 0,
+    level: 0,
   },
   {
     id: 1,
@@ -25,7 +25,7 @@ const cities = [
     longitute: 31.24615161464742,
     latitute: 121.45993996461581,
     players: 0,
-    flag: 0,
+    level: 0,
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const cities = [
     longitute: 22.591414849772395,
     latitute: 114.04906736003136,
     players: 0,
-    flag: 0,
+    level: 0,
   },
   {
     id: 3,
@@ -41,10 +41,10 @@ const cities = [
     longitute: 30.655749955405586,
     latitute: 104.0562367934888,
     players: 0,
-    flag: 0,
+    level: 0,
   },
 ];
-const stationCount = cities.length;
+const stationCount = stations.length;
 
 // // // Testing;
 const players = [
@@ -155,7 +155,7 @@ function App() {
           ]}
           updateCurrentStation={updateCurrentStation}
         />
-        <BigMap currentStationIndex={currentStationIndex} cities={cities} />
+        <BigMap currentStationIndex={currentStationIndex} stations={stations} />
       </div>
       <div className="column--2">
         <div className="row--1">
