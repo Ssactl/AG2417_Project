@@ -6,7 +6,7 @@ import L from "leaflet";
 import customMarkerIcon from "../../assets/dice/dice6.png"; // 导入自定义标记图片
 import { useEffect } from "react";
 
-function PlayerMarker({ position }) {
+function PlayerMarker({ position, index }) {
   // const markerStyle = {
   //   width: "30px",
   //   height: "30px",
@@ -16,7 +16,7 @@ function PlayerMarker({ position }) {
   // };
 
   const playerIcon = new L.Icon({
-    iconUrl: customMarkerIcon, // 图标的 URL
+    iconUrl: `../src/assets/player/player${index + 1}.png`, // 图标的 URL
     iconSize: [40, 40], // 图标大小
     iconAnchor: [20, 40], // 图标的锚点位置
     popupAnchor: [0, -40], // 弹出窗口的锚点位置

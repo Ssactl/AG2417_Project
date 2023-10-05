@@ -1,6 +1,6 @@
-import React from 'react'
-import { Card, Image, Container, Row, Col } from 'react-bootstrap';
-import "./PlayerBoard.css"
+import React from "react";
+import { Card, Image, Container, Row, Col } from "react-bootstrap";
+import "./PlayerBoard.css";
 //一个playerInfo框
 //头像 image
 //分数 一个state 从数据库拿
@@ -10,19 +10,22 @@ import "./PlayerBoard.css"
 
 //PlayerBoard组件接受一个名为players的属性，该属性是一个包含玩家信息的数组。
 //在render方法中，我们使用map函数遍历players数组，为每个玩家创建一个Card组件，显示玩家的头像、名字和分数
-const PlayerBoard = ({
-  players
-}) => {
+const PlayerBoard = ({ players }) => {
   return (
     <>
       <Row xs={1} md={2}>
         {players.map((player, index) => (
           <Col key={index} md={6}>
-            <Card style={{ width: '14rem' }}>
-              <Card.Body style={{ display: 'flex', alignItems: 'center' }}>
-                <Card.Img variant="top" src={player.avatar} alt={`${player.name}'s Avatar`} style={{ width:'80px',height: '110px' }}/>
-                <div style={{ marginLeft: '10px' }}>
-                  <Card.Title >{player.name}</Card.Title>
+            <Card style={{ width: "14rem" }}>
+              <Card.Body style={{ display: "flex", alignItems: "center" }}>
+                <Card.Img
+                  variant="top"
+                  src={player.avatar}
+                  alt={`${player.name}'s Avatar`}
+                  style={{ width: "80px", height: "80px" }}
+                />
+                <div style={{ marginLeft: "10px" }}>
+                  <Card.Title>{player.name}</Card.Title>
                   <Card.Text>score: {player.score}</Card.Text>
                 </div>
               </Card.Body>
@@ -32,6 +35,6 @@ const PlayerBoard = ({
       </Row>
     </>
   );
-}
+};
 
 export default PlayerBoard;

@@ -21,7 +21,7 @@ function SmallMap({ playerPositions }) {
       />
 
       {playerPositions.map((p, index) => (
-        <PlayerMarker position={p} key={index} />
+        <PlayerMarker position={p} index={index} key={index} />
       ))}
     </MapContainer>
   );
