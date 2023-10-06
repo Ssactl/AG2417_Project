@@ -20,7 +20,7 @@ const stations = [
     name: "Beijing",
     longitute: 39.920514604261506,
     latitute: 116.39601129456929,
-    players: 0,
+    belonger: 0,
     level: 0,
   },
   {
@@ -28,7 +28,7 @@ const stations = [
     name: "shanghai",
     longitute: 31.24615161464742,
     latitute: 121.45993996461581,
-    players: 0,
+    belonger: 0,
     level: 0,
   },
   {
@@ -36,7 +36,7 @@ const stations = [
     name: "shengzheng",
     longitute: 22.591414849772395,
     latitute: 114.04906736003136,
-    players: 0,
+    belonger: 0,
     level: 0,
   },
   {
@@ -44,7 +44,7 @@ const stations = [
     name: "chengdu",
     longitute: 30.655749955405586,
     latitute: 104.0562367934888,
-    players: 0,
+    belonger: 0,
     level: 0,
   },
   {
@@ -52,7 +52,7 @@ const stations = [
     name: "kunming",
     longitute: 24.88558106693481,
     latitute: 102.83097940902874,
-    players: -9999,
+    belonger: -9999,
     level: 0,
   },
   {
@@ -60,7 +60,7 @@ const stations = [
     name: "chongqin",
     longitute: 29.56047860181214,
     latitute: 106.5292432576508,
-    players: 0,
+    belonger: 0,
     level: -9999,
   },
 ];

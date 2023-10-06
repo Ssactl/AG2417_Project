@@ -18,6 +18,48 @@
   background-color: antiquewhite;
 }
 
+/* //////////////////////////////////////////////////// */
 .station--city--buyers {
-  background-color: red;
+  /* background-color: red; */
+  display: flex;
+}
+
+.station--buyers--column--1 {
+  flex-grow: 1;
+  background-color: antiquewhite;
+  height: 100%;
+}
+
+.station--buyers--column--2 {
+  flex-grow: 1;
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: column;
+}
+.station--buyers--column--2--row--1 {
+  flex-grow: 3;
+  background-color: blueviolet;
+}
+.station--buyers--column--2--row--2 {
+  flex-grow: 1;
+  background-color: blue;
+  text-align: center;
+}
+
+.station--buyers--column--2--row--2 p {
+  display: inline-block;
+}
+
+.station--buyers--column--2--row--3 {
+  flex-grow: 1;
+  display: flex;
+}
+
+.station--buyers--button {
+  display: inline-block;
+  width: 20%;
+  height: 40%;
+  margin: auto;
+  text-align: center;
+  font-weight: 500;
 }
