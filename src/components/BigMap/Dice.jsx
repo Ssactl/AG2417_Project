@@ -44,9 +44,10 @@ function Dice({
 
     //update dice image
     setCurrentDiceURL(diceImgURLArr[diceNumber - 1]);
-    // console.log(currentDiceURL);
 
-    alert(`Moving forward ${diceNumber} steps!!!`);
+    alert(
+      `Moving forward ${diceNumber} steps!!! You are now arriving ${stations[currentStationIndex].name}, ${stations[currentStationIndex].level}`
+    );
 
     updateStationClass(stations, currentStationIndex);
   };

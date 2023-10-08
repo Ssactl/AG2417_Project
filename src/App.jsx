@@ -106,6 +106,12 @@ function App() {
   const [player2StationIndex, setplayer2StationIndex] = useState(0);
   const [player3StationIndex, setplayer3StationIndex] = useState(0);
   const [player4StationIndex, setplayer4StationIndex] = useState(0);
+  const playersStationIndex = [
+    player1StationIndex,
+    player2StationIndex,
+    player3StationIndex,
+    player4StationIndex,
+  ];
   const playerPositions = [
     [
       stations[player1StationIndex].longitute,
@@ -133,10 +139,10 @@ function App() {
   const [stationClassOther, setStationClassOther] = useState("station--hidden");
   const updateStationClass = (stations, currentStationIndex) => {
     //if the current station is a non-city one,
-    stations[currentStationIndex] < 0
+    stations[currentStationIndex].level < 0
       ? setStationClassOther("")
       : //if the current station is a city one without any owner, then display the StationCityForBuyers;
-      stations[currentStationIndex] == 0
+      stations[currentStationIndex].level == 0
       ? setStationClassBuyers("")
       : //if the current station is a city and has a owner, but the current player is not the owner
       currentPlayer != stations[currentStationIndex].players
@@ -193,7 +199,9 @@ function App() {
           <StationCityForCustomers />
         </div>
         <div className={stationClassBuyers}>
-          <StationCityForBuyers />
+          <StationCityForBuyers
+            props={(players, currentPlayer, setCurrentPlayer)}
+          />
         </div>
         <div className={stationClassOther}>
           <StationOther />
@@ -201,12 +209,7 @@ function App() {
 
         <Dice
           currentPlayer={currentPlayer}
-          playersStationIndex={[
-            player1StationIndex,
-            player2StationIndex,
-            player3StationIndex,
-            player4StationIndex,
-          ]}
+          playersStationIndex={playersStationIndex}
           stationCount={stationCount}
           setplayerStation={[
             setplayer1StationIndex,
