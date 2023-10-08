@@ -49,7 +49,7 @@ function Dice({
       `Moving forward ${diceNumber} steps!!! You are now arriving ${stations[newStationIndex].name}`
     );
 
-    updateStationClass(stations, currentStationIndex);
+    updateStationClass(stations, newStationIndex);
   };
 
   return (

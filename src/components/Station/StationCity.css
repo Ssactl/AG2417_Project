@@ -15,9 +15,11 @@
 }
 
 .station--other {
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
 }
 
+/* //////////////////////////////////////////////////// */
+/* station of city for buyers */
 /* //////////////////////////////////////////////////// */
 .station--city--buyers {
   /* background-color: red; */
@@ -62,4 +64,14 @@
   margin: auto;
   text-align: center;
   font-weight: 500;
+}
+
+/* //////////////////////////////////////////////////// */
+/* station of city for customers */
+/* //////////////////////////////////////////////////// */
+.station--customer--button--ok {
+  width: 10%;
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
 }

@@ -20,7 +20,7 @@ const stations = [
     name: "Beijing",
     longitute: 39.920514604261506,
     latitute: 116.39601129456929,
-    belonger: 0,
+    belonger: 1,
     level: 0,
   },
   {
@@ -28,7 +28,7 @@ const stations = [
     name: "shanghai",
     longitute: 31.24615161464742,
     latitute: 121.45993996461581,
-    belonger: 0,
+    belonger: 1,
     level: 0,
   },
   {
@@ -36,7 +36,7 @@ const stations = [
     name: "shengzheng",
     longitute: 22.591414849772395,
     latitute: 114.04906736003136,
-    belonger: 0,
+    belonger: 1,
     level: 0,
   },
   {
@@ -44,7 +44,7 @@ const stations = [
     name: "chengdu",
     longitute: 30.655749955405586,
     latitute: 104.0562367934888,
-    belonger: 0,
+    belonger: 1,
     level: 0,
   },
   {
@@ -52,7 +52,7 @@ const stations = [
     name: "kunming",
     longitute: 24.88558106693481,
     latitute: 102.83097940902874,
-    belonger: -9999,
+    belonger: 1,
     level: 0,
   },
   {
@@ -61,7 +61,7 @@ const stations = [
     longitute: 29.56047860181214,
     latitute: 106.5292432576508,
     belonger: 0,
-    level: -9999,
+    level: 0,
   },
 ];
 const stationCount = stations.length;
@@ -138,14 +138,21 @@ function App() {
     useState("station--hidden");
   const [stationClassOther, setStationClassOther] = useState("station--hidden");
   const updateStationClass = (stations, currentStationIndex) => {
+    console.log(
+      stations[currentStationIndex].name,
+      "belonger is ",
+      stations[currentStationIndex].belonger
+    );
+    console.log(players);
+
     //if the current station is a non-city one,
     stations[currentStationIndex].level < 0
       ? setStationClassOther("")
       : //if the current station is a city one without any owner, then display the StationCityForBuyers;
-      stations[currentStationIndex].level == 0
+      stations[currentStationIndex].belonger == 0
       ? setStationClassBuyers("")
       : //if the current station is a city and has a owner, but the current player is not the owner
-      currentPlayer != stations[currentStationIndex].players
+      currentPlayer + 1 != stations[currentStationIndex].belonger
       ? setStationClassCustomers("")
       : //if the current station is a city and has a owner, and the current player is the owner, but the city's level is under 3
       stations[currentStationIndex].level < 3
@@ -178,6 +185,16 @@ function App() {
   //     });
   // }, []); // 空数组表示仅在组件挂载时执行一次
 
+  //the next player's turn
+  function nextPlayer() {
+    //update the currentPlayer and the currentStationIndex
+    const nextPlayer = (currentPlayer + 1) % 4;
+    setCurrentStationIndex(playersStationIndex[nextPlayer]);
+    setCurrentPlayer(nextPlayer);
+    //reset all the station components
+    resetStationClass();
+  }
+
   return (
     // <Container className="container" fluid="true">
     //   <Row>
@@ -196,7 +213,19 @@ function App() {
     <div className="container">
       <div className="column--1">
         <div className={stationClassCustomers}>
-          <StationCityForCustomers />
+          <StationCityForCustomers
+            nextPlayer={nextPlayer}
+            stations={stations}
+            currentStationIndex={currentStationIndex}
+            players={players}
+            currentPlayer={currentPlayer}
+            // setPlayers={setPlayers}
+            stationClassCustomers={stationClassCustomers}
+            setCurrentStationIndex={setCurrentStationIndex}
+            setCurrentPlayer={setCurrentPlayer}
+            playersStationIndex={playersStationIndex}
+            resetStationClass={resetStationClass}
+          />
         </div>
         <div className={stationClassBuyers}>
           <StationCityForBuyers
@@ -206,6 +235,7 @@ function App() {
             setCurrentStationIndex={setCurrentStationIndex}
             resetStationClass={resetStationClass}
             playersStationIndex={playersStationIndex}
+            nextPlayer={nextPlayer}
           />
         </div>
         <div className={stationClassOther}>

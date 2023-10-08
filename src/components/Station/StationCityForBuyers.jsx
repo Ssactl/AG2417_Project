@@ -16,6 +16,7 @@ function StationCityForBuyers({
   setCurrentStationIndex,
   playersStationIndex,
   resetStationClass,
+  nextPlayer,
 }) {
   // if the current player wants to buy the estate
   function buttonYesClickingHandler() {
@@ -29,21 +30,11 @@ function StationCityForBuyers({
       newStations[currentStationIndex].belonger == currentPlayer + 1;
       setStations(newStations);
     }
-    //update the currentPlayer and the currentStationIndex, it is the next player's turn
-    const nextPlayer = (currentPlayer + 1) % 4;
-    setCurrentStationIndex(playersStationIndex[nextPlayer]);
-    setCurrentPlayer(nextPlayer);
-    //reset all the station components
-    resetStationClass();
+    nextPlayer();
   }
   //if the current player does not want to buy the estate
   function buttonNoClickingHandler() {
-    //update the currentPlayer and the currentStationIndex, it is the next player's turn
-    const nextPlayer = (currentPlayer + 1) % 4;
-    setCurrentStationIndex(playersStationIndex[nextPlayer]);
-    setCurrentPlayer(nextPlayer);
-    //reset all the station components
-    resetStationClass();
+    nextPlayer();
   }
 
   return (
