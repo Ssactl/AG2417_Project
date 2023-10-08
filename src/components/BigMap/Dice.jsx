@@ -46,7 +46,7 @@ function Dice({
     setCurrentDiceURL(diceImgURLArr[diceNumber - 1]);
 
     alert(
-      `Moving forward ${diceNumber} steps!!! You are now arriving ${stations[currentStationIndex].name}, ${stations[currentStationIndex].level}`
+      `Moving forward ${diceNumber} steps!!! You are now arriving ${stations[currentStationIndex].name}}`
     );
 
     updateStationClass(stations, currentStationIndex);

@@ -11,3 +11,17 @@ npm install react-leaflet
 
 问题：  
 怎么实现四个玩家轮流玩游戏
+  
+  
+Dice.jsx:  
+update currant player station  
+update currant center of the big map  
+show station component  
+  
+  
+StationCityForBuyers.jsx: 
+update the score of the owner  
+update the owner of the station  
+update the current player  
+update current station index  
+reset the style of the station component
