@@ -132,11 +132,19 @@ function App() {
     useState("station--hidden");
   const [stationClassOther, setStationClassOther] = useState("station--hidden");
   const updateStationClass = (stations, currentStationIndex) => {
+    //if the current station is a non-city one,
     stations[currentStationIndex] < 0
       ? setStationClassOther("")
-      : stations[currentStationIndex] < 0 == 0
+      : //if the current station is a city one without any owner, then display the StationCityForBuyers;
+      stations[currentStationIndex] == 0
       ? setStationClassBuyers("")
-      : setStationClassCustomers("");
+      : //if the current station is a city and has a owner, but the current player is not the owner
+      currentPlayer != stations[currentStationIndex].players
+      ? setStationClassCustomers("")
+      : //if the current station is a city and has a owner, and the current player is the owner, but the city's level is under 3
+      stations[currentStationIndex].level < 3
+      ? setStationClassBuyers("")
+      : "";
   };
   const resetStationClass = () => {
     setStationClassCustomers("station--hidden");
