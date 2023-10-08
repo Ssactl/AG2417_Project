@@ -72,21 +72,25 @@ const players = [
     name: "Jiani1",
     avatar: "../src/assets/player/player1.png", // 头像图片的URL
     score: 1000,
+    pid: 1,
   },
   {
     name: "Lee2",
     avatar: "../src/assets/player/player2.png",
     score: 850,
+    pid: 2,
   },
   {
     name: "Meme3",
     avatar: "../src/assets/player/player3.png",
     score: 1200,
+    pid: 3,
   },
   {
     name: "Viva4",
     avatar: "../src/assets/player/player4.png",
     score: 750,
+    pid: 4,
   },
 ];
 
@@ -211,7 +215,7 @@ function App() {
       </div>
       <div className="column--2">
         <div className="row--1">
-          <PlayerBoard players={players} />
+          <PlayerBoard players={players} currentPlayer={currentPlayer} />
         </div>
         <div className="row--2">
           <SmallMap playerPositions={playerPositions} />

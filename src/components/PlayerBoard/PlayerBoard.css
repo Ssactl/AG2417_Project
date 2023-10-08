@@ -1,4 +1,8 @@
 .card {
-    padding: 0;
-    margin: 0;
-  }
+  padding: 0;
+  margin: 0;
+}
+
+.current--player {
+  border: solid red 2px;
+}
