@@ -200,7 +200,12 @@ function App() {
         </div>
         <div className={stationClassBuyers}>
           <StationCityForBuyers
-            props={(players, currentPlayer, setCurrentPlayer)}
+            players={players}
+            currentPlayer={currentPlayer}
+            setCurrentPlayer={setCurrentPlayer}
+            setCurrentStationIndex={setCurrentStationIndex}
+            resetStationClass={resetStationClass}
+            playersStationIndex={playersStationIndex}
           />
         </div>
         <div className={stationClassOther}>

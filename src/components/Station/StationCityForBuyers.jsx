@@ -4,28 +4,46 @@
 //testing
 const score = 200; //stations[currentStationIndex]-level-score
 
-//parameters:players,setPlayers(),currentPlayer,stations,currentStationIndex,setStations(),setCurrentPlayer(),setCurrentStationIndex(),playersStationIndex,resetStationClass()
-function StationCityForBuyers(props) {
+//parameters:players,setPlayers,currentPlayer,stations,currentStationIndex,setStations,setCurrentPlayer,setCurrentStationIndex,playersStationIndex,resetStationClass
+function StationCityForBuyers({
+  players,
+  setPlayers,
+  currentPlayer,
+  stations,
+  currentStationIndex,
+  setStation,
+  setCurrentPlayer,
+  setCurrentStationIndex,
+  playersStationIndex,
+  resetStationClass,
+}) {
   // if the current player wants to buy the estate
   function buttonYesClickingHandler() {
     //update the score of the owner
-    const newPlayers = { ...props.players };
-    newPlayers[currentPlayer].score =
-      props.players[currentPlayer].score - score;
-    props.setPlayers(newPlayers);
+    const newPlayers = { ...players };
+    newPlayers[currentPlayer].score = players[currentPlayer].score - score;
+    setPlayers(newPlayers);
     //if it is the first trade
-    if (props.stations[props.currentStationIndex].belonger == 0) {
-      const newStations = { ...props.stations };
-      newStations[props.currentStationIndex].belonger ==
-        props.currentPlayer + 1;
-      props.setStations(newStations);
+    if (stations[currentStationIndex].belonger == 0) {
+      const newStations = { ...stations };
+      newStations[currentStationIndex].belonger == currentPlayer + 1;
+      setStations(newStations);
     }
     //update the currentPlayer and the currentStationIndex, it is the next player's turn
     const nextPlayer = (currentPlayer + 1) % 4;
-    props.setCurrentStationIndex(playersStationIndex[nextPlayer]);
-    props.setCurrentPlayer(nextPlayer);
+    setCurrentStationIndex(playersStationIndex[nextPlayer]);
+    setCurrentPlayer(nextPlayer);
     //reset all the station components
-    props.resetStationClass();
+    resetStationClass();
+  }
+  //if the current player does not want to buy the estate
+  function buttonNoClickingHandler() {
+    //update the currentPlayer and the currentStationIndex, it is the next player's turn
+    const nextPlayer = (currentPlayer + 1) % 4;
+    setCurrentStationIndex(playersStationIndex[nextPlayer]);
+    setCurrentPlayer(nextPlayer);
+    //reset all the station components
+    resetStationClass();
   }
 
   return (
@@ -41,7 +59,10 @@ function StationCityForBuyers(props) {
           <button className="station--buyers--button station--buyers--button--yes">
             yes
           </button>
-          <button className="station--buyers--button station--buyers--button--no">
+          <button
+            className="station--buyers--button station--buyers--button--no"
+            onClick={buttonNoClickingHandler}
+          >
             no
           </button>
         </div>
