@@ -24,8 +24,11 @@ function StationCityForCustomers({
     const newPlayers = { ...players };
     const owner = stations[currentStationIndex].belonger; // the owner index
     //update the score of current player/customer and the owner
-    newPlayers[currentPlayer].score = players[currentPlayer].score - score;
-    newPlayers[owner].score = players[owner].score + score;
+    newPlayers[currentPlayer].score =
+      players[currentPlayer].score -
+      score * stations[currentStationIndex].level;
+    newPlayers[owner].score =
+      players[owner].score + score * stations[currentStationIndex].level;
     // setPlayers(newPlayers);
 
     nextPlayer();
