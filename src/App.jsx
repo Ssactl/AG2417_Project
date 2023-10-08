@@ -12,6 +12,7 @@ import SmallMap from "./components/SmallMap/SmallMap";
 import StationCityForBuyers from "./components/Station/StationCityForBuyers";
 import StationCityForCustomers from "./components/Station/StationCityForCustomers";
 import StationOther from "./components/Station/StationOther";
+import StationClassMaxLevel from "./components/Station/StationCityMaxLevel";
 
 //table stations
 const stations = [
@@ -37,7 +38,7 @@ const stations = [
     longitute: 22.591414849772395,
     latitute: 114.04906736003136,
     belonger: 1,
-    level: 0,
+    level: 3,
   },
   {
     id: 3,
@@ -45,7 +46,7 @@ const stations = [
     longitute: 30.655749955405586,
     latitute: 104.0562367934888,
     belonger: 1,
-    level: 0,
+    level: 3,
   },
   {
     id: 4,
@@ -53,7 +54,7 @@ const stations = [
     longitute: 24.88558106693481,
     latitute: 102.83097940902874,
     belonger: 1,
-    level: 0,
+    level: 3,
   },
   {
     id: 5,
@@ -137,16 +138,19 @@ function App() {
   const [stationClassBuyers, setStationClassBuyers] =
     useState("station--hidden");
   const [stationClassOther, setStationClassOther] = useState("station--hidden");
+  const [stationClassMaxLevel, setStationClassMaxLevel] =
+    useState("station--hidden");
   const updateStationClass = (stations, currentStationIndex) => {
+    //for debugging
     console.log(
       stations[currentStationIndex].name,
-      "belonger is ",
-      stations[currentStationIndex].belonger
+      "belonger is",
+      players[stations[currentStationIndex].belonger - 1].name
     );
-    console.log(players);
+    console.log("current player is", players[currentPlayer].name);
 
-    //if the current station is a non-city one,
-    stations[currentStationIndex].level < 0
+    //if the current station is a fate/chance card
+    stations[currentStationIndex].level === -8888
       ? setStationClassOther("")
       : //if the current station is a city one without any owner, then display the StationCityForBuyers;
       stations[currentStationIndex].belonger == 0
@@ -157,12 +161,14 @@ function App() {
       : //if the current station is a city and has a owner, and the current player is the owner, but the city's level is under 3
       stations[currentStationIndex].level < 3
       ? setStationClassBuyers("")
-      : "";
+      : //if the station reach the max level
+        setStationClassMaxLevel("");
   };
   const resetStationClass = () => {
     setStationClassCustomers("station--hidden");
     setStationClassBuyers("station--hidden");
     setStationClassOther("station--hidden");
+    setStationClassMaxLevel("station--hidden");
   };
 
   //current player
@@ -240,6 +246,9 @@ function App() {
         </div>
         <div className={stationClassOther}>
           <StationOther />
+        </div>
+        <div className={stationClassMaxLevel}>
+          <StationClassMaxLevel nextPlayer={nextPlayer} />
         </div>
 
         <Dice

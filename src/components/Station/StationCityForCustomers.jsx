@@ -36,6 +36,7 @@ function StationCityForCustomers({
 
   return (
     <div className="station">
+      <p>You spend some money here</p>
       <button
         className="station--customer--button--ok"
         onClick={buttonOkClikingHandler}
