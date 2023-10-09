@@ -230,6 +230,7 @@ function App() {
           playerDisplayEstate={playerDisplayEstate}
           players={players}
           setplayerDisplayEstateHidden={setplayerDisplayEstateHidden}
+          setPlayerDisplayEstate={setPlayerDisplayEstate}
         />
       </div>
 
@@ -286,7 +287,12 @@ function App() {
       </div>
       <div className="column--2">
         <div className="row--1">
-          <PlayerBoard players={players} currentPlayer={currentPlayer} />
+          <PlayerBoard
+            players={players}
+            currentPlayer={currentPlayer}
+            setplayerDisplayEstateHidden={setplayerDisplayEstateHidden}
+            setPlayerDisplayEstate={setPlayerDisplayEstate}
+          />
         </div>
         <div className="row--2">
           <SmallMap playerPositions={playerPositions} />
