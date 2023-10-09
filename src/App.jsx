@@ -13,6 +13,7 @@ import StationCityForBuyers from "./components/Station/StationCityForBuyers";
 import StationCityForCustomers from "./components/Station/StationCityForCustomers";
 import StationOther from "./components/Station/StationOther";
 import StationClassMaxLevel from "./components/Station/StationCityMaxLevel";
+import PlayerEstate from "./components/PlayerEstate/PlayerEstate";
 
 //table stations
 const stations = [
@@ -174,6 +175,11 @@ function App() {
   //current player
   const [currentPlayer, setCurrentPlayer] = useState(0);
 
+  //player who wants to display his all estate
+  const [playerDisplayEstate, setPlayerDisplayEstate] = useState(0);
+  const [playerDisplayEstateHidden, setplayerDisplayEstateHidden] =
+    useState("");
+
   // frech players data from postgresql
   // const [players, setPlayers] = useState([]);
   // useEffect(() => {
@@ -217,6 +223,15 @@ function App() {
     // </Container>
 
     <div className="container">
+      <div className={playerDisplayEstateHidden}>
+        <PlayerEstate
+          stations={stations}
+          playerDisplayEstate={playerDisplayEstate}
+          players={players}
+          setplayerDisplayEstateHidden={setplayerDisplayEstateHidden}
+        />
+      </div>
+
       <div className="column--1">
         <div className={stationClassCustomers}>
           <StationCityForCustomers
