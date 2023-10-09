@@ -1,7 +1,6 @@
-import "./PlayerEstate.css";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 
-function PlayerEstate({
+function PlayerEstateBoard({
   stations,
   playerDisplayEstate,
   players,
@@ -43,4 +42,4 @@ function PlayerEstate({
     </div>
   );
 }
-export default PlayerEstate;
+export default PlayerEstateBoard;

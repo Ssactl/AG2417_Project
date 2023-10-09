@@ -13,7 +13,7 @@ import StationCityForBuyers from "./components/Station/StationCityForBuyers";
 import StationCityForCustomers from "./components/Station/StationCityForCustomers";
 import StationOther from "./components/Station/StationOther";
 import StationClassMaxLevel from "./components/Station/StationCityMaxLevel";
-import PlayerEstate from "./components/PlayerEstate/PlayerEstate";
+import PlayerEstateBoard from "./components/PlayerEstate/PlayerEstateBoard";
 
 //table stations
 const stations = [
@@ -224,7 +224,7 @@ function App() {
 
     <div className="container">
       <div className={playerDisplayEstateHidden}>
-        <PlayerEstate
+        <PlayerEstateBoard
           stations={stations}
           playerDisplayEstate={playerDisplayEstate}
           players={players}
