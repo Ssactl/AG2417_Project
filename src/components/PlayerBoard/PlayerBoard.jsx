@@ -13,36 +13,23 @@ import "./PlayerBoard.css";
 const PlayerBoard = ({ players, currentPlayer }) => {
   return (
     <>
-      <Row xs={2} md={3}>
-        {players.map((player, index) => (
-          <Col key={index} md={5}>
-            <Card
-              style={{ width: "100%" }}
-              className={
-                currentPlayer + 1 == player.pid ? "current--player" : ""
-              }
-            >
-              <Card.Body
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={player.avatar}
-                  alt={`${player.name}'s Avatar`}
-                  style={{ width: "40%", height: "60%" }}
-                />
-                <div style={{ marginLeft: "10px" }}>
-                  <Card.Title>{player.name}</Card.Title>
-                  <Card.Text>score: {player.score}</Card.Text>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      {players.map((player, index) => (
+        <div
+          key={index}
+          className={
+            currentPlayer + 1 == player.pid
+              ? "current--player player--board--item"
+              : "player--board--item"
+          }
+        >
+          <img className="player--board--item--column--1" src={player.avatar} />
+          <div className="player--board--item--column--2">
+            <p>{player.name}</p>
+            <p>{player.score}</p>
+            <button>collection</button>
+          </div>
+        </div>
+      ))}
     </>
   );
 };

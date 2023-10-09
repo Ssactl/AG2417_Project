@@ -36,12 +36,17 @@
   /* display: flex; */
   width: 10%;
   flex-direction: column;
+  height: calc(100vh);
 }
 
 .row--1 {
   background-color: rgb(243, 247, 227);
   flex-grow: 1;
   height: 40%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .row--2 {

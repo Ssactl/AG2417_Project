@@ -1,6 +1,27 @@
-.card {
-  padding: 0;
-  margin: 0;
+.player--board--item {
+  /* background-color: blue; */
+  flex-basis: 50%;
+  display: inline-flex;
+  height: 50%;
+}
+
+.player--board--item--column--1 {
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+
+.player--board--item--column--2 {
+  flex-basis: 50%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.player--board--item--column--2 button {
+  width: 5em;
 }
 
 .current--player {

@@ -177,8 +177,9 @@ function App() {
 
   //player who wants to display his all estate
   const [playerDisplayEstate, setPlayerDisplayEstate] = useState(0);
-  const [playerDisplayEstateHidden, setplayerDisplayEstateHidden] =
-    useState("");
+  const [playerDisplayEstateHidden, setplayerDisplayEstateHidden] = useState(
+    "player--estate--hidden"
+  );
 
   // frech players data from postgresql
   // const [players, setPlayers] = useState([]);
