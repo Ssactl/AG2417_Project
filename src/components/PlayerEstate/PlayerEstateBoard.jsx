@@ -34,7 +34,11 @@ function PlayerEstateBoard({
 
         {stations.map((data, index) =>
           data.belonger === playerDisplayEstate + 1 ? (
-            <Marker position={[data.latitude, data.longitude]} key={index} />
+            <Marker position={[data.latitude, data.longitude]} key={index}>
+              <Popup>
+                {data.name}, level {data.level}
+              </Popup>
+            </Marker>
           ) : (
             ""
           )
