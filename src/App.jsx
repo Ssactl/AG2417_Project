@@ -67,56 +67,71 @@ const stationsTest = [
     level: 1,
   },
 ];
-// const stationCount = stations.length;
+// // const stationCount = stations.length;
 
-// // // Testing;
-const playersTest = [
-  {
-    name: "Jiani1",
-    avatar: "../src/assets/player/player1.png", // 头像图片的URL
-    score: 1000,
-    pid: 1,
-  },
-  {
-    name: "Lee2",
-    avatar: "../src/assets/player/player2.png",
-    score: 850,
-    pid: 2,
-  },
-  {
-    name: "Meme3",
-    avatar: "../src/assets/player/player3.png",
-    score: 1200,
-    pid: 3,
-  },
-  {
-    name: "Viva4",
-    avatar: "../src/assets/player/player4.png",
-    score: 750,
-    pid: 4,
-  },
-];
+// // // // Testing;
+// const playersTest = [
+//   {
+//     name: "Jiani1",
+//     avatar: "../src/assets/player/player1.png", // 头像图片的URL
+//     score: 1000,
+//     pid: 1,
+//   },
+//   {
+//     name: "Lee2",
+//     avatar: "../src/assets/player/player2.png",
+//     score: 850,
+//     pid: 2,
+//   },
+//   {
+//     name: "Meme3",
+//     avatar: "../src/assets/player/player3.png",
+//     score: 1200,
+//     pid: 3,
+//   },
+//   {
+//     name: "Viva4",
+//     avatar: "../src/assets/player/player4.png",
+//     score: 750,
+//     pid: 4,
+//   },
+// ];
 
 //玩游戏的页面，放大地图，小地图和人物展示框这三个组件
 function App() {
   // frech players data from postgresql
-  const [players, setPlayers] = useState(playersTest);
+  const [players, setPlayers] = useState([]);
   const [stations, setStations] = useState(stationsTest);
-  const stationCount = stations.length;
-  // useEffect(() => {
-  //   // 发起GET请求获取数据
-  //   axios.get('http://localhost:5000/player/get_players')
-  //     .then((response) => {
-  //       // 从响应中提取数据
-  //       const data = response.data;
-  //       console.log(data[0].avater)
-  //       // 更新状态变量以存储数据
-  //       setPlayers(data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching data:', error);
-  //     });
-  // }, []); // 空数组表示仅在组件挂载时执行一次
+
+  useEffect(() => {
+    // get players data
+    axios
+      .get("http://localhost:5000/player/get_players")
+      .then((response) => {
+        // 从响应中提取数据
+        const data = response.data;
+        console.log(data);
+        // 更新状态变量以存储数据
+        setPlayers(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+
+    // //get stations data
+    // axios
+    //   .get("http://localhost:5000/player/get_players")
+    //   .then((response) => {
+    //     // 从响应中提取数据
+    //     const data = response.data;
+    //     console.log(data);
+    //     // 更新状态变量以存储数据
+    //     setStations(data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching data:", error);
+    //   });
+  }, []); // 空数组表示仅在组件挂载时执行一次
 
   //the current center of the main/big map
   const [currentStationIndex, setCurrentStationIndex] = useState(0);
@@ -310,7 +325,7 @@ function App() {
         <Dice
           currentPlayer={currentPlayer}
           playersStationIndex={playersStationIndex}
-          stationCount={stationCount}
+          stationCount={stations.length}
           setplayerStation={[
             setplayer1StationIndex,
             setplayer2StationIndex,
