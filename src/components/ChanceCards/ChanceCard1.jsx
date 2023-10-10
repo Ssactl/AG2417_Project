@@ -7,6 +7,7 @@ class ChanceCard1 extends React.Component {
     
     // Access props to interact with the game state
     // For example, props.setSubsidies(1000);
+    console.log('here is chancecard1');
   }
 
   render() {

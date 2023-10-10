@@ -71,6 +71,29 @@
   /* font-family: "Agency FB", sans-serif */
 }
 
+.card-executed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-executed button{
+  background-color: #2656e6;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
 .chance-card-content {
   background-color: #fff;
   border: 2px solid #333;

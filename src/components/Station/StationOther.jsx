@@ -5,8 +5,8 @@ import CardBackImage from '../../assets/chancecard/chanceback.png';
 import CardContentImage from '../../assets/chancecard/chancecontent.png'
 import ChanceCard1 from '../ChanceCards/ChanceCard1';
 import ChanceCard2 from '../ChanceCards/ChanceCard2';
+import ChanceCard3 from '../ChanceCards/ChanceCard3';
 import ChanceCard4 from '../ChanceCards/ChanceCard4';
-import ChanceCardContent from '../ChanceCards/ChanceCardContent';
 
 class StationOther extends Component {
   constructor(props) {
@@ -14,71 +14,65 @@ class StationOther extends Component {
     this.state = {
       selectedCardIndex: null, // Track the selected card index
       isCardFlipped: false, // Track if the card is flipped to show content
+      isCardExecuted: false, // Track if the card is executed
     };
   }
+
+  // 定义一个数组来存储所有的 ChanceCard 组件
+  chanceCards = [
+    ChanceCard1,
+    ChanceCard2,
+    ChanceCard3,
+    ChanceCard4,
+    // ChanceCard5,
+    // ChanceCard6,
+  ];
 
   // Handle the card click to flip and show content
   handleCardClick = (cardIndex) => {
     this.setState({
       selectedCardIndex: cardIndex,
-      isCardFlipped: true
+      isCardFlipped: true,
+      isCardExecuted: false,
+    });
+  }
+
+  handleCardClose = () => {
+    this.setState({
+      selectedCardIndex: null,
+      isCardFlipped: false,
+      isCardExecuted: false,
     });
   }
 
   // Handle the execute button click
   handleExecuteButtonClick = () => {
     const { selectedCardIndex } = this.state;
-    // Execute logic based on the selected chance card index
-    this.executeChanceCard(selectedCardIndex);
-  };
-
-  // Execute logic for each chance card
-  executeChanceCard = (cardIndex) => {
-    // Use switch statement to execute logic for each card
-    switch (cardIndex) {
-      case 0:
-        // Execute logic for Chance Card 1
-        ChanceCard1.execute(this.props);
-        break;
-      case 1:
-        // Execute logic for Chance Card 2
-        ChanceCard2.execute(this.props);
-        break;
-      // case 2:
-      //   // Execute logic for Chance Card 3
-      //   ChanceCard3.execute(this.props);
-      //   break;
-      case 3:
-        // Execute logic for Chance Card 4
-        ChanceCard4.execute(this.props);
-        break;
-      // case 4:
-      //   // Execute logic for Chance Card 5
-      //   ChanceCard5.execute(this.props);
-      //   break;
-      // case 5:
-      //   // Execute logic for Chance Card 6
-      //   ChanceCard6.execute(this.props);
-      //   break;
-      default:
-        // Handle unknown card
-        console.log('Unknown chance card');
-    }
+    this.setState({
+      isCardExecuted: true,
+    });
   };
 
   // Render the window content
   renderWindowContent() {
-    const { selectedCardIndex, isCardFlipped } = this.state;
-
+    const { selectedCardIndex, isCardFlipped, isCardExecuted } = this.state;
     if (isCardFlipped) {
-      // Display the selected card content and execute button
-      return (
-        <div className="card-content">
+      if (isCardExecuted) {
+        <div className="card-executed">
           {/* Render the card content based on selectedCardIndex */}
-          {this.renderCardContent(selectedCardIndex)}
-          <button onClick={this.handleExecuteButtonClick}>Execute</button>
+          {this.renderCardExecuted(selectedCardIndex)}
+          <button onClick={this.handleCardClose}>X</button>
         </div>
-      );
+      } else {
+        // Display the selected card content and execute button
+        return (
+          <div className="card-content">
+            {/* Render the card content based on selectedCardIndex */}
+            {this.renderCardContent(selectedCardIndex)}
+            <button onClick={this.handleExecuteButtonClick}>Execute</button>
+          </div>
+        );
+      }
     } else {
       // Display the initial window with six red card options
       return (
@@ -150,6 +144,35 @@ class StationOther extends Component {
       );
     }
     return null; // 如果 selectedCardIndex 为 null，则不显示内容
+  }
+
+  renderCardExecuted(selectedCardIndex) {
+    if (selectedCardIndex !== null) {
+      const ChanceCardComponent = this.chanceCards[selectedCardIndex];
+      // console.log('renderCardExecuted');
+      // console.log(this.chanceCards);
+      // console.log(ChanceCardComponent);
+      if (ChanceCardComponent) {
+        console.log('ChanceCardComponent =/= 0');
+        return (
+          <div className="chance-card-executed">
+            <h3 className='card--title'>Result</h3>
+            {/* <ChanceCardComponent {...this.props}/>; */}
+          </div>
+        )
+      }
+      else{
+        return (
+          <div className="chance-card-executed">
+            <h1> ChanceCardComponent = 0 </h1>
+          </div>
+        );
+    }}
+    return (
+      <div className="chance-card-executed">
+        <h1> selectedCardIndex = null </h1>
+      </div>
+    );
   }
 
   render() {
