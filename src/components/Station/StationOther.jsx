@@ -3,7 +3,8 @@ import './StationOther.css';
 import CardBackImage from '../../assets/chancecard/chanceback.png';
 import CardContentImage from '../../assets/chancecard/chancecontent.png'
 import ChanceCard1 from '../ChanceCards/ChanceCard1';
-
+import ChanceCard2 from '../ChanceCards/ChanceCard2';
+import ChanceCardContent from '../ChanceCards/ChanceCardContent';
 
 class StationOther extends Component {
   constructor(props) {
@@ -22,17 +23,16 @@ class StationOther extends Component {
     });
   }
 
-  handleCloseCard() {
-    this.setState({
-      selectedCardIndex: null,
-      isCardFlipped: false,
-    });
-  }
+  // handleCloseCard() {
+  //   this.setState({
+  //     selectedCardIndex: null,
+  //     isCardFlipped: false,
+  //   });
+  // }
 
   // Handle the execute button click
   handleExecuteButtonClick = () => {
     const { selectedCardIndex } = this.state;
-
     // Execute logic based on the selected chance card index
     this.executeChanceCard(selectedCardIndex);
   };
@@ -49,22 +49,22 @@ class StationOther extends Component {
         // Execute logic for Chance Card 2
         ChanceCard2.execute(this.props);
         break;
-      case 2:
-        // Execute logic for Chance Card 3
-        ChanceCard3.execute(this.props);
-        break;
-      case 3:
-        // Execute logic for Chance Card 4
-        ChanceCard4.execute(this.props);
-        break;
-      case 4:
-        // Execute logic for Chance Card 5
-        ChanceCard5.execute(this.props);
-        break;
-      case 5:
-        // Execute logic for Chance Card 6
-        ChanceCard6.execute(this.props);
-        break;
+      // case 2:
+      //   // Execute logic for Chance Card 3
+      //   ChanceCard3.execute(this.props);
+      //   break;
+      // case 3:
+      //   // Execute logic for Chance Card 4
+      //   ChanceCard4.execute(this.props);
+      //   break;
+      // case 4:
+      //   // Execute logic for Chance Card 5
+      //   ChanceCard5.execute(this.props);
+      //   break;
+      // case 5:
+      //   // Execute logic for Chance Card 6
+      //   ChanceCard6.execute(this.props);
+      //   break;
       default:
         // Handle unknown card
         console.log('Unknown chance card');
@@ -78,7 +78,7 @@ class StationOther extends Component {
     if (isCardFlipped) {
       // Display the selected card content and execute button
       return (
-        <div className="card-content" style={{ background: CardContentImage }}>
+        <div className="card-content">
           {/* Render the card content based on selectedCardIndex */}
           {this.renderCardContent(selectedCardIndex)}
           <button onClick={this.handleExecuteButtonClick}>Execute</button>
@@ -107,7 +107,6 @@ class StationOther extends Component {
       "Host a cultural exchange event in a city.",
       "Organize a geography contest.",
     ];
-
     return (
       <div className="card-options">
         <ul className="card-grid">
@@ -119,7 +118,7 @@ class StationOther extends Component {
             >
               <div
                 className={`card-inner ${this.state.isCardFlipped ? 'flipped' : ''}`}
-                style={{ backgroundImage: `url(${CardBackImage})` }}
+                style={{ backgroundImage: `url(${CardBackImage})`}}
               ></div>
             </li>
           ))}
@@ -131,28 +130,40 @@ class StationOther extends Component {
   // Render the card content based on selectedCardIndex
   renderCardContent(selectedCardIndex) {
     if (selectedCardIndex !== null) {
+      let cardContent = null;
       switch (selectedCardIndex) {
         case 0:
-          return (
-            <div className="card-content">
-              <p>Query player's cities in the northwest region and grant subsidies.</p>
-              <button onClick={this.handleCloseCard}>Close</button>
-            </div>
-          );
+          cardContent = "Query player's cities in the northwest region and grant subsidies.";
+          break;
         case 1:
-          return <ChanceCard2Content />;
+          cardContent = "Discover a Feng Shui treasure. Analyze a city or location.";
+          break;
         case 2:
-          return <ChanceCard3Content />;
+          cardContent = "Query player's cities for Cuisine upgrades and impose fines.";
+          break;
         case 3:
-          return <ChanceCard4Content />;
+          cardContent = "Receive rewards for cities within 300km of each other.";
+          break;
         case 4:
-          return <ChanceCard5Content />;
+          cardContent = "Host a cultural exchange event in a city.";
+          break;
         case 5:
-          return <ChanceCard6Content />;
+          cardContent = "Organize a geography contest.";
+          break;
         default:
-          return <div>Unknown chance card</div>;
+          cardContent = "Unknown chance card";
+          break;
       }
+      return (
+        <div className="chance-card-content">
+        {/* <div> */}
+          <p>{cardContent}</p>
+          {/* <button onClick={this.handleCloseCard}>Close</button> */}
+        </div>
+      );
     }
+  
+    return null; // 如果 selectedCardIndex 为 null，则不显示内容
   }
 
   render() {

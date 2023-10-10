@@ -47,7 +47,8 @@ function StationCityForBuyers({
           <p>score 200</p>
         </div>
         <div className="station--buyers--column--2--row--3">
-          <button className="station--buyers--button station--buyers--button--yes">
+          <button className="station--buyers--button station--buyers--button--yes"
+          onClick={buttonYesClickingHandler}>
             yes
           </button>
           <button

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class DistanceReward extends Component {
+class DistanceRewardCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,4 +43,4 @@ class DistanceReward extends Component {
       return "You have purchased a city at a discounted price.";
     }
 
-export default DistanceReward;
+export default DistanceRewardCard;

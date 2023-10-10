@@ -17,4 +17,4 @@ class ChanceCard2 extends React.Component {
   }
 }
 
-export default ChanceCard1;
+export default ChanceCard2;
