@@ -11,7 +11,7 @@ function StationCityForBuyers({
   currentPlayer,
   stations,
   currentStationIndex,
-  setStation,
+  setStations,
   setCurrentPlayer,
   setCurrentStationIndex,
   playersStationIndex,
@@ -21,15 +21,19 @@ function StationCityForBuyers({
   // if the current player wants to buy the estate
   function buttonYesClickingHandler() {
     //update the score of the owner
-    const newPlayers = { ...players };
+    const newPlayers = JSON.parse(JSON.stringify(players));
     newPlayers[currentPlayer].score = players[currentPlayer].score - score;
     setPlayers(newPlayers);
-    //if it is the first trade
+
+    //update the level of the station
+    const newStations = JSON.parse(JSON.stringify(stations));
+    newStations[currentStationIndex].level =
+      stations[currentStationIndex].level + 1;
+    //if it is the first trade, update the belonger
     if (stations[currentStationIndex].belonger == 0) {
-      const newStations = { ...stations };
-      newStations[currentStationIndex].belonger == currentPlayer + 1;
-      setStations(newStations);
+      newStations[currentStationIndex].belonger = currentPlayer + 1;
     }
+    setStations(newStations);
     nextPlayer();
   }
   //if the current player does not want to buy the estate
@@ -47,8 +51,10 @@ function StationCityForBuyers({
           <p>score 200</p>
         </div>
         <div className="station--buyers--column--2--row--3">
-          <button className="station--buyers--button station--buyers--button--yes"
-          onClick={buttonYesClickingHandler}>
+          <button
+            className="station--buyers--button station--buyers--button--yes"
+            onClick={buttonYesClickingHandler}
+          >
             yes
           </button>
           <button

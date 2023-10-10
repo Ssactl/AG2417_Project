@@ -15,14 +15,14 @@ import StationClassMaxLevel from "./components/Station/StationCityMaxLevel";
 import PlayerEstateBoard from "./components/PlayerEstate/PlayerEstateBoard";
 
 //table stations
-const stations = [
+const stationsTest = [
   {
     id: 0,
     name: "Beijing",
     latitude: 39.920514604261506,
     longitude: 116.39601129456929,
-    belonger: -88888,
-    level: 0,
+    belonger: 1,
+    level: 1,
   },
   {
     id: 1,
@@ -30,15 +30,15 @@ const stations = [
     latitude: 31.24615161464742,
     longitude: 121.45993996461581,
     belonger: 1,
-    level: 0,
+    level: 1,
   },
   {
     id: 2,
     name: "shengzheng",
     latitude: 22.591414849772395,
     longitude: 114.04906736003136,
-    belonger: -88888,
-    level: 3,
+    belonger: 1,
+    level: 1,
   },
   {
     id: 3,
@@ -53,8 +53,8 @@ const stations = [
     name: "kunming",
     latitude: 24.88558106693481,
     longitude: 102.83097940902874,
-    belonger: -88888,
-    level: 3,
+    belonger: 1,
+    level: 1,
   },
   {
     id: 5,
@@ -62,13 +62,13 @@ const stations = [
     latitude: 29.56047860181214,
     longitude: 106.5292432576508,
     belonger: 1,
-    level: 0,
+    level: 1,
   },
 ];
-const stationCount = stations.length;
+// const stationCount = stations.length;
 
 // // // Testing;
-const players = [
+const playersTest = [
   {
     name: "Jiani1",
     avatar: "../src/assets/player/player1.png", // 头像图片的URL
@@ -97,6 +97,25 @@ const players = [
 
 //玩游戏的页面，放大地图，小地图和人物展示框这三个组件
 function App() {
+  // frech players data from postgresql
+  const [players, setPlayers] = useState(playersTest);
+  const [stations, setStations] = useState(stationsTest);
+  const stationCount = stations.length;
+  // useEffect(() => {
+  //   // 发起GET请求获取数据
+  //   axios.get('http://localhost:5000/player/get_players')
+  //     .then((response) => {
+  //       // 从响应中提取数据
+  //       const data = response.data;
+  //       console.log(data[0].avater)
+  //       // 更新状态变量以存储数据
+  //       setPlayers(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching data:', error);
+  //     });
+  // }, []); // 空数组表示仅在组件挂载时执行一次
+
   //the current center of the main/big map
   const [currentStationIndex, setCurrentStationIndex] = useState(0);
   const updateCurrentStation = (newStation) =>
@@ -154,21 +173,23 @@ function App() {
       ? setStationClassOther("")
       : //if the current station is a city one without any owner, then display the StationCityForBuyers;
       stations[currentStationIndex].belonger == 0
-        ? setStationClassBuyers("")
-        : //if the current station is a city and has a owner, but the current player is not the owner
-        currentPlayer + 1 != stations[currentStationIndex].belonger
-          ? setStationClassCustomers("")
-          : //if the current station is a city and has a owner, and the current player is the owner, but the city's level is under 3
-          stations[currentStationIndex].level < 3
-            ? setStationClassBuyers("")
-            : //if the station reach the max level
-            setStationClassMaxLevel("");
+      ? setStationClassBuyers("")
+      : //if the current station is a city and has a owner, but the current player is not the owner
+      currentPlayer + 1 != stations[currentStationIndex].belonger
+      ? setStationClassCustomers("")
+      : //if the current station is a city and has a owner, and the current player is the owner, but the city's level is under 3
+      stations[currentStationIndex].level < 3
+      ? setStationClassBuyers("")
+      : //if the station reach the max level
+        setStationClassMaxLevel("");
   };
   const resetStationClass = () => {
     setStationClassCustomers("station--hidden");
     setStationClassBuyers("station--hidden");
     setStationClassOther("station--hidden");
     setStationClassMaxLevel("station--hidden");
+    console.log(players);
+    console.log(stations);
   };
 
   //current player
@@ -179,23 +200,6 @@ function App() {
   const [playerDisplayEstateHidden, setplayerDisplayEstateHidden] = useState(
     "player--estate--hidden"
   );
-
-  // frech players data from postgresql
-  // const [players, setPlayers] = useState([]);
-  // useEffect(() => {
-  //   // 发起GET请求获取数据
-  //   axios.get('http://localhost:5000/player/get_players')
-  //     .then((response) => {
-  //       // 从响应中提取数据
-  //       const data = response.data;
-  //       console.log(data[0].avater)
-  //       // 更新状态变量以存储数据
-  //       setPlayers(data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching data:', error);
-  //     });
-  // }, []); // 空数组表示仅在组件挂载时执行一次
 
   //the next player's turn
   function nextPlayer() {
@@ -241,7 +245,7 @@ function App() {
             currentStationIndex={currentStationIndex}
             players={players}
             currentPlayer={currentPlayer}
-            // setPlayers={setPlayers}
+            setPlayers={setPlayers}
             stationClassCustomers={stationClassCustomers}
             setCurrentStationIndex={setCurrentStationIndex}
             setCurrentPlayer={setCurrentPlayer}
@@ -258,10 +262,14 @@ function App() {
             resetStationClass={resetStationClass}
             playersStationIndex={playersStationIndex}
             nextPlayer={nextPlayer}
+            setPlayers={setPlayers}
+            currentStationIndex={currentStationIndex}
+            stations={stations}
+            setStations={setStations}
           />
         </div>
         <div className={stationClassOther}>
-          <StationOther 
+          <StationOther
             nextPlayer={nextPlayer}
             stations={stations}
             currentStationIndex={currentStationIndex}
