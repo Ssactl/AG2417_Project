@@ -26,30 +26,33 @@ function Dice({
   stations,
   currentStationIndex,
   updateStationClass,
+  stationClassList,
 }) {
   const [currentDiceURL, setCurrentDiceURL] = useState(dice1ImgURL);
 
   //函数作用：当用户点击骰子，根据骰子点数计算移动步数，更新站点位置
   const diceClickingHandler = () => {
-    let diceNumber = Math.floor(Math.random() * 6) + 1;
-    // console.log(diceNumber);
+    if (stationClassList.every((s) => s === "station--hidden")) {
+      let diceNumber = Math.floor(Math.random() * 6) + 1;
+      // console.log(diceNumber);
 
-    //update currant player station
-    let newStationIndex =
-      (playersStationIndex[currentPlayer] + diceNumber) % stationCount;
-    setplayerStation[currentPlayer](newStationIndex);
+      //update currant player station
+      let newStationIndex =
+        (playersStationIndex[currentPlayer] + diceNumber) % stationCount;
+      setplayerStation[currentPlayer](newStationIndex);
 
-    //update currant center of the big map
-    updateCurrentStation(newStationIndex);
+      //update currant center of the big map
+      updateCurrentStation(newStationIndex);
 
-    //update dice image
-    setCurrentDiceURL(diceImgURLArr[diceNumber - 1]);
+      //update dice image
+      setCurrentDiceURL(diceImgURLArr[diceNumber - 1]);
 
-    alert(
-      `Moving forward ${diceNumber} steps!!! You are now arriving ${stations[newStationIndex].name}`
-    );
+      alert(
+        `Moving forward ${diceNumber} steps!!! You are now arriving ${stations[newStationIndex].name}`
+      );
 
-    updateStationClass(stations, newStationIndex);
+      updateStationClass(stations, newStationIndex);
+    }
   };
 
   return (

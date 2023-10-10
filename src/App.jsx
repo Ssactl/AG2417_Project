@@ -159,6 +159,12 @@ function App() {
   const [stationClassOther, setStationClassOther] = useState("station--hidden");
   const [stationClassMaxLevel, setStationClassMaxLevel] =
     useState("station--hidden");
+  const stationClassList = [
+    stationClassCustomers,
+    stationClassBuyers,
+    stationClassOther,
+    stationClassMaxLevel,
+  ];
   const updateStationClass = (stations, currentStationIndex) => {
     // //for debugging
     // console.log(
@@ -188,8 +194,6 @@ function App() {
     setStationClassBuyers("station--hidden");
     setStationClassOther("station--hidden");
     setStationClassMaxLevel("station--hidden");
-    console.log(players);
-    console.log(stations);
   };
 
   //current player
@@ -301,6 +305,7 @@ function App() {
           stations={stations}
           currentStationIndex={currentStationIndex}
           updateStationClass={updateStationClass}
+          stationClassList={stationClassList}
         />
         <BigMap currentStationIndex={currentStationIndex} stations={stations} />
       </div>
