@@ -1,5 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 // import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -215,6 +217,20 @@ function App() {
     resetStationClass();
   }
 
+  //initiate map reference
+  const mapRef = useRef(); //refer to map
+  const zoom = 13;
+  //when the currentStationIndex updates, move the map to the new center
+  useEffect(() => {
+    if (mapRef.current) {
+      // mapRef.current.setView(stationLocationArr[currentStationIndex], zoom);
+      mapRef.current.panTo([
+        stations[currentStationIndex].latitude,
+        stations[currentStationIndex].longitude,
+      ]);
+    }
+  }, [currentStationIndex]);
+
   return (
     // <Container className="container" fluid="true">
     //   <Row>
@@ -307,7 +323,20 @@ function App() {
           updateStationClass={updateStationClass}
           stationClassList={stationClassList}
         />
-        <BigMap currentStationIndex={currentStationIndex} stations={stations} />
+        <MapContainer
+          ref={mapRef}
+          center={[
+            stations[currentStationIndex].latitude,
+            stations[currentStationIndex].longitude,
+          ]}
+          zoom={zoom}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+        </MapContainer>
       </div>
       <div className="column--2">
         <div className="row--1">
