@@ -19,8 +19,8 @@ function BigMap({ currentStationIndex, stations }) {
     if (mapRef.current) {
       // mapRef.current.setView(stationLocationArr[currentStationIndex], zoom);
       mapRef.current.panTo([
-        stations[currentStationIndex].longitute,
-        stations[currentStationIndex].latitute,
+        stations[currentStationIndex].latitude,
+        stations[currentStationIndex].longitude,
       ]);
     }
   }, [currentStationIndex]);
@@ -29,8 +29,8 @@ function BigMap({ currentStationIndex, stations }) {
     <MapContainer
       ref={mapRef}
       center={[
-        stations[currentStationIndex].longitute,
-        stations[currentStationIndex].latitute,
+        stations[currentStationIndex].latitude,
+        stations[currentStationIndex].longitude,
       ]}
       zoom={zoom}
       scrollWheelZoom={false}

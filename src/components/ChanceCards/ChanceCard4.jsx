@@ -1,59 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'; 
+import * as turf from '@turf/turf';
 
-// display all the cities belongs to currentPlayer with 300km buffer in a map
-// display the score.
 const ChanceCard4 = {
   execute: (props) => {
     const {
       players,
       currentPlayer,
-      cities,
+      stations,
       setCurrentPlayer,
       setPlayers,
     } = props;
+    
+    const currentPlayerCities = stations.filter(
+      (stations) => stations.belonger === currentPlayer+1
+    )
+    console.log(currentPlayerCities);
+    const calculateScore = () => {
+      let totalReward = 0;
 
-    // 获取当前玩家的城市
-    const currentPlayerCities = stations.filter(city => city.belonger === currentPlayer && city.level > 0);
+      currentPlayerCities.forEach((city1) => {
+        currentPlayerCities.forEach((city2) => {
+          if (city1.id !== city2.id) {
+            console.log(city1);
+            console.log(city1.longitude);
+            console.log(city1.latitude);
+             console.log(city2);
+            const city1Point = turf.point([city1.longitude, city1.latitude]);
+            console.log(city1Point);
+            const city2Point = turf.point([city2.longitude, city2.latitude]);
+            const distance = turf.distance(city1Point, city2Point, {
+              units: 'kilometers',
+            });
 
-    // 检查每两座城市的距离是否不超过300km
-    let totalReward = 0;
-    for (let i = 0; i < currentPlayerCities.length; i++) {
-      for (let j = i + 1; j < currentPlayerCities.length; j++) {
-        const city1 = cities.find((city) => city.id === currentPlayerCities[i]);
-        const city2 = cities.find((city) => city.id === currentPlayerCities[j]);
-        if (city1 && city2) {
-          const distance = calculateDistance(city1, city2);
-          if (distance <= 300) {
-            totalReward += 1000;
+            if (distance <= 300) {
+              totalReward += 1000;
+            }
           }
-        }
-      }
-    }
+        });
+      });
 
-    // 更新当前玩家的资金
-    const updatedPlayers = [...players];
-    updatedPlayers[currentPlayerIndex].money += totalReward;
+      return totalReward;
+    };
 
-    // 更新玩家信息
-    setPlayers(updatedPlayers);
+    const score = calculateScore();
 
-    // 切换到下一个玩家
-    const nextPlayerIndex = (currentPlayerIndex + 1) % players.length;
-    setCurrentPlayer(nextPlayerIndex);
+    return (
+      <div>
+        <h3>Chance Card 4 - Receive rewards for cities within 300km of each other</h3>
+        <p>Score: {score}</p>
+        {currentPlayerCities.length > 0 && (
+          <MapContainer
+            center={[currentPlayerCities[0].latitude, currentPlayerCities[0].longitude]}
+            zoom={5}
+            style={{ height: '400px', width: '100%' }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {currentPlayerCities.map((city) => (
+              <Marker
+                key={city.id}
+                position={[city.latitude, city.longitude]}
+              >
+                <Popup>{city.name}</Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        )}
+      </div>
+    );
   },
 };
-
-// 计算两个城市之间的距离
-function calculateDistance(city1, city2) {
-  // 这里可以根据实际需求计算城市之间的距离
-  // 返回一个代表距离的数值
-  // 以下示例计算了城市之间的欧氏距离
-  const x1 = city1.x;
-  const y1 = city1.y;
-  const x2 = city2.x;
-  const y2 = city2.y;
-  const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-  return distance;
-}
 
 export default ChanceCard4;

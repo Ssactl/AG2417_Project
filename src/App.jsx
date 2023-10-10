@@ -19,49 +19,49 @@ const stations = [
   {
     id: 0,
     name: "Beijing",
-    longitute: 39.920514604261506,
-    latitute: 116.39601129456929,
+    latitude: 39.920514604261506,
+    longitude: 116.39601129456929,
     belonger: -88888,
     level: 0,
   },
   {
     id: 1,
     name: "shanghai",
-    longitute: 31.24615161464742,
-    latitute: 121.45993996461581,
-    belonger: -88888,
+    latitude: 31.24615161464742,
+    longitude: 121.45993996461581,
+    belonger: 1,
     level: 0,
   },
   {
     id: 2,
     name: "shengzheng",
-    longitute: 22.591414849772395,
-    latitute: 114.04906736003136,
+    latitude: 22.591414849772395,
+    longitude: 114.04906736003136,
     belonger: -88888,
     level: 3,
   },
   {
     id: 3,
     name: "chengdu",
-    longitute: 30.655749955405586,
-    latitute: 104.0562367934888,
-    belonger: -88888,
+    latitude: 30.655749955405586,
+    longitude: 104.0562367934888,
+    belonger: 1,
     level: 3,
   },
   {
     id: 4,
     name: "kunming",
-    longitute: 24.88558106693481,
-    latitute: 102.83097940902874,
+    latitude: 24.88558106693481,
+    longitude: 102.83097940902874,
     belonger: -88888,
     level: 3,
   },
   {
     id: 5,
     name: "chongqin",
-    longitute: 29.56047860181214,
-    latitute: 106.5292432576508,
-    belonger: -88888,
+    latitude: 29.56047860181214,
+    longitude: 106.5292432576508,
+    belonger: 1,
     level: 0,
   },
 ];
@@ -115,20 +115,20 @@ function App() {
   ];
   const playerPositions = [
     [
-      stations[player1StationIndex].longitute,
-      stations[player1StationIndex].latitute,
+      stations[player1StationIndex].latitude,
+      stations[player1StationIndex].longitude,
     ],
     [
-      stations[player2StationIndex].longitute,
-      stations[player2StationIndex].latitute,
+      stations[player2StationIndex].latitude,
+      stations[player2StationIndex].longitude,
     ],
     [
-      stations[player3StationIndex].longitute,
-      stations[player3StationIndex].latitute,
+      stations[player3StationIndex].latitude,
+      stations[player3StationIndex].longitude,
     ],
     [
-      stations[player4StationIndex].longitute,
-      stations[player4StationIndex].latitute,
+      stations[player4StationIndex].latitude,
+      stations[player4StationIndex].longitude,
     ],
   ];
 
@@ -154,15 +154,15 @@ function App() {
       ? setStationClassOther("")
       : //if the current station is a city one without any owner, then display the StationCityForBuyers;
       stations[currentStationIndex].belonger == 0
-      ? setStationClassBuyers("")
-      : //if the current station is a city and has a owner, but the current player is not the owner
-      currentPlayer + 1 != stations[currentStationIndex].belonger
-      ? setStationClassCustomers("")
-      : //if the current station is a city and has a owner, and the current player is the owner, but the city's level is under 3
-      stations[currentStationIndex].level < 3
-      ? setStationClassBuyers("")
-      : //if the station reach the max level
-        setStationClassMaxLevel("");
+        ? setStationClassBuyers("")
+        : //if the current station is a city and has a owner, but the current player is not the owner
+        currentPlayer + 1 != stations[currentStationIndex].belonger
+          ? setStationClassCustomers("")
+          : //if the current station is a city and has a owner, and the current player is the owner, but the city's level is under 3
+          stations[currentStationIndex].level < 3
+            ? setStationClassBuyers("")
+            : //if the station reach the max level
+            setStationClassMaxLevel("");
   };
   const resetStationClass = () => {
     setStationClassCustomers("station--hidden");
@@ -261,7 +261,19 @@ function App() {
           />
         </div>
         <div className={stationClassOther}>
-          <StationOther />
+          <StationOther 
+            nextPlayer={nextPlayer}
+            stations={stations}
+            currentStationIndex={currentStationIndex}
+            players={players}
+            currentPlayer={currentPlayer}
+            // setPlayers={setPlayers}
+            stationClassCustomers={stationClassCustomers}
+            setCurrentStationIndex={setCurrentStationIndex}
+            setCurrentPlayer={setCurrentPlayer}
+            playersStationIndex={playersStationIndex}
+            resetStationClass={resetStationClass}
+          />
         </div>
         <div className={stationClassMaxLevel}>
           <StationClassMaxLevel nextPlayer={nextPlayer} />
