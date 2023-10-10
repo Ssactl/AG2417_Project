@@ -37,6 +37,25 @@ class StationOther extends Component {
     });
   }
 
+  // Handle the execute button click
+  handleExecuteButtonClick = () => {
+    const { selectedCardIndex } = this.state;
+    this.setState({
+      isCardFlipped: true,
+      isCardExecuted: true,
+    });
+    console.log('isCardExecuted:'+this.state.isCardExecuted);
+    this.setState(
+      {
+        isCardExecuted: true,
+      },
+      () => {
+        // 在状态更新完成后执行其他操作
+        console.log('isCardExecuted is now true');
+      }
+    );
+  };
+
   handleCardClose = () => {
     this.setState({
       selectedCardIndex: null,
@@ -45,24 +64,18 @@ class StationOther extends Component {
     });
   }
 
-  // Handle the execute button click
-  handleExecuteButtonClick = () => {
-    const { selectedCardIndex } = this.state;
-    this.setState({
-      isCardExecuted: true,
-    });
-  };
-
   // Render the window content
   renderWindowContent() {
     const { selectedCardIndex, isCardFlipped, isCardExecuted } = this.state;
     if (isCardFlipped) {
       if (isCardExecuted) {
+        return (
         <div className="card-executed">
           {/* Render the card content based on selectedCardIndex */}
           {this.renderCardExecuted(selectedCardIndex)}
-          <button onClick={this.handleCardClose}>X</button>
+          <button onClick={this.handleCardClose}>Commit</button>
         </div>
+        );
       } else {
         // Display the selected card content and execute button
         return (
@@ -157,9 +170,9 @@ class StationOther extends Component {
         return (
           <div className="chance-card-executed">
             <h3 className='card--title'>Result</h3>
-            {/* <ChanceCardComponent {...this.props}/>; */}
+            <ChanceCardComponent {...this.props}/>;
           </div>
-        )
+        );
       }
       else{
         return (
