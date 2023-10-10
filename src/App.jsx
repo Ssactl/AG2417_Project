@@ -8,7 +8,6 @@ import BigMap from "./components/BigMap/BIgMap";
 import Dice from "./components/BigMap/Dice";
 import PlayerBoard from "./components/PlayerBoard/PlayerBoard";
 import SmallMap from "./components/SmallMap/SmallMap";
-
 import StationCityForBuyers from "./components/Station/StationCityForBuyers";
 import StationCityForCustomers from "./components/Station/StationCityForCustomers";
 import StationOther from "./components/Station/StationOther";
@@ -22,7 +21,7 @@ const stations = [
     name: "Beijing",
     longitute: 39.920514604261506,
     latitute: 116.39601129456929,
-    belonger: 1,
+    belonger: -88888,
     level: 0,
   },
   {
@@ -30,7 +29,7 @@ const stations = [
     name: "shanghai",
     longitute: 31.24615161464742,
     latitute: 121.45993996461581,
-    belonger: 1,
+    belonger: -88888,
     level: 0,
   },
   {
@@ -38,7 +37,7 @@ const stations = [
     name: "shengzheng",
     longitute: 22.591414849772395,
     latitute: 114.04906736003136,
-    belonger: 1,
+    belonger: -88888,
     level: 3,
   },
   {
@@ -46,7 +45,7 @@ const stations = [
     name: "chengdu",
     longitute: 30.655749955405586,
     latitute: 104.0562367934888,
-    belonger: 1,
+    belonger: -88888,
     level: 3,
   },
   {
@@ -54,7 +53,7 @@ const stations = [
     name: "kunming",
     longitute: 24.88558106693481,
     latitute: 102.83097940902874,
-    belonger: 1,
+    belonger: -88888,
     level: 3,
   },
   {
@@ -62,7 +61,7 @@ const stations = [
     name: "chongqin",
     longitute: 29.56047860181214,
     latitute: 106.5292432576508,
-    belonger: 0,
+    belonger: -88888,
     level: 0,
   },
 ];
@@ -142,16 +141,16 @@ function App() {
   const [stationClassMaxLevel, setStationClassMaxLevel] =
     useState("station--hidden");
   const updateStationClass = (stations, currentStationIndex) => {
-    //for debugging
-    console.log(
-      stations[currentStationIndex].name,
-      "belonger is",
-      players[stations[currentStationIndex].belonger - 1].name
-    );
-    console.log("current player is", players[currentPlayer].name);
+    // //for debugging
+    // console.log(
+    //   stations[currentStationIndex].name,
+    //   "belonger is",
+    //   players[stations[currentStationIndex].belonger - 1].name
+    // );
+    // console.log("current player is", players[currentPlayer].name);
 
     //if the current station is a fate/chance card
-    stations[currentStationIndex].level === -8888
+    stations[currentStationIndex].belonger === -88888
       ? setStationClassOther("")
       : //if the current station is a city one without any owner, then display the StationCityForBuyers;
       stations[currentStationIndex].belonger == 0

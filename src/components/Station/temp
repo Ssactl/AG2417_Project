@@ -1,0 +1,173 @@
+import React, { Component } from 'react';
+
+// Chance card
+class StationOther extends Component {
+  constructor(props) {
+    super(props);
+
+    // The parameters passed in can be accessed in the constructor function
+    const {
+      stations,
+      currentStationIndex,
+      players,
+      setPlayers,
+      nextPlayer,
+      currentPlayer,
+      playersStationIndex,
+      setCurrentStationIndex,
+      setCurrentPlayer,
+      stationClassCustomers,
+      resetStationClass
+    } = props;
+
+    this.state = {
+      selectedCard: null,
+    };
+  }
+
+  // Handle card selection
+  handleSelectCard = (card) => {
+    this.setState({ selectedCard: card });
+  };
+
+  // Handle executing the selected command
+  handleExecuteCommand = () => {
+    const { selectedCard } = this.state;
+
+    if (selectedCard) {
+      // Execute the command based on the selected card
+      switch (selectedCard) {
+        case 1:
+          this.executeCommand1();
+          break;
+        case 2:
+          this.executeCommand2();
+          break;
+        case 3:
+          this.executeCommand3();
+          break;
+        case 4:
+          this.executeCommand4();
+          break;
+        case 5:
+          this.executeCommand5();
+          break;
+        case 6:
+          this.executeCommand6();
+          break;
+        default:
+          break;
+      }
+      // Clear the selected card
+      this.setState({ selectedCard: null });
+    }
+  };
+
+  // Implement the logic for each command
+  executeCommand1 = () => {
+    // Execute the logic for command 1
+    // Query the cities owned by the player and apply the corresponding actions
+    // 获取当前玩家的索引
+    const currentPlayerIndex = currentPlayer;
+    // 获取当前玩家拥有的城市信息
+    const playerCities = stations.filter(city => city.belonger === currentPlayerIndex && city.level > 0);
+
+    // 遍历城市，检查是否位于西北地区
+    playerCities.forEach((cid) => {
+      const city = stations[cid];
+      const isCityInNorthwestChina =
+        city.longitude >= 80 && city.longitude <= 110 && city.latitude >= 30 && city.latitude <= 45;
+      if (isCityInNorthwestChina) {
+        // 给玩家添加政府补贴
+        const subsidyAmount = 1000 * city.level;
+        players[currentPlayerIndex].score += subsidyAmount;
+
+        // 更新玩家信息
+        const updatedPlayers = [...players];
+        updatedPlayers[currentPlayerIndex] = { ...updatedPlayers[currentPlayerIndex] };
+        setPlayers(updatedPlayers);
+
+        // 标记政府补贴已应用
+        this.setState({ subsidyApplied: true });
+      }
+    });
+
+  };
+
+  executeCommand2 = () => {
+    // Execute the logic for command 2
+    // Analyze a Feng Shui location and apply the corresponding actions
+  };
+
+  executeCommand3 = () => {
+    // Execute the logic for command 3
+    // Query the cities owned by the player and apply the corresponding actions
+  };
+
+  executeCommand4 = () => {
+    // Execute the logic for command 4
+    // Query the player's cities, calculate distances, and apply the corresponding actions
+  };
+
+  executeCommand5 = () => {
+    // Execute the logic for command 5
+    // Organize a cultural exchange event, select a random city, and apply the corresponding actions
+  };
+
+  executeCommand6 = () => {
+    // Execute the logic for command 6
+    // Organize a geography competation, select a random city, and apply the corresponding actions
+  };
+
+  render() {
+    const { selectedCard } = this.state;
+
+    return (
+      <div className="station station--other">
+        <h3>Pick up a chance card</h3>
+        <div className="card-list">
+          {/* List of chance cards */}
+          <div
+            className={`opportunity-card ${selectedCard === 1 ? 'selected' : ''}`}
+            onClick={() => this.handleSelectCard(1)}
+          >
+            chance card 1
+          </div>
+          <div
+            className={`opportunity-card ${selectedCard === 2 ? 'selected' : ''}`}
+            onClick={() => this.handleSelectCard(2)}
+          >
+            chance card 2
+          </div>
+          <div
+            className={`opportunity-card ${selectedCard === 3 ? 'selected' : ''}`}
+            onClick={() => this.handleSelectCard(3)}
+          >
+            chance card 3
+          </div>
+          <div
+            className={`opportunity-card ${selectedCard === 4 ? 'selected' : ''}`}
+            onClick={() => this.handleSelectCard(4)}
+          >
+            chance card 4
+          </div>
+          <div
+            className={`opportunity-card ${selectedCard === 5 ? 'selected' : ''}`}
+            onClick={() => this.handleSelectCard(5)}
+          >
+            chance card 5
+          </div>
+          <div
+            className={`opportunity-card ${selectedCard === 6 ? 'selected' : ''}`}
+            onClick={() => this.handleSelectCard(6)}
+          >
+            chance card 6
+          </div>
+        </div>
+        <button onClick={this.handleExecuteCommand}>Execute Command</button>
+      </div>
+    );
+  }
+}
+
+export default StationOther;

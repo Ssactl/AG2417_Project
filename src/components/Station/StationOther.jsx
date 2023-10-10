@@ -1,115 +1,165 @@
 import React, { Component } from 'react';
+import './StationOther.css';
+import CardBackImage from '../../assets/chancecard/chanceback.png';
+import CardContentImage from '../../assets/chancecard/chancecontent.png'
+import ChanceCard1 from '../ChanceCards/ChanceCard1';
 
-// Chance card
+
 class StationOther extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedCard: null,
+      selectedCardIndex: null, // Track the selected card index
+      isCardFlipped: false, // Track if the card is flipped to show content
     };
   }
 
-  // Handle card selection
-  handleSelectCard = (card) => {
-    this.setState({ selectedCard: card });
+  // Handle the card click to flip and show content
+  handleCardClick = (cardIndex) => {
+    this.setState({
+      selectedCardIndex: cardIndex,
+      isCardFlipped: true
+    });
+  }
+
+  handleCloseCard() {
+    this.setState({
+      selectedCardIndex: null,
+      isCardFlipped: false,
+    });
+  }
+
+  // Handle the execute button click
+  handleExecuteButtonClick = () => {
+    const { selectedCardIndex } = this.state;
+
+    // Execute logic based on the selected chance card index
+    this.executeChanceCard(selectedCardIndex);
   };
 
-  // Handle executing the selected command
-  handleExecuteCommand = () => {
-    const { selectedCard } = this.state;
-
-    if (selectedCard) {
-      // Execute the command based on the selected card
-      switch (selectedCard) {
-        case 1:
-          this.executeCommand1();
-          break;
-        case 2:
-          this.executeCommand2();
-          break;
-        case 3:
-          this.executeCommand3();
-          break;
-        case 4:
-          this.executeCommand4();
-          break;
-        case 5:
-          this.executeCommand5();
-          break;
-        default:
-          break;
-      }
-      // Clear the selected card
-      this.setState({ selectedCard: null });
+  // Execute logic for each chance card
+  executeChanceCard = (cardIndex) => {
+    // Use switch statement to execute logic for each card
+    switch (cardIndex) {
+      case 0:
+        // Execute logic for Chance Card 1
+        ChanceCard1.execute(this.props);
+        break;
+      case 1:
+        // Execute logic for Chance Card 2
+        ChanceCard2.execute(this.props);
+        break;
+      case 2:
+        // Execute logic for Chance Card 3
+        ChanceCard3.execute(this.props);
+        break;
+      case 3:
+        // Execute logic for Chance Card 4
+        ChanceCard4.execute(this.props);
+        break;
+      case 4:
+        // Execute logic for Chance Card 5
+        ChanceCard5.execute(this.props);
+        break;
+      case 5:
+        // Execute logic for Chance Card 6
+        ChanceCard6.execute(this.props);
+        break;
+      default:
+        // Handle unknown card
+        console.log('Unknown chance card');
     }
   };
 
-  // Implement the logic for each command
-  executeCommand1 = () => {
-    // Execute the logic for command 1
-    // Query the cities owned by the player and apply the corresponding actions
-  };
+  // Render the window content
+  renderWindowContent() {
+    const { selectedCardIndex, isCardFlipped } = this.state;
 
-  executeCommand2 = () => {
-    // Execute the logic for command 2
-    // Analyze a Feng Shui location and apply the corresponding actions
-  };
+    if (isCardFlipped) {
+      // Display the selected card content and execute button
+      return (
+        <div className="card-content" style={{ background: CardContentImage }}>
+          {/* Render the card content based on selectedCardIndex */}
+          {this.renderCardContent(selectedCardIndex)}
+          <button onClick={this.handleExecuteButtonClick}>Execute</button>
+        </div>
+      );
+    } else {
+      // Display the initial window with six red card options
+      return (
+        <div className="card-options">
+          <h3>Select a Chance Card</h3>
+          <ul>
+            {this.renderCardOptions()}
+          </ul>
+        </div>
+      );
+    }
+  }
 
-  executeCommand3 = () => {
-    // Execute the logic for command 3
-    // Query the cities owned by the player and apply the corresponding actions
-  };
-
-  executeCommand4 = () => {
-    // Execute the logic for command 4
-    // Query the player's cities, calculate distances, and apply the corresponding actions
-  };
-
-  executeCommand5 = () => {
-    // Execute the logic for command 5
-    // Organize a cultural exchange event, select a random city, and apply the corresponding actions
-  };
-
-  render() {
-    const { selectedCard } = this.state;
+  // Render the card options
+  renderCardOptions() {
+    const cardOptions = [
+      "Query player's cities in the northwest region and grant subsidies.",
+      "Discover a Feng Shui treasure. Analyze a city or location.",
+      "Query player's cities for Cuisine upgrades and impose fines.",
+      "Receive rewards for cities within 300km of each other.",
+      "Host a cultural exchange event in a city.",
+      "Organize a geography contest.",
+    ];
 
     return (
-      <div className="station station--other">
-        <h3>Pick up a chance card</h3>
-        <div className="card-list">
-          {/* List of chance cards */}
-          <div
-            className={`opportunity-card ${selectedCard === 1 ? 'selected' : ''}`}
-            onClick={() => this.handleSelectCard(1)}
-          >
-            chance card 1
-          </div>
-          <div
-            className={`opportunity-card ${selectedCard === 2 ? 'selected' : ''}`}
-            onClick={() => this.handleSelectCard(2)}
-          >
-            chance card 2
-          </div>
-          <div
-            className={`opportunity-card ${selectedCard === 3 ? 'selected' : ''}`}
-            onClick={() => this.handleSelectCard(3)}
-          >
-            chance card 3
-          </div>
-          <div
-            className={`opportunity-card ${selectedCard === 4 ? 'selected' : ''}`}
-            onClick={() => this.handleSelectCard(4)}
-          >
-            chance card 4
-          </div>
-          <div
-            className={`opportunity-card ${selectedCard === 5 ? 'selected' : ''}`}
-            onClick={() => this.handleSelectCard(5)}
-          >
-            chance card 5
-          </div>
-        </div>
-        <button onClick={this.handleExecuteCommand}>Execute Command</button>
+      <div className="card-options">
+        <ul className="card-grid">
+          {cardOptions.map((option, index) => (
+            <li
+              key={index}
+              onClick={() => this.handleCardClick(index)}
+              className="card"
+            >
+              <div
+                className={`card-inner ${this.state.isCardFlipped ? 'flipped' : ''}`}
+                style={{ backgroundImage: `url(${CardBackImage})` }}
+              ></div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  // Render the card content based on selectedCardIndex
+  renderCardContent(selectedCardIndex) {
+    if (selectedCardIndex !== null) {
+      switch (selectedCardIndex) {
+        case 0:
+          return (
+            <div className="card-content">
+              <p>Query player's cities in the northwest region and grant subsidies.</p>
+              <button onClick={this.handleCloseCard}>Close</button>
+            </div>
+          );
+        case 1:
+          return <ChanceCard2Content />;
+        case 2:
+          return <ChanceCard3Content />;
+        case 3:
+          return <ChanceCard4Content />;
+        case 4:
+          return <ChanceCard5Content />;
+        case 5:
+          return <ChanceCard6Content />;
+        default:
+          return <div>Unknown chance card</div>;
+      }
+    }
+  }
+
+  render() {
+    return (
+      <div className="stationchancecards">
+        {this.renderWindowContent()}
+        {this.renderCardContent(this.state.selectedCardIndex)}
       </div>
     );
   }
