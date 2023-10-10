@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import "./StationCity.css";
 import './StationOther.css';
 import CardBackImage from '../../assets/chancecard/chanceback.png';
 import CardContentImage from '../../assets/chancecard/chancecontent.png'
 import ChanceCard1 from '../ChanceCards/ChanceCard1';
 import ChanceCard2 from '../ChanceCards/ChanceCard2';
+import ChanceCard4 from '../ChanceCards/ChanceCard4';
 import ChanceCardContent from '../ChanceCards/ChanceCardContent';
 
 class StationOther extends Component {
@@ -22,13 +24,6 @@ class StationOther extends Component {
       isCardFlipped: true
     });
   }
-
-  // handleCloseCard() {
-  //   this.setState({
-  //     selectedCardIndex: null,
-  //     isCardFlipped: false,
-  //   });
-  // }
 
   // Handle the execute button click
   handleExecuteButtonClick = () => {
@@ -53,10 +48,10 @@ class StationOther extends Component {
       //   // Execute logic for Chance Card 3
       //   ChanceCard3.execute(this.props);
       //   break;
-      // case 3:
-      //   // Execute logic for Chance Card 4
-      //   ChanceCard4.execute(this.props);
-      //   break;
+      case 3:
+        // Execute logic for Chance Card 4
+        ChanceCard4.execute(this.props);
+        break;
       // case 4:
       //   // Execute logic for Chance Card 5
       //   ChanceCard5.execute(this.props);
@@ -88,7 +83,7 @@ class StationOther extends Component {
       // Display the initial window with six red card options
       return (
         <div className="card-options">
-          <h3>Select a Chance Card</h3>
+          <h3 className='card--title'>Select  a  Chance  Card</h3>
           <ul>
             {this.renderCardOptions()}
           </ul>
@@ -99,18 +94,11 @@ class StationOther extends Component {
 
   // Render the card options
   renderCardOptions() {
-    const cardOptions = [
-      "Query player's cities in the northwest region and grant subsidies.",
-      "Discover a Feng Shui treasure. Analyze a city or location.",
-      "Query player's cities for Cuisine upgrades and impose fines.",
-      "Receive rewards for cities within 300km of each other.",
-      "Host a cultural exchange event in a city.",
-      "Organize a geography contest.",
-    ];
+    const cardIndices = [0, 1, 2, 3, 4, 5];
     return (
       <div className="card-options">
         <ul className="card-grid">
-          {cardOptions.map((option, index) => (
+          {cardIndices.map((index) => (
             <li
               key={index}
               onClick={() => this.handleCardClick(index)}
@@ -118,7 +106,7 @@ class StationOther extends Component {
             >
               <div
                 className={`card-inner ${this.state.isCardFlipped ? 'flipped' : ''}`}
-                style={{ backgroundImage: `url(${CardBackImage})`}}
+                style={{ backgroundImage: `url(${CardBackImage})` }}
               ></div>
             </li>
           ))}
@@ -156,21 +144,18 @@ class StationOther extends Component {
       }
       return (
         <div className="chance-card-content">
-        {/* <div> */}
+          <h3>CHANCE CARD</h3>
           <p>{cardContent}</p>
-          {/* <button onClick={this.handleCloseCard}>Close</button> */}
         </div>
       );
     }
-  
     return null; // 如果 selectedCardIndex 为 null，则不显示内容
   }
 
   render() {
     return (
-      <div className="stationchancecards">
+      <div className="station--other">
         {this.renderWindowContent()}
-        {this.renderCardContent(this.state.selectedCardIndex)}
       </div>
     );
   }
