@@ -38,7 +38,7 @@ function StationCityForBuyers({
   );
   const currentLevelFeature =
     stationlevels[stations[currentStationIndex].level];
-  // console.log(stations[currentStationIndex]);
+  console.log(currentLevelFeature);
 
   //get the information about attraction from Google Map API
   useEffect(() => {
@@ -114,7 +114,7 @@ function StationCityForBuyers({
       <div className="station--buyers--column--1">
         {placeDetails ? (
           <div>
-            <h3>{placeDetails.name}</h3>
+            <h2>{placeDetails.name}</h2>
             <p>Address: {placeDetails.formatted_address}</p>
             <div className="button--buyers--photo-scroll-container">
               {placeDetails.photos && placeDetails.photos.length > 0 ? (
@@ -148,6 +148,7 @@ function StationCityForBuyers({
       <div className="station--buyers--column--2">
         {/* <div className="station--buyers--column--2--row--1">for image</div> */}
         <div className="station--buyers--column--2--row--2">
+          <h2>{currentLevelFeature.cname}</h2>
           <p>{currentLevelFeature.textBuy}</p>
           <p>Level: {currentLevelFeature.level}</p>
           <p>Credits: {currentLevelFeature.scoreBuy}</p>
