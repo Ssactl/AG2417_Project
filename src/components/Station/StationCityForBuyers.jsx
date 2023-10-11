@@ -17,12 +17,22 @@ function StationCityForBuyers({
   playersStationIndex,
   resetStationClass,
   nextPlayer,
+  levelfeatures,
 }) {
+  const stationlevels = levelfeatures.filter(
+    (data) => data.cid == stations[currentStationIndex].cid
+  );
+  const currentLevelFeature =
+    stationlevels[stations[currentStationIndex].level];
+
+  console.log(currentLevelFeature);
+
   // if the current player wants to buy the estate
   function buttonYesClickingHandler() {
     //update the score of the owner
     const newPlayers = JSON.parse(JSON.stringify(players));
-    newPlayers[currentPlayer].score = players[currentPlayer].score - score;
+    newPlayers[currentPlayer].score =
+      players[currentPlayer].score - currentLevelFeature.scoreBuy;
     setPlayers(newPlayers);
 
     //update the level of the station
@@ -47,8 +57,8 @@ function StationCityForBuyers({
       <div className="station--buyers--column--2">
         <div className="station--buyers--column--2--row--1">for image</div>
         <div className="station--buyers--column--2--row--2">
-          <p>level 1</p>
-          <p>score 200</p>
+          <p>{currentLevelFeature.textBuy}</p>
+          <p>{currentLevelFeature.scoreBuy}</p>
         </div>
         <div className="station--buyers--column--2--row--3">
           <button

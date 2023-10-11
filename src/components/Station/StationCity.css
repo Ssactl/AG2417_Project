@@ -15,7 +15,7 @@
 }
 
 /* .station--other { */
-  /* background-color: antiquewhite; */
+/* background-color: antiquewhite; */
 /* } */
 .station--other {
   position: fixed;
@@ -56,8 +56,12 @@
 }
 .station--buyers--column--2--row--2 {
   flex-grow: 1;
-  background-color: blue;
+  /* background-color: blue */
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid black 2px;
 }
 
 .station--buyers--column--2--row--2 p {

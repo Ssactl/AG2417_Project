@@ -19,16 +19,24 @@ function StationCityForCustomers({
   setCurrentPlayer,
   stationClassCustomers,
   resetStationClass,
+  levelfeatures,
 }) {
+  //list of all levels of the current station
+  const stationlevels = levelfeatures.filter(
+    (data) => data.cid == stations[currentStationIndex].cid
+  );
+
   function buttonOkClikingHandler() {
     const newPlayers = JSON.parse(JSON.stringify(players));
     const owner = stations[currentStationIndex].belonger - 1; // the owner index
     //update the score of current player/customer and the owner
-    newPlayers[currentPlayer].score =
-      players[currentPlayer].score -
-      score * stations[currentStationIndex].level;
-    newPlayers[owner].score =
-      players[owner].score + score * stations[currentStationIndex].level;
+    stationlevels.forEach((levelFeatrue) => {
+      if (levelFeatrue.level <= stations[currentStationIndex].level) {
+        newPlayers[currentPlayer].score =
+          players[currentPlayer].score - levelFeatrue.scoreFine;
+        newPlayers[owner].score = players[owner].score + levelFeatrue.scoreFine;
+      }
+    });
 
     // console.log(
     //   "level of current station",
@@ -49,7 +57,15 @@ function StationCityForCustomers({
 
   return (
     <div className="station">
-      <p>You spend some money here</p>
+      {stationlevels.map((levelFeatrue) =>
+        levelFeatrue.level <= stations[currentStationIndex].level ? (
+          <p>
+            {levelFeatrue.scoreFine} for {levelFeatrue.textFine}
+          </p>
+        ) : (
+          ""
+        )
+      )}
       <button
         className="station--customer--button--ok"
         onClick={buttonOkClikingHandler}

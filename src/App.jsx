@@ -17,56 +17,57 @@ import StationClassMaxLevel from "./components/Station/StationCityMaxLevel";
 import PlayerEstateBoard from "./components/PlayerEstate/PlayerEstateBoard";
 
 // //table stations
-// const stationsTest = [
-//   {
-//     id: 0,
-//     name: "Beijing",
-//     latitude: 39.920514604261506,
-//     longitude: 116.39601129456929,
-//     belonger: 1,
-//     level: 1,
-//   },
-//   {
-//     id: 1,
-//     name: "shanghai",
-//     latitude: 31.24615161464742,
-//     longitude: 121.45993996461581,
-//     belonger: 1,
-//     level: 1,
-//   },
-//   {
-//     id: 2,
-//     name: "shengzheng",
-//     latitude: 22.591414849772395,
-//     longitude: 114.04906736003136,
-//     belonger: 1,
-//     level: 1,
-//   },
-//   {
-//     id: 3,
-//     name: "chengdu",
-//     latitude: 30.655749955405586,
-//     longitude: 104.0562367934888,
-//     belonger: 1,
-//     level: 3,
-//   },
-//   {
-//     id: 4,
-//     name: "kunming",
-//     latitude: 24.88558106693481,
-//     longitude: 102.83097940902874,
-//     belonger: 1,
-//     level: 1,
-//   },
-//   {
-//     id: 5,
-//     name: "chongqin",
-//     latitude: 29.56047860181214,
-//     longitude: 106.5292432576508,
-//     belonger: 1,
-//     level: 1,
-//   },
-// ];
+//id starts from 0
+const stationsTest = [
+  // {
+  //   cid: 0,
+  //   name: "Beijing",
+  //   latitude: 39.920514604261506,
+  //   longitude: 116.39601129456929,
+  //   belonger: 1,
+  //   level: 1,
+  // },
+  {
+    cid: 1,
+    name: "shanghai",
+    latitude: 31.24615161464742,
+    longitude: 121.45993996461581,
+    belonger: 0,
+    level: 0,
+  },
+  // {
+  //   cid: 2,
+  //   name: "shengzheng",
+  //   latitude: 22.591414849772395,
+  //   longitude: 114.04906736003136,
+  //   belonger: 1,
+  //   level: 1,
+  // },
+  // {
+  //   cid: 3,
+  //   name: "chengdu",
+  //   latitude: 30.655749955405586,
+  //   longitude: 104.0562367934888,
+  //   belonger: 1,
+  //   level: 3,
+  // },
+  // {
+  //   cid: 4,
+  //   name: "kunming",
+  //   latitude: 24.88558106693481,
+  //   longitude: 102.83097940902874,
+  //   belonger: 1,
+  //   level: 1,
+  // },
+  // {
+  //   cid: 5,
+  //   name: "chongqin",
+  //   latitude: 29.56047860181214,
+  //   longitude: 106.5292432576508,
+  //   belonger: 1,
+  //   level: 1,
+  // },
+];
 // // const stationCount = stations.length;
 
 // // // // Testing;
@@ -97,11 +98,55 @@ import PlayerEstateBoard from "./components/PlayerEstate/PlayerEstateBoard";
 //   },
 // ];
 
+//testing
+const levelfeaturesTest = [
+  {
+    fid: 1,
+    cid: 1,
+    cname: "shanghai",
+    longitude: 121.4694399,
+    latitude: 31.23339301,
+    level: 1,
+    categories: "Cultural",
+    textBuy: "Explore Shanghai's modern cultural scene.",
+    scoreBuy: 4000,
+    textFine: "Attend a cultural exhibition.",
+    scoreFine: 1100,
+  },
+  {
+    fid: 1,
+    cid: 1,
+    cname: "shanghai",
+    longitude: 121.4694399,
+    latitude: 31.23339301,
+    level: 2,
+    categories: "Cuisine",
+    textBuy: "Explore Shanghai's modern cultural scene.",
+    scoreBuy: 2700,
+    textFine: "Attend a cultural exhibition.",
+    scoreFine: 1100,
+  },
+  {
+    fid: 1,
+    cid: 1,
+    cname: "shanghai",
+    longitude: 121.4694399,
+    latitude: 31.23339301,
+    level: 3,
+    categories: "Cuisine",
+    textBuy: "Explore Shanghai's modern cultural scene.",
+    scoreBuy: 2700,
+    textFine: "Attend a cultural exhibition.",
+    scoreFine: 1100,
+  },
+];
+
 //玩游戏的页面，放大地图，小地图和人物展示框这三个组件
 function App() {
   // frech players data from postgresql
   const [players, setPlayers] = useState();
-  const [stations, setStations] = useState();
+  const [stations, setStations] = useState(stationsTest);
+  const [levelfeatures, setLevelfeatures] = useState(levelfeaturesTest);
 
   useEffect(() => {
     console.log("loading players and stations!");
@@ -118,7 +163,7 @@ function App() {
 
           // 更新状态变量以存储数据
           setPlayers(playersData);
-          setStations(stationsData);
+          // setStations(stationsData);
         })
       )
       .catch((error) => {
@@ -289,6 +334,7 @@ function App() {
             setCurrentPlayer={setCurrentPlayer}
             playersStationIndex={playersStationIndex}
             resetStationClass={resetStationClass}
+            levelfeatures={levelfeatures}
           />
         </div>
         <div className={stationClassBuyers}>
@@ -304,6 +350,7 @@ function App() {
             currentStationIndex={currentStationIndex}
             stations={stations}
             setStations={setStations}
+            levelfeatures={levelfeatures}
           />
         </div>
         <div className={stationClassOther}>
