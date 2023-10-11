@@ -2,7 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useEffect, useState, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-// import axios from "axios";
+import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -16,57 +16,57 @@ import StationOther from "./components/Station/StationOther";
 import StationClassMaxLevel from "./components/Station/StationCityMaxLevel";
 import PlayerEstateBoard from "./components/PlayerEstate/PlayerEstateBoard";
 
-//table stations
-const stationsTest = [
-  {
-    id: 0,
-    name: "Beijing",
-    latitude: 39.920514604261506,
-    longitude: 116.39601129456929,
-    belonger: 1,
-    level: 1,
-  },
-  {
-    id: 1,
-    name: "shanghai",
-    latitude: 31.24615161464742,
-    longitude: 121.45993996461581,
-    belonger: 1,
-    level: 1,
-  },
-  {
-    id: 2,
-    name: "shengzheng",
-    latitude: 22.591414849772395,
-    longitude: 114.04906736003136,
-    belonger: 1,
-    level: 1,
-  },
-  {
-    id: 3,
-    name: "chengdu",
-    latitude: 30.655749955405586,
-    longitude: 104.0562367934888,
-    belonger: 1,
-    level: 3,
-  },
-  {
-    id: 4,
-    name: "kunming",
-    latitude: 24.88558106693481,
-    longitude: 102.83097940902874,
-    belonger: 1,
-    level: 1,
-  },
-  {
-    id: 5,
-    name: "chongqin",
-    latitude: 29.56047860181214,
-    longitude: 106.5292432576508,
-    belonger: 1,
-    level: 1,
-  },
-];
+// //table stations
+// const stationsTest = [
+//   {
+//     id: 0,
+//     name: "Beijing",
+//     latitude: 39.920514604261506,
+//     longitude: 116.39601129456929,
+//     belonger: 1,
+//     level: 1,
+//   },
+//   {
+//     id: 1,
+//     name: "shanghai",
+//     latitude: 31.24615161464742,
+//     longitude: 121.45993996461581,
+//     belonger: 1,
+//     level: 1,
+//   },
+//   {
+//     id: 2,
+//     name: "shengzheng",
+//     latitude: 22.591414849772395,
+//     longitude: 114.04906736003136,
+//     belonger: 1,
+//     level: 1,
+//   },
+//   {
+//     id: 3,
+//     name: "chengdu",
+//     latitude: 30.655749955405586,
+//     longitude: 104.0562367934888,
+//     belonger: 1,
+//     level: 3,
+//   },
+//   {
+//     id: 4,
+//     name: "kunming",
+//     latitude: 24.88558106693481,
+//     longitude: 102.83097940902874,
+//     belonger: 1,
+//     level: 1,
+//   },
+//   {
+//     id: 5,
+//     name: "chongqin",
+//     latitude: 29.56047860181214,
+//     longitude: 106.5292432576508,
+//     belonger: 1,
+//     level: 1,
+//   },
+// ];
 // // const stationCount = stations.length;
 
 // // // // Testing;
@@ -100,37 +100,30 @@ const stationsTest = [
 //玩游戏的页面，放大地图，小地图和人物展示框这三个组件
 function App() {
   // frech players data from postgresql
-  const [players, setPlayers] = useState([]);
-  const [stations, setStations] = useState(stationsTest);
+  const [players, setPlayers] = useState();
+  const [stations, setStations] = useState();
 
   useEffect(() => {
-    // get players data
+    console.log("loading players and stations!");
     axios
-      .get("http://localhost:5000/player/get_players")
-      .then((response) => {
-        // 从响应中提取数据
-        const data = response.data;
-        console.log(data);
-        // 更新状态变量以存储数据
-        setPlayers(data);
-      })
+      .all([
+        axios.get("http://localhost:5000/player/get_players"),
+        axios.get("http://localhost:5000/stations/get_stations"),
+      ])
+      .then(
+        axios.spread((playersResponse, stationsResponse) => {
+          // 提取数据
+          const playersData = playersResponse.data;
+          const stationsData = stationsResponse.data;
+
+          // 更新状态变量以存储数据
+          setPlayers(playersData);
+          setStations(stationsData);
+        })
+      )
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-
-    // //get stations data
-    // axios
-    //   .get("http://localhost:5000/player/get_players")
-    //   .then((response) => {
-    //     // 从响应中提取数据
-    //     const data = response.data;
-    //     console.log(data);
-    //     // 更新状态变量以存储数据
-    //     setStations(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching data:", error);
-    //   });
   }, []); // 空数组表示仅在组件挂载时执行一次
 
   //the current center of the main/big map
@@ -148,24 +141,6 @@ function App() {
     player2StationIndex,
     player3StationIndex,
     player4StationIndex,
-  ];
-  const playerPositions = [
-    [
-      stations[player1StationIndex].latitude,
-      stations[player1StationIndex].longitude,
-    ],
-    [
-      stations[player2StationIndex].latitude,
-      stations[player2StationIndex].longitude,
-    ],
-    [
-      stations[player3StationIndex].latitude,
-      stations[player3StationIndex].longitude,
-    ],
-    [
-      stations[player4StationIndex].latitude,
-      stations[player4StationIndex].longitude,
-    ],
   ];
 
   //visibility state for station window
@@ -245,6 +220,34 @@ function App() {
       ]);
     }
   }, [currentStationIndex]);
+
+  /////////////////////////////////////////////////////
+  // return after all hooks
+  /////////////////////////////////////////////////////
+  if (!players || !stations) {
+    console.log("data is not ready");
+    return null;
+  }
+
+  console.log("data is ready!");
+  const playerPositions = [
+    [
+      stations[player1StationIndex].latitude,
+      stations[player1StationIndex].longitude,
+    ],
+    [
+      stations[player2StationIndex].latitude,
+      stations[player2StationIndex].longitude,
+    ],
+    [
+      stations[player3StationIndex].latitude,
+      stations[player3StationIndex].longitude,
+    ],
+    [
+      stations[player4StationIndex].latitude,
+      stations[player4StationIndex].longitude,
+    ],
+  ];
 
   return (
     // <Container className="container" fluid="true">
