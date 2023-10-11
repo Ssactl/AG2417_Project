@@ -29,6 +29,8 @@ function StationCityForBuyers({
   setMarkers,
   stationClassList,
 }) {
+  if (!(markers.length > 1)) return null;
+
   // 定义 state 来存储地点的详细信息
   const [placeDetails, setPlaceDetails] = useState(null);
 
@@ -38,7 +40,7 @@ function StationCityForBuyers({
   );
   const currentLevelFeature =
     stationlevels[stations[currentStationIndex].level];
-  // console.log(currentLevelFeature);
+  console.log(stations[currentStationIndex]);
 
   //get the information about attraction from Google Map API
   useEffect(() => {

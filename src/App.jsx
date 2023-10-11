@@ -157,30 +157,33 @@ function App() {
   const [levelfeatures, setLevelfeatures] = useState(levelfeaturesTest);
 
   useEffect(() => {
-    console.log("loading players and stations!");
-    axios.all([
+    console.log("loading data!");
+    axios
+      .all([
         axios.get("http://localhost:5000/player/get_players"),
         axios.get("http://localhost:5000/stations/get_stations"),
-        axios.get("http://localhost:5000//level/levelfeatures"),
+        axios.get("http://localhost:5000/level/levelfeatures"),
       ])
       .then(
-        axios.spread((playersResponse, stationsResponse, levelfeaturesResponse ) => {
-          // 提取数据
-          const playersData = playersResponse.data;
-          const stationsData = stationsResponse.data;
-          const levelfeaturesData = levelfeaturesResponse.data;
+        axios.spread(
+          (playersResponse, stationsResponse, levelfeaturesResponse) => {
+            // 提取数据
+            const playersData = playersResponse.data;
+            const stationsData = stationsResponse.data;
+            const levelfeaturesData = levelfeaturesResponse.data;
 
-          // 更新状态变量以存储数据
-          setPlayers(playersData);
-          setStations(stationsData);
-          setLevelfeatures(levelfeaturesData);
-        })
+            // 更新状态变量以存储数据
+            setPlayers(playersData);
+            setStations(stationsData);
+            setLevelfeatures(levelfeaturesData);
+          }
+        )
       )
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   }, []); // 空数组表示仅在组件挂载时执行一次
- 
+
   //the current center of the main/big map
   const [currentStationIndex, setCurrentStationIndex] = useState(0);
   const updateCurrentStation = (newStation) =>
@@ -289,9 +292,6 @@ function App() {
   }
 
   console.log("data is ready!");
-
-sStart(true);
-
   const playerPositions = [
     [
       stations[player1StationIndex].latitude,
