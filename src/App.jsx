@@ -15,6 +15,7 @@ import StationCityForCustomers from "./components/Station/StationCityForCustomer
 import StationOther from "./components/Station/StationOther";
 import StationClassMaxLevel from "./components/Station/StationCityMaxLevel";
 import PlayerEstateBoard from "./components/PlayerEstate/PlayerEstateBoard";
+import { render } from "react-dom";
 
 // //table stations
 //id starts from 0
@@ -29,9 +30,9 @@ const stationsTest = [
   // },
   {
     cid: 1,
-    name: "shanghai",
-    latitude: 31.24615161464742,
-    longitude: 121.45993996461581,
+    name: "qindao",
+    latitude: 36.07703215,
+    longitude: 120.3325006,
     belonger: 0,
     level: 0,
   },
@@ -103,10 +104,10 @@ const levelfeaturesTest = [
   {
     fid: 1,
     cid: 1,
-    cname: "shanghai",
+    cname: "qindao",
     fname: "Laoshan Mountain",
-    longitude: 121.4694399,
-    latitude: 31.23339301,
+    longitude: 120.3325006,
+    latitude: 36.07703215,
     level: 1,
     categories: "Cultural",
     textBuy: "Explore Shanghai's modern cultural scene.",
@@ -258,9 +259,10 @@ function App() {
     resetStationClass();
   }
 
-  //initiate map reference
+  //initiate map
   const mapRef = useRef(); //refer to map
-  const zoom = 13;
+  const mapCenter = [39.920514604261506, 116.39601129456929];
+  const zoom = 11;
   //when the currentStationIndex updates, move the map to the new center
   useEffect(() => {
     if (mapRef.current) {
@@ -272,6 +274,9 @@ function App() {
     }
   }, [currentStationIndex]);
 
+  //for adding new marker
+  const [markers, setMarkers] = useState([]);
+
   /////////////////////////////////////////////////////
   // return after all hooks
   /////////////////////////////////////////////////////
@@ -281,6 +286,7 @@ function App() {
   }
 
   console.log("data is ready!");
+  // setIsStart(true);
   const playerPositions = [
     [
       stations[player1StationIndex].latitude,
@@ -357,6 +363,10 @@ function App() {
             stations={stations}
             setStations={setStations}
             levelfeatures={levelfeatures}
+            mapRef={mapRef}
+            setMarkers={setMarkers}
+            markers={markers}
+            stationClassList={stationClassList}
           />
         </div>
         <div className={stationClassOther}>
@@ -402,11 +412,21 @@ function App() {
           ]}
           zoom={zoom}
           scrollWheelZoom={false}
+          closePopupOnClick={false}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+          {/* add new marker */}
+          {markers.length > 1 &&
+            markers.map((marker) => {
+              return (
+                <Marker key={marker.id} position={marker.position}>
+                  <Popup autoClose={false}>{marker.name}</Popup>
+                </Marker>
+              );
+            })}
         </MapContainer>
       </div>
       <div className="column--2">

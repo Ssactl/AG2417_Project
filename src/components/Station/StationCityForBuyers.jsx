@@ -24,6 +24,10 @@ function StationCityForBuyers({
   resetStationClass,
   nextPlayer,
   levelfeatures,
+  mapRef,
+  markers,
+  setMarkers,
+  stationClassList,
 }) {
   // 定义 state 来存储地点的详细信息
   const [placeDetails, setPlaceDetails] = useState(null);
@@ -39,6 +43,7 @@ function StationCityForBuyers({
   //get the information about attraction from Google Map API
   useEffect(() => {
     if (google && google.maps) {
+      console.log("display information");
       // 使用 Google Places API 获取地点的详细信息
       const request = {
         query: currentLevelFeature.fname, // 你可以使用地点的名称
@@ -63,6 +68,17 @@ function StationCityForBuyers({
             if (status === google.maps.places.PlacesServiceStatus.OK) {
               console.log("Place Details:", details);
               setPlaceDetails(details);
+
+              //get the position of the new marker
+              const latitude = details.geometry.location.lat();
+              const longitude = details.geometry.location.lng();
+              const newMarker = {
+                id: Math.random(), // 可以使用其他方式创建唯一标识符
+                position: [latitude, longitude],
+                name: details.name, // 你可以根据需要包含更多信息
+              };
+
+              setMarkers([...markers, newMarker]);
             }
           });
         }
