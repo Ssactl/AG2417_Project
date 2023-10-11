@@ -24,6 +24,10 @@ function StationCityForBuyers({
   resetStationClass,
   nextPlayer,
   levelfeatures,
+  mapRef,
+  markers,
+  setMarkers,
+  stationClassList,
 }) {
   // 定义 state 来存储地点的详细信息
   const [placeDetails, setPlaceDetails] = useState(null);
@@ -39,6 +43,7 @@ function StationCityForBuyers({
   //get the information about attraction from Google Map API
   useEffect(() => {
     if (google && google.maps) {
+      console.log("display information");
       // 使用 Google Places API 获取地点的详细信息
       const request = {
         query: currentLevelFeature.fname, // 你可以使用地点的名称
@@ -56,13 +61,24 @@ function StationCityForBuyers({
           //use place id to get more information
           const detailsRequest = {
             placeId,
-            fields: ["reviews", "name", "formatted_address", "rating"],
+            fields: ["name", "formatted_address", "geometry", "photos"],
           };
 
           service.getDetails(detailsRequest, (details, status) => {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
               console.log("Place Details:", details);
               setPlaceDetails(details);
+
+              //get the position of the new marker
+              const latitude = details.geometry.location.lat();
+              const longitude = details.geometry.location.lng();
+              const newMarker = {
+                id: Math.random(), // 可以使用其他方式创建唯一标识符
+                position: [latitude, longitude],
+                name: details.name, // 你可以根据需要包含更多信息
+              };
+
+              setMarkers([...markers, newMarker]);
             }
           });
         }
@@ -101,15 +117,37 @@ function StationCityForBuyers({
           <div>
             <h3>{placeDetails.name}</h3>
             <p>Address: {placeDetails.formatted_address}</p>
-            <p>Rating: {placeDetails.rating}</p>
-            {/* 可以添加其他详细信息，如照片和评论 */}
+            <div className="button--buyers--photo-scroll-container">
+              {placeDetails.photos && placeDetails.photos.length > 0 ? (
+                placeDetails.photos.map((photo, index) => (
+                  <img
+                    key={index}
+                    src={photo.getUrl()}
+                    alt={placeDetails.name}
+                    className="place-photo"
+                  />
+                ))
+              ) : (
+                <p>No photos available</p>
+              )}
+            </div>
+
+            {/* {placeDetails.photos && placeDetails.photos.length > 0 ? (
+              <img
+                src={placeDetails.photos[0].getUrl()}
+                alt={placeDetails.name}
+                className="place-photo"
+              />
+            ) : (
+              <p>No photos available</p>
+            )} */}
           </div>
         ) : (
           <p>Loading place details...</p>
         )}
       </div>
       <div className="station--buyers--column--2">
-        <div className="station--buyers--column--2--row--1">for image</div>
+        {/* <div className="station--buyers--column--2--row--1">for image</div> */}
         <div className="station--buyers--column--2--row--2">
           <p>{currentLevelFeature.textBuy}</p>
           <p>{currentLevelFeature.scoreBuy}</p>
