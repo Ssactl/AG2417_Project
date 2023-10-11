@@ -57,9 +57,9 @@ function StationCityForCustomers({
 
   return (
     <div className="station">
-      {stationlevels.map((levelFeatrue) =>
+      {stationlevels.map((levelFeatrue, index) =>
         levelFeatrue.level <= stations[currentStationIndex].level ? (
-          <p>
+          <p key={index}>
             {levelFeatrue.scoreFine} for {levelFeatrue.textFine}
           </p>
         ) : (

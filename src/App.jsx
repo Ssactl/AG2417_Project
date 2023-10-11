@@ -104,6 +104,7 @@ const levelfeaturesTest = [
     fid: 1,
     cid: 1,
     cname: "shanghai",
+    fname: "Laoshan Mountain",
     longitude: 121.4694399,
     latitude: 31.23339301,
     level: 1,
@@ -112,11 +113,13 @@ const levelfeaturesTest = [
     scoreBuy: 4000,
     textFine: "Attend a cultural exhibition.",
     scoreFine: 1100,
+    placeID: "ChIJV1SA0WeZ8DURiRkz9Mq0YKM",
   },
   {
     fid: 1,
     cid: 1,
     cname: "shanghai",
+    fname: "Laoshan Mountain",
     longitude: 121.4694399,
     latitude: 31.23339301,
     level: 2,
@@ -125,11 +128,13 @@ const levelfeaturesTest = [
     scoreBuy: 2700,
     textFine: "Attend a cultural exhibition.",
     scoreFine: 1100,
+    placeID: "ChIJV1SA0WeZ8DURiRkz9Mq0YKM",
   },
   {
     fid: 1,
     cid: 1,
     cname: "shanghai",
+    fname: "Laoshan Mountain",
     longitude: 121.4694399,
     latitude: 31.23339301,
     level: 3,
@@ -138,6 +143,7 @@ const levelfeaturesTest = [
     scoreBuy: 2700,
     textFine: "Attend a cultural exhibition.",
     scoreFine: 1100,
+    placeID: "ChIJV1SA0WeZ8DURiRkz9Mq0YKM",
   },
 ];
 
