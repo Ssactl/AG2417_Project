@@ -7,6 +7,7 @@ import * as turf from '@turf/turf';
 function ChanceCard4({
   players,
   currentPlayer,
+  nextplayer,
   stations,
 }) {
   console.log('here is ChanceCard4');
@@ -74,10 +75,10 @@ function ChanceCard4({
     // });
     const mapContainerRef = useRef(null);
   return (
-    <>
+    <div className='chance--card--4'>
       <h3>Chance Card 4 - Receive rewards for cities within 300km of each other</h3>
-      <p>Reward: {totalReward}</p>
-      <p>Score: {score}</p>
+      <p >Reward: {totalReward}</p>
+      <p >Score: {score}</p>
       {currentPlayerCities.length > 0 && (
         <MapContainer
         ref={mapContainerRef}
@@ -103,14 +104,13 @@ function ChanceCard4({
             const buffer = turf.buffer(cityPoint, 300, {
               units: 'kilometers',
             });
-
             const bufferLayer = L.geoJSON(buffer);
             bufferLayer.addTo(mapContainerRef.current.leafletElement);
           })}
 
         </MapContainer>
       )}
-    </>
+    </div>
   );
 };
 
