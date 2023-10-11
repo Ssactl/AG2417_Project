@@ -18,18 +18,16 @@ function StationCityForBuyers({
   stations,
   currentStationIndex,
   setStations,
-  setCurrentPlayer,
-  setCurrentStationIndex,
-  playersStationIndex,
-  resetStationClass,
   nextPlayer,
   levelfeatures,
-  mapRef,
   markers,
   setMarkers,
-  stationClassList,
 }) {
-  if (!(markers.length > 1)) return null;
+  if (stations[currentStationIndex].level < 0) return null;
+
+  // console.log("show StationCityForBuyers");
+
+  let newMarker;
 
   // 定义 state 来存储地点的详细信息
   const [placeDetails, setPlaceDetails] = useState(null);
@@ -40,7 +38,7 @@ function StationCityForBuyers({
   );
   const currentLevelFeature =
     stationlevels[stations[currentStationIndex].level];
-  console.log(stations[currentStationIndex]);
+  // console.log(stations[currentStationIndex]);
 
   //get the information about attraction from Google Map API
   useEffect(() => {
@@ -58,7 +56,7 @@ function StationCityForBuyers({
       service.findPlaceFromQuery(request, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           const placeId = results[0].place_id;
-          console.log("place id", placeId);
+          // console.log("place id", placeId);
 
           //use place id to get more information
           const detailsRequest = {
@@ -68,19 +66,17 @@ function StationCityForBuyers({
 
           service.getDetails(detailsRequest, (details, status) => {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
-              console.log("Place Details:", details);
+              // console.log("Place Details:", details)
               setPlaceDetails(details);
 
               //get the position of the new marker
               const latitude = details.geometry.location.lat();
               const longitude = details.geometry.location.lng();
-              const newMarker = {
+              newMarker = {
                 id: Math.random(), // 可以使用其他方式创建唯一标识符
                 position: [latitude, longitude],
                 name: details.name, // 你可以根据需要包含更多信息
               };
-
-              setMarkers([...markers, newMarker]);
             }
           });
         }
@@ -105,6 +101,7 @@ function StationCityForBuyers({
       newStations[currentStationIndex].belonger = currentPlayer + 1;
     }
     setStations(newStations);
+    setMarkers([...markers, newMarker]);
     nextPlayer();
   }
   //if the current player does not want to buy the estate

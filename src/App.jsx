@@ -151,11 +151,11 @@ const levelfeaturesTest = [
 //玩游戏的页面，放大地图，小地图和人物展示框这三个组件
 function App() {
   // frech players data from postgresql
-  const [players, setPlayers] = useState();
+  const [players, setPlayers] = useState(null);
   // const [stations, setStations] = useState(stationsTest);
-  const [stations, setStations] = useState();
+  const [stations, setStations] = useState(null);
   // const [levelfeatures, setLevelfeatures] = useState(levelfeaturesTest);
-  const [levelfeatures, setLevelfeatures] = useState();
+  const [levelfeatures, setLevelfeatures] = useState(null);
 
   useEffect(() => {
     console.log("loading data!");
@@ -294,8 +294,6 @@ function App() {
 
   console.log("data is ready!");
 
-  sStart(true);
-
   const playerPositions = [
     [
       stations[player1StationIndex].latitude,
@@ -314,7 +312,6 @@ function App() {
       stations[player4StationIndex].longitude,
     ],
   ];
-  console.log("level", playerPositions);
 
   return (
     // <Container className="container" fluid="true">
@@ -373,10 +370,8 @@ function App() {
             stations={stations}
             setStations={setStations}
             levelfeatures={levelfeatures}
-            mapRef={mapRef}
             setMarkers={setMarkers}
             markers={markers}
-            stationClassList={stationClassList}
           />
         </div>
         <div className={stationClassOther}>

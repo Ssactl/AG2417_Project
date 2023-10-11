@@ -52,6 +52,7 @@ function Dice({
       );
 
       updateStationClass(stations, newStationIndex);
+      console.log(stations[newStationIndex]);
     }
   };
 
