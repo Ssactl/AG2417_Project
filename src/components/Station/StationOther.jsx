@@ -17,7 +17,7 @@ class StationOther extends Component {
       isCardExecuted: false, // Track if the card is executed
     };
   }
-
+ 
   // 定义一个数组来存储所有的 ChanceCard 组件
   chanceCards = [
     ChanceCard1,
@@ -62,6 +62,7 @@ class StationOther extends Component {
       isCardFlipped: false,
       isCardExecuted: false,
     });
+    this.props.nextPlayer();
   }
 
   // Render the window content
@@ -73,7 +74,7 @@ class StationOther extends Component {
         <div className="card-executed">
           {/* Render the card content based on selectedCardIndex */}
           {this.renderCardExecuted(selectedCardIndex)}
-          <button onClick={this.handleCardClose}>Commit</button>
+          <button onClick={this.handleCardClose}>Done</button>
         </div>
         );
       } else {
@@ -167,6 +168,7 @@ class StationOther extends Component {
       // console.log(ChanceCardComponent);
       if (ChanceCardComponent) {
         console.log('ChanceCardComponent =/= 0');
+        console.log(this.props);
         return (
           <div className="chance-card-executed">
             <h3 className='card--title'>Result</h3>
