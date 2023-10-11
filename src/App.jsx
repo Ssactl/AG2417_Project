@@ -154,14 +154,15 @@ function App() {
   const [players, setPlayers] = useState();
   // const [stations, setStations] = useState(stationsTest);
   const [stations, setStations] = useState();
-  const [levelfeatures, setLevelfeatures] = useState(levelfeaturesTest);
+  // const [levelfeatures, setLevelfeatures] = useState(levelfeaturesTest);
+  const [levelfeatures, setLevelfeatures] = useState();
 
   useEffect(() => {
     console.log("loading players and stations!");
     axios.all([
         axios.get("http://localhost:5000/player/get_players"),
         axios.get("http://localhost:5000/stations/get_stations"),
-        axios.get("http://localhost:5000//level/levelfeatures"),
+        axios.get("http://localhost:5000/level/levelfeatures"),
       ])
       .then(
         axios.spread((playersResponse, stationsResponse, levelfeaturesResponse ) => {
@@ -283,14 +284,15 @@ function App() {
   /////////////////////////////////////////////////////
   // return after all hooks
   /////////////////////////////////////////////////////
-  if (!players || !stations) {
+  if (!players || !stations || !levelfeatures) {
     console.log("data is not ready");
     return null;
   }
 
   console.log("data is ready!");
-
-sStart(true);
+  console.log("players",players);
+  console.log(stations);
+  console.log("level",levelfeatures);
 
   const playerPositions = [
     [
@@ -310,6 +312,7 @@ sStart(true);
       stations[player4StationIndex].longitude,
     ],
   ];
+  console.log("level",playerPositions);
 
   return (
     // <Container className="container" fluid="true">
