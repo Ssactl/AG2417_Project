@@ -1,9 +1,9 @@
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-} from "react-google-maps";
+// import {
+//   withScriptjs,
+//   withGoogleMap,
+//   GoogleMap,
+//   Marker,
+// } from "react-google-maps";
 import React, { Component } from "react";
 import { useState, useEffect } from "react";
 
