@@ -154,7 +154,8 @@ function App() {
   const [players, setPlayers] = useState();
   // const [stations, setStations] = useState(stationsTest);
   const [stations, setStations] = useState();
-  const [levelfeatures, setLevelfeatures] = useState(levelfeaturesTest);
+  // const [levelfeatures, setLevelfeatures] = useState(levelfeaturesTest);
+  const [levelfeatures, setLevelfeatures] = useState();
 
   useEffect(() => {
     console.log("loading data!");
@@ -286,12 +287,15 @@ function App() {
   /////////////////////////////////////////////////////
   // return after all hooks
   /////////////////////////////////////////////////////
-  if (!players || !stations) {
+  if (!players || !stations || !levelfeatures) {
     console.log("data is not ready");
     return null;
   }
 
   console.log("data is ready!");
+
+  sStart(true);
+
   const playerPositions = [
     [
       stations[player1StationIndex].latitude,
@@ -310,6 +314,7 @@ function App() {
       stations[player4StationIndex].longitude,
     ],
   ];
+  console.log("level", playerPositions);
 
   return (
     // <Container className="container" fluid="true">
