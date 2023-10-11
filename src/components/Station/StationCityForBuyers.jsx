@@ -150,7 +150,8 @@ function StationCityForBuyers({
         {/* <div className="station--buyers--column--2--row--1">for image</div> */}
         <div className="station--buyers--column--2--row--2">
           <p>{currentLevelFeature.textBuy}</p>
-          <p>{currentLevelFeature.scoreBuy}</p>
+          <p>Level: {currentLevelFeature.level}</p>
+          <p>Credits: {currentLevelFeature.scoreBuy}</p>
         </div>
         <div className="station--buyers--column--2--row--3">
           <button
