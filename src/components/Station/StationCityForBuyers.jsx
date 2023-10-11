@@ -56,7 +56,7 @@ function StationCityForBuyers({
           //use place id to get more information
           const detailsRequest = {
             placeId,
-            fields: ["reviews", "name", "formatted_address", "rating"],
+            fields: ["name", "formatted_address", "geometry", "photos"],
           };
 
           service.getDetails(detailsRequest, (details, status) => {
@@ -101,15 +101,37 @@ function StationCityForBuyers({
           <div>
             <h3>{placeDetails.name}</h3>
             <p>Address: {placeDetails.formatted_address}</p>
-            <p>Rating: {placeDetails.rating}</p>
-            {/* 可以添加其他详细信息，如照片和评论 */}
+            <div className="button--buyers--photo-scroll-container">
+              {placeDetails.photos && placeDetails.photos.length > 0 ? (
+                placeDetails.photos.map((photo, index) => (
+                  <img
+                    key={index}
+                    src={photo.getUrl()}
+                    alt={placeDetails.name}
+                    className="place-photo"
+                  />
+                ))
+              ) : (
+                <p>No photos available</p>
+              )}
+            </div>
+
+            {/* {placeDetails.photos && placeDetails.photos.length > 0 ? (
+              <img
+                src={placeDetails.photos[0].getUrl()}
+                alt={placeDetails.name}
+                className="place-photo"
+              />
+            ) : (
+              <p>No photos available</p>
+            )} */}
           </div>
         ) : (
           <p>Loading place details...</p>
         )}
       </div>
       <div className="station--buyers--column--2">
-        <div className="station--buyers--column--2--row--1">for image</div>
+        {/* <div className="station--buyers--column--2--row--1">for image</div> */}
         <div className="station--buyers--column--2--row--2">
           <p>{currentLevelFeature.textBuy}</p>
           <p>{currentLevelFeature.scoreBuy}</p>
