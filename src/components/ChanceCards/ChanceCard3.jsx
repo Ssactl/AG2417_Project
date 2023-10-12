@@ -58,24 +58,30 @@ function ChanceCard3({
   }
   console.log(cuisineStations);
   console.log(penalty);
-
+  // let clickcount = 0;
   function setCurrentPlayerScore() {
-    const newPlayers = JSON.parse(JSON.stringify(players));
-    // const owner = stations[currentStationIndex].belonger - 1; // the owner index
-    //update the score of current player/customer and the owner
-    // stationlevels.forEach((levelFeatrue) => {
-    // if (levelFeatrue.level <= stations[currentStationIndex].level) {
-    newPlayers[currentPlayer].score =
-      players[currentPlayer].score + penalty;
-    console.log('newPlayers', newPlayers);
-    // newPlayers[owner].score = players[owner].score + levelFeatrue.scoreFine;
+    // if (clickcount == 0) {
+      const newPlayers = JSON.parse(JSON.stringify(players));
+      // const owner = stations[currentStationIndex].belonger - 1; // the owner index
+      //update the score of current player/customer and the owner
+      // stationlevels.forEach((levelFeatrue) => {
+      // if (levelFeatrue.level <= stations[currentStationIndex].level) {
+      newPlayers[currentPlayer].score =
+        players[currentPlayer].score + penalty;
+      console.log('newPlayers', newPlayers);
+      // newPlayers[owner].score = players[owner].score + levelFeatrue.scoreFine;
+      // }
+    //   setPlayers(newPlayers);
+    //   console.log('After setPlayers', players);
+    //   clickcount++;
+    //   console.log('click', clickcount);
     // }
-    setPlayers(newPlayers);
-    console.log('After setPlayers', players);
+    // console.log('click', clickcount);
+    // console.log('clickchancecard3:players', players);
   };
 
 
-  console.log('players', players);
+  // console.log('players', players);
 
 
   return (
