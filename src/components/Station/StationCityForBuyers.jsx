@@ -77,6 +77,7 @@ function StationCityForBuyers({
                 id: Math.random(), // 可以使用其他方式创建唯一标识符
                 position: [latitude, longitude],
                 name: details.name, // 你可以根据需要包含更多信息
+                avatar: players[currentPlayer].avatar,
               });
             }
           });

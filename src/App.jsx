@@ -429,7 +429,14 @@ function App() {
               console.log(marker.id);
               return (
                 <Marker key={marker.id} position={marker.position}>
-                  <Popup autoClose={false}>{marker.name}</Popup>
+                  <Popup autoClose={false}>
+                    <img
+                      src={marker.avatar}
+                      width={"40px"}
+                      height={"40px"}
+                    ></img>
+                    {marker.name}
+                  </Popup>
                 </Marker>
               );
             })}
