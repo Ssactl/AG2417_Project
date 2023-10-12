@@ -1,3 +1,7 @@
+/* .player--board {
+  border: 2px solid white;
+} */
+
 .player--board--item {
   /* background-color: blue; */
   flex-basis: 50%;

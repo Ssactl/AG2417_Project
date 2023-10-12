@@ -404,13 +404,13 @@ function App() {
           <StationOther
             nextPlayer={nextPlayer}
             stations={stations}
+            setStations={setStations}
             currentStationIndex={currentStationIndex}
             players={players}
             setPlayers={setPlayers}
             currentPlayer={currentPlayer}
             setCurrentPlayer={setCurrentPlayer}
             levelfeatures={levelfeatures}
-            // setPlayers={setPlayers}
             stationClassCustomers={stationClassCustomers}
             setCurrentStationIndex={setCurrentStationIndex}
             playersStationIndex={playersStationIndex}

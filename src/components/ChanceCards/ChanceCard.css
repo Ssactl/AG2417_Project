@@ -1,6 +1,4 @@
-.chance--card--result {
-    margin-bottom: 5%;
-}
+
 .chance--card--result h3 {
     font-size: 40px;
     text-align: center;
@@ -33,3 +31,17 @@
     color: white;
     font-family: "Agency FB", sans-serif;
 }
+.chance--card--button {
+    background-color: #2656e6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+  }
