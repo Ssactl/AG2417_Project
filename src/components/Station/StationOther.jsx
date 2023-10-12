@@ -15,9 +15,10 @@ class StationOther extends Component {
       selectedCardIndex: null, // Track the selected card index
       isCardFlipped: false, // Track if the card is flipped to show content
       isCardExecuted: false, // Track if the card is executed
+      scoreChange: 0, //score
     };
   }
- 
+  
   // 定义一个数组来存储所有的 ChanceCard 组件
   chanceCards = [
     ChanceCard1,
@@ -34,6 +35,7 @@ class StationOther extends Component {
       selectedCardIndex: cardIndex,
       isCardFlipped: true,
       isCardExecuted: false,
+      scoreChange: 0, //score
     });
   }
 
@@ -74,7 +76,7 @@ class StationOther extends Component {
         <div className="card-executed">
           {/* Render the card content based on selectedCardIndex */}
           {this.renderCardExecuted(selectedCardIndex)}
-          <button onClick={this.handleCardClose}>Done</button>
+          <button onClick={this.handleCardClose}>OK</button>
         </div>
         );
       } else {
@@ -125,6 +127,7 @@ class StationOther extends Component {
 
   // Render the card content based on selectedCardIndex
   renderCardContent(selectedCardIndex) {
+     console.log(this.props);
     if (selectedCardIndex !== null) {
       let cardContent = null;
       switch (selectedCardIndex) {

@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import * as turf from '@turf/turf';
-import './ChanceCard.css'
+import './ChanceCard.css';
 
 function ChanceCard4({
   players,
+  setPlayers,
   currentPlayer,
-  nextplayer,
   stations,
 }) {
   console.log('here is ChanceCard4');
@@ -37,8 +37,23 @@ function ChanceCard4({
     return totalReward;
   };
 
+
   const score = calculateScore();
 
+  function setCurrentPlayerScore() {
+    const newPlayers = JSON.parse(JSON.stringify(players));
+    // const owner = stations[currentStationIndex].belonger - 1; // the owner index
+    //update the score of current player/customer and the owner
+    // stationlevels.forEach((levelFeatrue) => {
+    //   if (levelFeatrue.level <= stations[currentStationIndex].level) {
+        newPlayers[currentPlayer].score =
+          players[currentPlayer].score + totalReward;
+        // newPlayers[owner].score = players[owner].score + levelFeatrue.scoreFine;
+      // }
+    // });
+    setPlayers[newPlayers];
+  }
+  setCurrentPlayerScore();
   // Create a Turf.js feature collection for the currentPlayerCities
   const cityFeatures = currentPlayerCities.map((city) => {
     return turf.point([city.latitude, city.longitude], {
@@ -75,7 +90,7 @@ function ChanceCard4({
     // });
     const mapContainerRef = useRef(null);
   return (
-    <div className='chance--card--4'>
+    <div className='chance--card--result'>
       <h3>Chance Card 4 - Distance Bonus </h3>
       <p >Reward: {totalReward}</p>
       <p >Score: {players[currentPlayer].score}</p>
@@ -105,7 +120,7 @@ function ChanceCard4({
               units: 'kilometers',
             });
             const bufferLayer = L.geoJSON(buffer);
-            bufferLayer.addTo(mapContainerRef.current.leafletElement);
+            // bufferLayer.addTo(mapContainerRef.current.leafletElement);
           })}
 
         </MapContainer>

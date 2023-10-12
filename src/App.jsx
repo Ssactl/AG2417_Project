@@ -330,7 +330,7 @@ function App() {
       stations[player4StationIndex].longitude,
     ],
   ];
-
+  console.log('APP-players',players);
   return (
     // <Container className="container" fluid="true">
     //   <Row>
@@ -398,11 +398,13 @@ function App() {
             stations={stations}
             currentStationIndex={currentStationIndex}
             players={players}
+            setPlayers={setPlayers}
             currentPlayer={currentPlayer}
+            setCurrentPlayer={setCurrentPlayer}
+            levelfeatures={levelfeatures}
             // setPlayers={setPlayers}
             stationClassCustomers={stationClassCustomers}
             setCurrentStationIndex={setCurrentStationIndex}
-            setCurrentPlayer={setCurrentPlayer}
             playersStationIndex={playersStationIndex}
             resetStationClass={resetStationClass}
           />
