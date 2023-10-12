@@ -1,6 +1,14 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useEffect, useState, useRef } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMap,
+  Polyline,
+  Circle,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import axios from "axios";
 
@@ -423,12 +431,43 @@ function App() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+
+          {/* add circles */}
+          {stations.map((station, index) => (
+            <Circle
+              key={index}
+              center={[station.latitude, station.longitude]}
+              pathOptions={{ color: "red", fillColor: "red" }}
+              radius={2000} // 设置圆的半径（以米为单位）
+            />
+          ))}
+
+          {/* 添加连接线，确保头尾相连 */}
+          <Polyline
+            positions={[
+              ...stations.map((station) => [
+                station.latitude,
+                station.longitude,
+              ]),
+              [stations[0].latitude, stations[0].longitude],
+            ]}
+            pathOptions={{ color: "green", weight: 5, dashArray: "20, 20" }}
+          />
+
           {/* add new marker */}
-          {markers.length > 1 &&
+          {markers &&
             markers.map((marker) => {
+              console.log(marker.id);
               return (
                 <Marker key={marker.id} position={marker.position}>
-                  <Popup autoClose={false}>{marker.name}</Popup>
+                  <Popup autoClose={false}>
+                    <img
+                      src={marker.avatar}
+                      width={"40px"}
+                      height={"40px"}
+                    ></img>
+                    {marker.name}
+                  </Popup>
                 </Marker>
               );
             })}
@@ -444,7 +483,7 @@ function App() {
           />
         </div>
         <div className="row--2">
-          <SmallMap playerPositions={playerPositions} />
+          <SmallMap playerPositions={playerPositions} stations={stations} />
         </div>
       </div>
     </div>

@@ -27,7 +27,8 @@ function StationCityForBuyers({
 
   // console.log("show StationCityForBuyers");
 
-  let newMarker;
+  // 定义一个新状态来保存 newMarker
+  const [newMarker, setNewMarker] = useState(null);
 
   // 定义 state 来存储地点的详细信息
   const [placeDetails, setPlaceDetails] = useState(null);
@@ -72,11 +73,12 @@ function StationCityForBuyers({
               //get the position of the new marker
               const latitude = details.geometry.location.lat();
               const longitude = details.geometry.location.lng();
-              newMarker = {
+              setNewMarker({
                 id: Math.random(), // 可以使用其他方式创建唯一标识符
                 position: [latitude, longitude],
                 name: details.name, // 你可以根据需要包含更多信息
-              };
+                avatar: players[currentPlayer].avatar,
+              });
             }
           });
         }
