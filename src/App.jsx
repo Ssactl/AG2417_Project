@@ -405,7 +405,7 @@ function App() {
             nextPlayer={nextPlayer}
             stations={stations}
             setStations={setStations}
-            currentStationIndex={currentStationIndesetStations={setStations}}
+            currentStationIndex={currentStationIndex}
             players={players}
             setPlayers={setPlayers}
             currentPlayer={currentPlayer}
