@@ -71,15 +71,16 @@
   display: none;
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
-  background: #3498db;
-  color: #fff;
+  left: 20%;
+  width: 20%;
+  background: #333; /* 使用暗灰色背景 */
+  color: #fff; /* 白色字体颜色 */
   text-align: center;
   padding: 10px;
-  font-size: 24px;
+  font-size: 32px; /* 增大字号 */
   z-index: 99999;
   animation-duration: 2s;
+  opacity: 0.8;
 }
 
 .banner.banner--show {

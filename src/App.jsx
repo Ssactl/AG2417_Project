@@ -292,8 +292,15 @@ function App() {
   //for adding new marker
   const [markers, setMarkers] = useState([]);
 
-  //showing the current station name
+  //visibility state for the current station name/banner
   const [showBanner, setShowBanner] = useState(true);
+  useEffect(() => {
+    if (stationClassList.every((s) => s === "station--hidden")) {
+      setShowBanner(true);
+    } else {
+      setShowBanner(false);
+    }
+  }, stationClassList);
 
   /////////////////////////////////////////////////////
   // return after all hooks
@@ -421,7 +428,7 @@ function App() {
           stationClassList={stationClassList}
         />
         <div className={`banner ${showBanner ? "banner--show" : ""}`}>
-          <p>显示的地名或消息</p>
+          <p>{stations[currentStationIndex].name}</p>
         </div>
         <MapContainer
           ref={mapRef}
