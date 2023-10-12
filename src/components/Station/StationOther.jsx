@@ -77,7 +77,7 @@ class StationOther extends Component {
         <div className="card-executed">
           {/* Render the card content based on selectedCardIndex */}
           {this.renderCardExecuted(selectedCardIndex)}
-          <button onClick={this.handleCardClose}>OK</button>
+          {/* <button onClick={this.handleCardClose}>OK</button> */}
         </div>
         );
       } else {

@@ -8,6 +8,8 @@ function ChanceCard1({
 }) {
   console.log('here is ChanceCard4');
 
+
+
     return (
       <div>
         <h3>Chance Card 1 - Northwest Region Government Subsidy</h3>
