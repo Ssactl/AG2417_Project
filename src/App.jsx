@@ -410,7 +410,6 @@ function App() {
             currentPlayer={currentPlayer}
             setCurrentPlayer={setCurrentPlayer}
             levelfeatures={levelfeatures}
-            // setPlayers={setPlayers}
             stationClassCustomers={stationClassCustomers}
             setCurrentStationIndex={setCurrentStationIndex}
             playersStationIndex={playersStationIndex}

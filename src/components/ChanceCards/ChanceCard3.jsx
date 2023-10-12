@@ -27,27 +27,27 @@ function ChanceCard3({
   // console.log(currentPlayer);
   console.log(currentPlayerCities);
 
-// Check if any of the currentPlayer's cities have the "Cuisine" feature
-let hasCuisineCity = false;
-let index = 0;
+  // Check if any of the currentPlayer's cities have the "Cuisine" feature
+  let hasCuisineCity = false;
+  let index = 0;
 
-let cuisineStations = levelfeatures.filter(
-  (feature) => feature.level === -9999,
-)
+  let cuisineStations = levelfeatures.filter(
+    (feature) => feature.level === -9999,
+  )
 
-for (const city of currentPlayerCities) {
-  for (const feature of levelfeatures) {
-    if (feature.cid === city.cid && feature.categories === 'Cuisine') {
-      cuisineStations[index] = feature;
-      hasCuisineCity = true;
-      index++;
+  for (const city of currentPlayerCities) {
+    for (const feature of levelfeatures) {
+      if (feature.cid === city.cid && feature.categories === 'Cuisine') {
+        cuisineStations[index] = feature;
+        hasCuisineCity = true;
+        index++;
+        break;
+      }
+    }
+    if (hasCuisineCity) {
       break;
     }
   }
-  if (hasCuisineCity) {
-    break;
-  }
-}
   // Initialize the penalty
   let penalty = 0;
 
@@ -58,27 +58,28 @@ for (const city of currentPlayerCities) {
   }
   console.log(cuisineStations);
   console.log(penalty);
-  
+
   function setCurrentPlayerScore() {
     const newPlayers = JSON.parse(JSON.stringify(players));
     // const owner = stations[currentStationIndex].belonger - 1; // the owner index
     //update the score of current player/customer and the owner
     // stationlevels.forEach((levelFeatrue) => {
-      // if (levelFeatrue.level <= stations[currentStationIndex].level) {
-        newPlayers[currentPlayer].score =
-          players[currentPlayer].score + penalty;
-          console.log(newPlayers);
-        // newPlayers[owner].score = players[owner].score + levelFeatrue.scoreFine;
-      // }
-      setPlayers[newPlayers];
-    }; 
+    // if (levelFeatrue.level <= stations[currentStationIndex].level) {
+    newPlayers[currentPlayer].score =
+      players[currentPlayer].score + penalty;
+    console.log('newPlayers', newPlayers);
+    // newPlayers[owner].score = players[owner].score + levelFeatrue.scoreFine;
+    // }
+    setPlayers(newPlayers);
+    console.log('After setPlayers', players);
+  };
 
-  
-  console.log(players);
+
+  console.log('players', players);
 
 
   return (
-    <div className='chance--card--result' onMouseOver = {setCurrentPlayerScore()}>
+    <div className='chance--card--result' onClick={setCurrentPlayerScore}>
       <h3>Chance Card 3 - Cuisine Desert</h3>
       {hasCuisineCity ? (
         <div>
@@ -86,7 +87,7 @@ for (const city of currentPlayerCities) {
           <p>Cuisine Stations:</p>
           <ul >
             {cuisineStations.map((feature, index) => (
-              <li className='chance--card--list' key={index}>Station:{feature.cname} <br/>    Feature: {feature.fname}</li>
+              <li className='chance--card--list' key={index}>Station:{feature.cname} <br />    Feature: {feature.fname}</li>
             ))}
           </ul>
         </div>

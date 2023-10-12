@@ -15,7 +15,7 @@ class StationOther extends Component {
       selectedCardIndex: null, // Track the selected card index
       isCardFlipped: false, // Track if the card is flipped to show content
       isCardExecuted: false, // Track if the card is executed
-      scoreChange: 0, //score
+      // scoreChange: 0, //score
     };
   }
   
@@ -35,7 +35,7 @@ class StationOther extends Component {
       selectedCardIndex: cardIndex,
       isCardFlipped: true,
       isCardExecuted: false,
-      scoreChange: 0, //score
+      // scoreChange: 0, //score
     });
   }
 
@@ -64,6 +64,7 @@ class StationOther extends Component {
       isCardFlipped: false,
       isCardExecuted: false,
     });
+    console.log(this.props.players);
     this.props.nextPlayer();
   }
 
