@@ -235,21 +235,23 @@ function App() {
     // console.log("current player is", players[currentPlayer].name);
 
     //if the current station is a fate/chance card
-    stations[currentStationIndex].belonger === -99999
-      ? pass
-      : stations[currentStationIndex].belonger === -88888
-      ? setStationClassOther("")
-      : //if the current station is a city one without any owner, then display the StationCityForBuyers;
-      stations[currentStationIndex].belonger == 0
-      ? setStationClassBuyers("")
-      : //if the current station is a city and has a owner, but the current player is not the owner
-      currentPlayer + 1 != stations[currentStationIndex].belonger
-      ? setStationClassCustomers("")
-      : //if the current station is a city and has a owner, and the current player is the owner, but the city's level is under 3
-      stations[currentStationIndex].level < 3
-      ? setStationClassBuyers("")
-      : //if the station reach the max level
-        setStationClassMaxLevel("");
+    if (stations[currentStationIndex].belonger === -99999) {
+      // Do nothing
+    } else if (stations[currentStationIndex].belonger === -88888) {
+      setStationClassOther("");
+    } else if (stations[currentStationIndex].belonger === 0) {
+      //if the current station is a city one without any owner, then display the StationCityForBuyers;
+      setStationClassBuyers("");
+    } else if (currentPlayer + 1 !== stations[currentStationIndex].belonger) {
+      //if the current station is a city and has a owner, but the current player is not the owner
+      setStationClassCustomers("");
+    } else if (stations[currentStationIndex].level < 3) {
+      //if the current station is a city and has a owner, and the current player is the owner, but the city's level is under 3
+      setStationClassBuyers("");
+    } else {
+      //if the station reach the max level
+      setStationClassMaxLevel("");
+    }
   };
   const resetStationClass = () => {
     setStationClassCustomers("station--hidden");
