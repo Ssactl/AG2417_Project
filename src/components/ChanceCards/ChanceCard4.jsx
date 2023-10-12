@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import * as turf from '@turf/turf';
-// import { useGeoJSON } from '@react-leaflet/core';
+import './ChanceCard.css'
 
 function ChanceCard4({
   players,
@@ -78,7 +78,7 @@ function ChanceCard4({
     <div className='chance--card--4'>
       <h3>Chance Card 4 - Receive rewards for cities within 300km of each other</h3>
       <p >Reward: {totalReward}</p>
-      <p >Score: {score}</p>
+      <p >Score: {players[currentPlayer].score}</p>
       {currentPlayerCities.length > 0 && (
         <MapContainer
         ref={mapContainerRef}
@@ -109,7 +109,10 @@ function ChanceCard4({
           })}
 
         </MapContainer>
-      )}
+      )}:
+      (
+        <p> No Reward</p>
+      )
     </div>
   );
 };
