@@ -129,22 +129,22 @@ class StationOther extends Component {
       let cardContent = null;
       switch (selectedCardIndex) {
         case 0:
-          cardContent = "Query player's cities in the northwest region and grant subsidies.";
+          cardContent = "Northwest Region Government Subsidy: In the cities you own, each one located in the northwest region is eligible for a government subsidy. Each city will receive a subsidy of 500 units of currency. If a city has been upgraded, you will receive an additional 1000 units.";
           break;
         case 1:
-          cardContent = "Discover a Feng Shui treasure. Analyze a city or location.";
+          cardContent = "Feng Shui Discovery: You've stumbled upon a Feng Shui treasure. Now, you can choose to analyze a city or location. If you already own it, its value will double. If you haven't acquired it yet, you can purchase it at a discounted price.";
           break;
         case 2:
-          cardContent = "Query player's cities for Cuisine upgrades and impose fines.";
+          cardContent = "Cuisine Desert Title: In the cities you own, if none of them have the Cuisine, you will be awarded the Cuisine Desert title, but you'll also face a penalty of 1000 units of currency.";
           break;
         case 3:
-          cardContent = "Receive rewards for cities within 300km of each other.";
+          cardContent = "Distance Bonus: In the cities you own, if the distance between any two cities is less than 300 kilometers, you will receive a bonus of 1000 units.";
           break;
         case 4:
-          cardContent = "Host a cultural exchange event in a city.";
+          cardContent = "Cultural Exchange Event: You've organized a cultural exchange event in one of your cities, attracting tourists. Randomly select a city, and its value will increase by 200 units. Other players will have to pay you a fee of 400 units each.";
           break;
         case 5:
-          cardContent = "Organize a geography contest.";
+          cardContent = "Geography Contest Challenge: You've participated in a geography contest, answering questions about world geography. If you answer correctly, you'll receive 1000 units from each of the other players.";
           break;
         default:
           cardContent = "Unknown chance card";

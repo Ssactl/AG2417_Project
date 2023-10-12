@@ -10,7 +10,7 @@ class ChanceCard2 extends React.Component {
   render() {
     return (
       <div>
-        <h3>Chance Card 2 Content</h3>
+        <h3>Chance Card 2 - Feng Shui Discovery </h3>
         {/* Add content for Chance Card 2 */}
       </div>
     );

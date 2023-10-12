@@ -111,18 +111,18 @@
 }
 
 .chance-card-content h3 {
-  font-size: 45px;
+  font-size: 30px;
   margin-top: 2%;
   color: white;
   font-family: "Agency FB", sans-serif;
 }
 
 .chance-card-content p {
-  font-size: 30px;
+  font-size: 20px;
   margin-left: 5%;
   margin-right: 5%;
   /* margin-top: 10%;  */
-  margin-bottom: 5%;
+  /* margin-bottom: 5%; */
   color: white;
   font-family: "Agency FB", sans-serif;
 }

@@ -76,7 +76,7 @@ function ChanceCard4({
     const mapContainerRef = useRef(null);
   return (
     <div className='chance--card--4'>
-      <h3>Chance Card 4 - Receive rewards for cities within 300km of each other</h3>
+      <h3>Chance Card 4 - Distance Bonus </h3>
       <p >Reward: {totalReward}</p>
       <p >Score: {players[currentPlayer].score}</p>
       {currentPlayerCities.length > 0 && (
