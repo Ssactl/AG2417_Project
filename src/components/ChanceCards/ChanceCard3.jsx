@@ -64,7 +64,7 @@ function ChanceCard3({
     const newPlayers = JSON.parse(JSON.stringify(players));
     newPlayers[currentPlayer].score = players[currentPlayer].score + penalty;
     console.log('newPlayers', newPlayers);
-    setPlayers[newPlayers];
+    setPlayers(newPlayers);
     nextPlayer();
   };
 

@@ -19,8 +19,8 @@ import PlayerMarker from "./PlayerMarker";
 function SmallMap({ playerPositions, stations }) {
   return (
     <MapContainer
-      center={[35.03956537837425, 103.4895297672369]}
-      zoom={3}
+      center={[35.75383411159672, 113.10072042038098]}
+      zoom={4}
       scrollWheelZoom={false}
       zoomControl={false}
     >

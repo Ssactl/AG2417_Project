@@ -19,7 +19,7 @@ function ChanceCard2({
   console.log(fengShuiStations);
   let cid = -999;
   let isPicked = false;
-  
+
 // for picking
   function handlePick(event, cidCity) {
     cid = cidCity;
@@ -62,7 +62,7 @@ function ChanceCard2({
         )}
         {fengShuiStations.length > 0 ? (
           <MapContainer
-            center={[fengShuiStations[0].latitude, fengShuiStations[0].longitude]}
+            center={[35.03956537837425, 103.4895297672369]}
             zoom={4}
             style={{ height: '400px', width: '100%' }}
           >

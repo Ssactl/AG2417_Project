@@ -53,7 +53,7 @@ function ChanceCard4({
   function setCurrentPlayerScore() {
     const newPlayers = JSON.parse(JSON.stringify(players));
     newPlayers[currentPlayer].score = players[currentPlayer].score + totalReward;
-    setPlayers[newPlayers];
+    setPlayers(newPlayers);
     nextPlayer();
   }
 
