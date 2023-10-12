@@ -47,7 +47,7 @@ function StationCityForBuyers({
       console.log("display information");
       // 使用 Google Places API 获取地点的详细信息
       const request = {
-        query: currentLevelFeature.fname, // 你可以使用地点的名称
+        query: `${currentLevelFeature.fname}, ${currentLevelFeature.cname}`, // 你可以使用地点的名称
         fields: ["place_id"],
       };
 
