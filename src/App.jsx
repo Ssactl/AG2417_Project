@@ -338,7 +338,7 @@ function App() {
       stations[player4StationIndex].longitude,
     ],
   ];
-  console.log('APP-players',players);
+  console.log("APP-players", players);
   return (
     // <Container className="container" fluid="true">
     //   <Row>
@@ -483,7 +483,7 @@ function App() {
               console.log(marker.id);
               return (
                 <Marker key={marker.id} position={marker.position}>
-                  <Popup autoClose={false}>
+                  <Popup>
                     <img
                       src={marker.avatar}
                       width={"40px"}

@@ -64,7 +64,10 @@ function StationCityForCustomers({
           Owner: {players[stations[currentStationIndex].belonger - 1].name}
         </h3>
       )}
-      <p>You spend {currentLevelFeature.scoreFine} for</p>
+      <p>
+        You spend {currentLevelFeature.scoreFine} in{" "}
+        <b>{currentLevelFeature.cname}</b> for
+      </p>
       {stationlevels.map((levelFeatrue, index) =>
         levelFeatrue.level <= stations[currentStationIndex].level ? (
           <p key={index}>{levelFeatrue.textFine}</p>
