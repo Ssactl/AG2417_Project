@@ -292,6 +292,9 @@ function App() {
   //for adding new marker
   const [markers, setMarkers] = useState([]);
 
+  //showing the current station name
+  const [showBanner, setShowBanner] = useState(true);
+
   /////////////////////////////////////////////////////
   // return after all hooks
   /////////////////////////////////////////////////////
@@ -417,6 +420,9 @@ function App() {
           updateStationClass={updateStationClass}
           stationClassList={stationClassList}
         />
+        <div className={`banner ${showBanner ? "banner--show" : ""}`}>
+          <p>显示的地名或消息</p>
+        </div>
         <MapContainer
           ref={mapRef}
           center={[
