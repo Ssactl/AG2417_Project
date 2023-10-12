@@ -224,6 +224,7 @@ function App() {
     stationClassOther,
     stationClassMaxLevel,
   ];
+  console.log(stationClassList);
   const updateStationClass = (stations, currentStationIndex) => {
     // //for debugging
     // console.log(
@@ -234,7 +235,9 @@ function App() {
     // console.log("current player is", players[currentPlayer].name);
 
     //if the current station is a fate/chance card
-    stations[currentStationIndex].belonger === -88888
+    stations[currentStationIndex].belonger === -99999
+      ? pass
+      : stations[currentStationIndex].belonger === -88888
       ? setStationClassOther("")
       : //if the current station is a city one without any owner, then display the StationCityForBuyers;
       stations[currentStationIndex].belonger == 0
