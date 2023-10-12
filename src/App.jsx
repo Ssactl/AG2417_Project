@@ -295,12 +295,15 @@ function App() {
   //visibility state for the current station name/banner
   const [showBanner, setShowBanner] = useState(true);
   useEffect(() => {
-    if (stationClassList.every((s) => s === "station--hidden")) {
+    if (
+      stationClassList.every((s) => s === "station--hidden") &&
+      playerDisplayEstateHidden === "player--estate--hidden"
+    ) {
       setShowBanner(true);
     } else {
       setShowBanner(false);
     }
-  }, stationClassList);
+  }, [stationClassList, playerDisplayEstateHidden]);
 
   /////////////////////////////////////////////////////
   // return after all hooks
