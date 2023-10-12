@@ -10,7 +10,7 @@ class ChanceCard3 extends React.Component {
   render() {
     return (
       <div>
-        <h3>Chance Card 3 Content</h3>
+        <h3>Chance Card 3 - Cuisine Desert </h3>
         {/* Add content for Chance Card 3 */}
       </div>
     );
