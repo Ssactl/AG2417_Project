@@ -424,8 +424,9 @@ function App() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {/* add new marker */}
-          {markers.length > 1 &&
+          {markers &&
             markers.map((marker) => {
+              console.log(marker.id);
               return (
                 <Marker key={marker.id} position={marker.position}>
                   <Popup autoClose={false}>{marker.name}</Popup>
