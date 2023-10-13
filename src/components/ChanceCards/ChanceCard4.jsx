@@ -10,6 +10,7 @@ function ChanceCard4({
   currentPlayer,
   nextPlayer,
   stations,
+  updateStationOtherState,
 }) {
   console.log('here is ChanceCard4');
   // const updatedStations1 = stations.filter(
@@ -50,11 +51,15 @@ function ChanceCard4({
 
   const score = calculateScore();
 
+  function setStationOtherClose() {
+    updateStationOtherState();
+  }
+
   function setCurrentPlayerScore() {
     const newPlayers = JSON.parse(JSON.stringify(players));
     newPlayers[currentPlayer].score = players[currentPlayer].score + totalReward;
     setPlayers(newPlayers);
-    nextPlayer();
+    setStationOtherClose();
   }
 
   return (
@@ -65,9 +70,9 @@ function ChanceCard4({
         <p >Score: {players[currentPlayer].score}</p>
         {currentPlayerCities.length > 0 ? (
           <MapContainer
-            center={[currentPlayerCities[0].latitude, currentPlayerCities[0].longitude]}
-            zoom={3}
-            style={{ height: '400px', width: '100%' }}
+            center={[35.03956537837425, 103.4895297672369]}
+            zoom={4}
+            // style={{ height: '400px', width: '100%' }}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

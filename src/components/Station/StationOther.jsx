@@ -18,7 +18,15 @@ class StationOther extends Component {
       // scoreChange: 0, //score
     };
   }
-  
+  updateStationOtherState = () => {
+    this.setState({
+      selectedCardIndex: null,
+      isCardFlipped: false,
+      isCardExecuted: false,
+    });
+    console.log(this.props.players);
+    this.props.nextPlayer();
+  }
   // 定义一个数组来存储所有的 ChanceCard 组件
   chanceCards = [
     ChanceCard1,
@@ -77,7 +85,7 @@ class StationOther extends Component {
         <div className="card-executed">
           {/* Render the card content based on selectedCardIndex */}
           {this.renderCardExecuted(selectedCardIndex)}
-          {/* <button onClick={this.handleCardClose}>OK</button> */}
+          <button onClick={this.handleCardClose}>X</button>
         </div>
         );
       } else {
@@ -136,7 +144,7 @@ class StationOther extends Component {
           cardContent = "Northwest Region Government Subsidy: In the cities you own, each one located in the northwest region is eligible for a government subsidy. Each city will receive a subsidy of 500 units of currency. If a city has been upgraded, you will receive an additional 1000 units.";
           break;
         case 1:
-          cardContent = "Feng Shui Discovery: You've stumbled upon a Feng Shui treasure. Now, you can choose to analyze a city or location. If you already own it, its value will double. If you haven't acquired it yet, you can purchase it at a discounted price.";
+          cardContent = "Feng Shui Haven: You've stumbled upon a Feng Shui treasure. Now, you can choose to analyze a city or location. If you already own it, its value will double. If you haven't acquired it yet, you can purchase it at a discounted price.";
           break;
         case 2:
           cardContent = "Cuisine Desert Title: In the cities you own, if none of them have the Cuisine, you will be awarded the Cuisine Desert title, but you'll also face a penalty of 1000 units of currency.";
@@ -171,12 +179,12 @@ class StationOther extends Component {
       // console.log(this.chanceCards);
       // console.log(ChanceCardComponent);
       if (ChanceCardComponent) {
-        console.log('ChanceCardComponent =/= 0');
-        console.log(this.props);
+        // console.log('ChanceCardComponent =/= 0');
+        // console.log(this.props);
         return (
           <div className="chance-card-executed">
             <h3 className='card--title'>Result</h3>
-            <ChanceCardComponent {...this.props}/>;
+            <ChanceCardComponent {...this.props} updateStationOtherState={this.updateStationOtherState}/>;
           </div>
         );
       }

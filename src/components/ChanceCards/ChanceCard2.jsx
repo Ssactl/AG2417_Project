@@ -11,6 +11,7 @@ function ChanceCard2({
   setStations,
   levelfeatures,
   setLevelfeatures,
+  updateStationOtherState,
 }) {
   console.log('here is ChanceCard2');
   const fengShuiStations = stations.filter(
@@ -18,52 +19,62 @@ function ChanceCard2({
   )
   console.log(fengShuiStations);
   let cid = -999;
+  let fid = -999;
   let isPicked = false;
 
+  function setStationOtherClose() {
+    // const { updateStationOtherState } = props;
+    updateStationOtherState();
+  }
 // for picking
   function handlePick(event, cidCity) {
     cid = cidCity;
     isPicked = true;
-    console.log('handlePick called with cidCity:', cidCity);
+    fid = (cid - 1) * 3 + 1;
+    console.log('handlePick called with cid:', cid);
     console.log('isPicked:', isPicked);
+    console.log('scoreBuy:',levelfeatures[fid].scoreBuy)
   }
 // for buying
   function setCurrentInfo() {
     if (isPicked && cid > 0) {
+      // console.log('setCurrentInfo called with cid:', cid);
+      // console.log('setCurrentInfo called with cid:', fid);
       const newPlayers = JSON.parse(JSON.stringify(players));
-      const fid = (cid - 1) * 3 + 1;
-      newPlayers[currentPlayer].score = players[currentPlayer].score - levelfeatures[fid];
+      newPlayers[currentPlayer].score = players[currentPlayer].score - levelfeatures[fid].scoreBuy;
       console.log('newPlayers', newPlayers);
       setPlayers(newPlayers);
+
       const newStations = JSON.parse(JSON.stringify(stations));
-      newStations[cid].belonger = currentPlayer + 1;
-      newStations[cid].level = 1;
+      newStations[cid-1].belonger = currentPlayer + 1;
+      newStations[cid-1].level = 1;
+      console.log('newStations', newStations);
       setStations(newStations);
-      nextPlayer();
-      console.log(fid);
+
+      setStationOtherClose();
     }
-    console.log(isPicked);
-    console.log(cid);
+    // console.log(isPicked);
+    // console.log(cid);
   }
 // for not buying
   function setClose(){
-    nextPlayer();
+    setStationOtherClose();
   }
 
   return (
     <div>
       <div className='chance--card--result'>
         <h3>Chance Card 2 - Feng Shui Haven</h3>
-        <p> Please pick one station and you will own it.</p>
-        {isPicked ? (
-          <p> The station costs: {levelfeatures[(cid - 1) * 3 + 1]} scores</p>
+        <p> Please pick one station.</p>
+        {/* {fid>0 ? (
+          <p> The station costs: {levelfeatures[fid].scoreBuy} scores</p>
         ) : (
           <p> You haven't pick one yet. </p>
-        )}
+        )} */}
         {fengShuiStations.length > 0 ? (
           <MapContainer
             center={[35.03956537837425, 103.4895297672369]}
-            zoom={4}
+            zoom={5}
             style={{ height: '400px', width: '100%' }}
           >
             <TileLayer
@@ -79,7 +90,7 @@ function ChanceCard2({
                   }
                 }}
               >
-                <Popup>{city.name}</Popup>
+                <Popup>{city.name},cost:{levelfeatures[3*(city.cid-1)+1].scoreBuy}</Popup>
               </Marker>
             ))}
           </MapContainer>

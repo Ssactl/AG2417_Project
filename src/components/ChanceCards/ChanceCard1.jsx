@@ -1,4 +1,5 @@
 import React from 'react';
+import { MapContainer, TileLayer, Circle, Marker, Popup, useMap, GeoJSON } from 'react-leaflet';
 import './ChanceCard.css';
 
 function ChanceCard1({
@@ -7,17 +8,37 @@ function ChanceCard1({
   currentPlayer,
   nextPlayer,
   stations,
+  updateStationOtherState,
 }) {
   console.log('here is ChanceCard1');
-  const currentPlayerCities = stations.filter(
-    (stations) => stations.belonger === currentPlayer + 1
-  )
+
+  const remoteRegion = ["Xishuangbanna","Qinghai","Baotou","Hulunbuir","Changbai Mountains"];
  let subsidy = 0;
+ let northwestStations = [];
+  let hasNorthwestCity = false;
+
+  const currentPlayerCities = stations.filter(
+    (station) => station.belonger === currentPlayer + 1
+  );
+
+  // 判断是否有城市在remoteRegion
+  for (const city of currentPlayerCities) {
+    if (remoteRegion.includes(city.name)) {
+      subsidy += 1000;
+      northwestStations.push(city);
+      hasNorthwestCity = true;
+    }
+  }
+
+  function setStationOtherClose() {
+    updateStationOtherState();
+  }
+
 function setCurrentPlayerScore(){
   const newPlayers = JSON.parse(JSON.stringify(players));
   newPlayers[currentPlayer].score = players[currentPlayer].score +  subsidy;
   setPlayers(newPlayers);
-  nextPlayer();
+  setStationOtherClose();
 }
 
     return (
@@ -26,7 +47,7 @@ function setCurrentPlayerScore(){
         <h3>Chance Card 1 - Remote Region Government Subsidy</h3>
         {hasNorthwestCity ? (
           <div>
-            <p>You own stations in Remote Region. </p>
+            <p>You own stations in Remote Region and got subsidy: {subsidy}. </p>
             <p>Remote Stations:</p>
             <ul >
               {northwestStations.map((station, index) => (
@@ -54,7 +75,7 @@ function setCurrentPlayerScore(){
         ) : (
           <div>
             <p>
-              You don't own stations in Remote Region.
+              No subsidy because you don't own any station in Remote Region.
             </p>
           </div>
         )}
