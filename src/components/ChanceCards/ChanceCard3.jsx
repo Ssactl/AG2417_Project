@@ -1,4 +1,5 @@
 import React from 'react';
+import { MapContainer, TileLayer, Circle, Marker, Popup, useMap, GeoJSON } from 'react-leaflet';
 import './ChanceCard.css';
 
 function ChanceCard3({
@@ -88,10 +89,9 @@ function ChanceCard3({
               ))}
             </ul>
             <MapContainer
-              ref={mapContainerRef}
               center={[35.03956537837425, 103.4895297672369]}
               zoom={4}
-              // style={{ height: '400px', width: '100%' }}
+              style={{ height: '400px', width: '100%' }}
             >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
