@@ -5,7 +5,7 @@ function StationClassMaxLevel({ nextPlayer }) {
     nextPlayer();
   }
   return (
-    <div className="station">
+    <div className="station station--max-level">
       <p>You city reachs the MAX LEVEL!!!!</p>
       <button
         className="station--customer--button--ok"

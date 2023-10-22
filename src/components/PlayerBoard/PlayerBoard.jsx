@@ -41,7 +41,7 @@ const PlayerBoard = ({
             alt={`${player.name}'s Avatar`}
           />
           <div className="player--board--item--column--2">
-            <p>{player.name}</p>
+            <p className="player--name">{player.name}</p>
             <p>{player.score}</p>
             <button onClick={() => displayPlayerAllCollection(player)}>
               collection

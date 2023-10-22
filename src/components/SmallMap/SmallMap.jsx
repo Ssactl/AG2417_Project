@@ -26,10 +26,18 @@ function SmallMap({ playerPositions, stations }) {
     >
       <ZoomControl position="bottomright" />
 
+      {/* <TileLayer
+        attribution='Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
+        url={`https://api.mapbox.com/styles/v1/ssactl99/clo1g6z1a00e701qxb75o3bvw/draft/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic3NhY3RsOTkiLCJhIjoiY2xvMWV2ZW42MDcwMTJpbXNyZ3l6dm90ZCJ9.2Is1KTMgZB-UD56AlF3E0A`}
+      /> */}
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
+        url={`https://api.mapbox.com/styles/v1/ssactl99/clo1eyfuz00g901pf8a0ybguu/draft/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic3NhY3RsOTkiLCJhIjoiY2xvMWV2ZW42MDcwMTJpbXNyZ3l6dm90ZCJ9.2Is1KTMgZB-UD56AlF3E0A`}
       />
+      {/* <TileLayer
+        attribution='Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
+        url={`https://api.mapbox.com/styles/v1/ssactl99/clo1iknhd00ah01qx55s979z3/draft/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic3NhY3RsOTkiLCJhIjoiY2xvMWV2ZW42MDcwMTJpbXNyZ3l6dm90ZCJ9.2Is1KTMgZB-UD56AlF3E0A`}
+      /> */}
 
       {/* add circles */}
       {stations.map((station, index) => (

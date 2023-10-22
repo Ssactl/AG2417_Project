@@ -3,10 +3,13 @@
 } */
 
 .player--board--item {
+  background-color: #fff;
   /* background-color: blue; */
   flex-basis: 50%;
   display: inline-flex;
   height: 50%;
+  /* border: 5px #333 solid; */
+  opacity: 0.8;
 }
 
 .player--board--item--column--1 {
@@ -29,5 +32,10 @@
 }
 
 .current--player {
-  border: solid red 2px;
+  border: solid red 5px;
+  opacity: 1;
+}
+.player--name {
+  font-weight: 800;
+  font-size: larger;
 }

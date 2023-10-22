@@ -282,7 +282,7 @@ function App() {
   //initiate map
   const mapRef = useRef(); //refer to map
   const mapCenter = [39.920514604261506, 116.39601129456929];
-  const zoom = 11;
+  const zoom = 13;
   //when the currentStationIndex updates, move the map to the new center
   useEffect(() => {
     if (mapRef.current) {
@@ -293,6 +293,24 @@ function App() {
       ]);
     }
   }, [currentStationIndex]);
+
+  //track the basemap selection
+  const [selectedBasemap, setSelectedBasemap] = useState("mapbox-streets-v11");
+  const basemaps = {
+    "Mapbox Customiazed Outdoors":
+      "https://api.mapbox.com/styles/v1/ssactl99/clo1eyfuz00g901pf8a0ybguu/draft/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic3NhY3RsOTkiLCJhIjoiY2xvMWV2ZW42MDcwMTJpbXNyZ3l6dm90ZCJ9.2Is1KTMgZB-UD56AlF3E0A",
+    "Mapbox Customiazed Standard Oil Company":
+      "https://api.mapbox.com/styles/v1/ssactl99/clo1g6z1a00e701qxb75o3bvw/draft/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic3NhY3RsOTkiLCJhIjoiY2xvMWV2ZW42MDcwMTJpbXNyZ3l6dm90ZCJ9.2Is1KTMgZB-UD56AlF3E0A",
+    "Mapbox Customiazed Frank":
+      "https://api.mapbox.com/styles/v1/ssactl99/clo1iknhd00ah01qx55s979z3/draft/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic3NhY3RsOTkiLCJhIjoiY2xvMWV2ZW42MDcwMTJpbXNyZ3l6dm90ZCJ9.2Is1KTMgZB-UD56AlF3E0A",
+    "Mapbox Customiazed Monochrome":
+      "https://api.mapbox.com/styles/v1/ssactl99/clo1o91lt006v01qx426m4hio/draft/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic3NhY3RsOTkiLCJhIjoiY2xvMWV2ZW42MDcwMTJpbXNyZ3l6dm90ZCJ9.2Is1KTMgZB-UD56AlF3E0A",
+    OpenStreetMap: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  };
+
+  const handleBasemapChange = (basemap) => {
+    setSelectedBasemap(basemap);
+  };
 
   //for adding new marker
   const [markers, setMarkers] = useState([]);
@@ -440,6 +458,17 @@ function App() {
         <div className={`banner ${showBanner ? "banner--show" : ""}`}>
           <p>{stations[currentStationIndex].name}</p>
         </div>
+        {/* UI 元素，用于切换底图 */}
+        <select
+          className="select--basemap"
+          onChange={(e) => handleBasemapChange(e.target.value)}
+        >
+          {Object.keys(basemaps).map((key) => (
+            <option key={key} value={basemaps[key]}>
+              {key}
+            </option>
+          ))}
+        </select>
         <MapContainer
           ref={mapRef}
           center={[
@@ -451,10 +480,9 @@ function App() {
           closePopupOnClick={false}
         >
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
+            url={selectedBasemap}
           />
-
           {/* add circles */}
           {stations.map((station, index) => (
             <Circle
@@ -464,7 +492,6 @@ function App() {
               radius={2000} // 设置圆的半径（以米为单位）
             />
           ))}
-
           {/* 添加连接线，确保头尾相连 */}
           <Polyline
             positions={[
@@ -476,7 +503,6 @@ function App() {
             ]}
             pathOptions={{ color: "green", weight: 5, dashArray: "20, 20" }}
           />
-
           {/* add new marker */}
           {markers &&
             markers.map((marker) => {

@@ -27,11 +27,11 @@
 .column--1 {
   background-color: red;
   height: calc(100vh);
-  flex-grow: 2;
+  flex-grow: 4;
 }
 
 .column--2 {
-  background-color: aqua;
+  /* background-color: aqua; */
   flex-grow: 1;
   /* display: flex; */
   width: 10%;
@@ -40,13 +40,17 @@
 }
 
 .row--1 {
-  background-color: rgb(243, 247, 227);
+  /* background-color: #fff; */
+  color: #333;
+  font-weight: 500;
+  font-size: 1.2rem;
   flex-grow: 1;
   height: 40%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
+  /* opacity: 0.8; */
 }
 
 .row--2 {
@@ -71,9 +75,9 @@
   display: none;
   position: fixed;
   top: 0;
-  left: 20%;
+  left: 30%;
   width: 20%;
-  background: #333; /* 使用暗灰色背景 */
+  background: #34495e; /* 使用暗灰色背景 */
   color: #fff; /* 白色字体颜色 */
   text-align: center;
   padding: 10px;
@@ -97,6 +101,39 @@
   }
 }
 
+.select--basemap {
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  right: 28%;
+  overflow: hidden;
+  background-color: #2c3e50;
+  color: #fff;
+  border: 0;
+  border-radius: 0.25em;
+  cursor: pointer;
+  width: 20em;
+  height: 3em;
+  border-radius: 0.25em;
+  /* appearance: none; */
+  padding: 0 1em;
+  overflow: hidden;
+  outline: 10px red;
+}
+Arrow .select--basemap::after {
+  content: "▼"; /* Add content for the pseudo-element */
+  position: absolute; /* Use absolute positioning */
+  top: 0; /* Adjust positioning as needed */
+  right: 10px; /* Adjust positioning as needed */
+  transform: translateY(-80%); /* Center the arrow vertically */
+  color: #2c3e50;
+  pointer-events: none;
+  z-index: 99999;
+}
+/* Transition */
+.select--basemap:hover::after {
+  color: #f39c12;
+}
 /* ===================================================== */
-/* small map */
+/* select--basemap */
 /* ===================================================== */

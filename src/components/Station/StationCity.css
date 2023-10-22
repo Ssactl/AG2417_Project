@@ -132,3 +132,11 @@
 .station--customer {
   padding: 2rem;
 }
+
+/* //////////////////////////////////////////////////// */
+/* station of city which reach max level */
+/* //////////////////////////////////////////////////// */
+.station--max-level {
+  padding: 20px;
+  font-size: 20px;
+}
