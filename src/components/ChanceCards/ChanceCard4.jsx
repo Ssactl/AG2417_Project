@@ -1,8 +1,16 @@
-import React, { useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Circle, Marker, Popup, useMap, GeoJSON } from 'react-leaflet';
-import L from 'leaflet';
-import * as turf from '@turf/turf';
-import './ChanceCard.css';
+import React, { useEffect, useRef } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Circle,
+  Marker,
+  Popup,
+  useMap,
+  GeoJSON,
+} from "react-leaflet";
+import L from "leaflet";
+import * as turf from "@turf/turf";
+import "./ChanceCard.css";
 
 function ChanceCard4({
   players,
@@ -12,7 +20,7 @@ function ChanceCard4({
   stations,
   updateStationOtherState,
 }) {
-  console.log('here is ChanceCard4');
+  console.log("here is ChanceCard4");
   // const updatedStations1 = stations.filter(
   //   (stations) => stations.belonger === 0,
   // )
@@ -25,7 +33,7 @@ function ChanceCard4({
   // )
   const currentPlayerCities = stations.filter(
     (stations) => stations.belonger === currentPlayer + 1
-  )
+  );
   console.log(stations);
   console.log(currentPlayer);
   console.log(currentPlayerCities);
@@ -38,7 +46,7 @@ function ChanceCard4({
           const city1Point = turf.point([city1.latitude, city1.longitude]);
           const city2Point = turf.point([city2.latitude, city2.longitude]);
           const distance = turf.distance(city1Point, city2Point, {
-            units: 'kilometers',
+            units: "kilometers",
           });
           if (distance <= 300) {
             totalReward += 1000;
@@ -49,7 +57,7 @@ function ChanceCard4({
     return totalReward;
   };
 
-  const score = calculateScore();
+  calculateScore();
 
   function setStationOtherClose() {
     updateStationOtherState();
@@ -57,27 +65,25 @@ function ChanceCard4({
 
   function setCurrentPlayerScore() {
     const newPlayers = JSON.parse(JSON.stringify(players));
-    newPlayers[currentPlayer].score = players[currentPlayer].score + totalReward;
+    newPlayers[currentPlayer].score =
+      players[currentPlayer].score + totalReward;
     setPlayers(newPlayers);
     setStationOtherClose();
   }
 
   return (
     <div>
-      <div className='chance--card--result'>
+      <div className="chance--card--result">
         <h3>Chance Card 4 - Distance Bonus </h3>
-        <p >Reward: {totalReward}</p>
-        <p >Score: {players[currentPlayer].score}</p>
+        <p>Reward: {totalReward}</p>
+        <p>Score: {players[currentPlayer].score}</p>
         {currentPlayerCities.length > 0 ? (
           <MapContainer
             center={[35.03956537837425, 103.4895297672369]}
-            zoom={4}
-            // style={{ height: '400px', width: '100%' }}
+            zoom={6}
+            style={{ height: "400px", width: "100%" }}
           >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {/* add circles */}
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             {currentPlayerCities.map((station, index) => (
               <Circle
                 key={index}
@@ -87,23 +93,20 @@ function ChanceCard4({
               />
             ))}
             {currentPlayerCities.map((city) => (
-              <Marker
-                key={city.id}
-                position={[city.latitude, city.longitude]}
-              >
+              <Marker key={city.id} position={[city.latitude, city.longitude]}>
                 <Popup>{city.name}</Popup>
               </Marker>
             ))}
           </MapContainer>
         ) : (
-          <p> No Reward</p>
+          ""
         )}
       </div>
-      <button className='chance--card--button' onClick={setCurrentPlayerScore}>
+      <button className="chance--card--button" onClick={setCurrentPlayerScore}>
         OK
       </button>
     </div>
   );
-};
+}
 
 export default ChanceCard4;
