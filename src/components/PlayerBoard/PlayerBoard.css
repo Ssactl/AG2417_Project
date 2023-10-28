@@ -6,6 +6,7 @@
   background-color: #fff;
   /* background-color: blue; */
   flex-basis: 50%;
+  flex-shrink: 1;
   display: inline-flex;
   height: 50%;
   /* border: 5px #333 solid; */
@@ -15,6 +16,7 @@
 .player--board--item--column--1 {
   flex-basis: 50%;
   flex-grow: 1;
+  flex-shrink: 1;
 }
 
 .player--board--item--column--2 {
@@ -25,6 +27,7 @@
   justify-content: center;
   text-align: center;
   align-items: center;
+  flex-shrink: 1;
 }
 
 .player--board--item--column--2 button {
