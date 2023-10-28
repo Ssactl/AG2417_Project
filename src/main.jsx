@@ -8,6 +8,5 @@ import "../src/components/PlayerEstate/PlayerEstateBoard.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />
-    {/* <BigMap></BigMap> */}
   </React.StrictMode>
 );

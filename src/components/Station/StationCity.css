@@ -131,20 +131,69 @@
 }
 .station--customer {
   padding: 2rem;
+  position: fixed;
+  top: 15%;
+  left: 20%;
+  right: 20%;
+  bottom: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+  z-index: 9999; /* 使其在最上层显示 */
+  border: 2px solid #333;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  /* 使其在最上层显示，可根据需要调整 z-index */
 }
 
-.station--customer p {
+.station--customer--div {
+  padding: 20px;
+  text-align: center;
+  z-index: 9999;
+}
+
+.station--customer--div h2 {
   padding: 2rem;
+  font-size: 40px;
+  color: white;
+  font-family: "Agency FB", sans-serif;
+}
+
+.station--customer--div p {
+  font-size: 30px;
+  color: white;
+  font-family: "Agency FB", sans-serif;
 }
 /* //////////////////////////////////////////////////// */
 /* station of city which reach max level */
 /* //////////////////////////////////////////////////// */
 .station--max-level {
-  padding: 20px;
-  font-size: 20px;
+    padding: 2rem;
+    position: fixed;
+    top: 15%;
+    left: 20%;
+    right: 20%;
+    bottom: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+    z-index: 9999; /* 使其在最上层显示 */
+    border: 2px solid #333;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    /* 使其在最上层显示，可根据需要调整 z-index */
 }
 
 .station--max-level p{
   padding: 20px;
   font-size: 20px;
+  font-size: 20px;
+  /* margin-top: 10%;  */
+  /* margin-bottom: 5%; */
+  color: white;
+  font-family: "Agency FB", sans-serif;
 }
