@@ -31,7 +31,7 @@ function StationCityForCustomers({
   const currentLevelFeature =
     stationlevels[stations[currentStationIndex].level];
 
-  function buttonOkClikingHandler() {
+  function buttonOkClickingHandler() {
     const newPlayers = JSON.parse(JSON.stringify(players));
     const owner = stations[currentStationIndex].belonger - 1; // the owner index
     //update the score of current player/customer and the owner
@@ -58,30 +58,74 @@ function StationCityForCustomers({
   }
 
   return (
-    <div className="station station--customer">
-      {stations[currentStationIndex].belonger > 0 && (
-        <h3>
-          Owner: {players[stations[currentStationIndex].belonger - 1].name}
-        </h3>
+    // <div className="station--customer">
+    //   {stations[currentStationIndex].belonger > 0 && (
+    //     <h3>
+    //       Owner: {players[stations[currentStationIndex].belonger - 1].name}
+    //     </h3>
+    //   )}
+    //   <p>
+    //     You spend {currentLevelFeature.scoreFine} in{" "}
+    //     <b>{currentLevelFeature.cname}</b> for
+    //   </p>
+    //   {stationlevels.map((levelFeatrue, index) =>
+    //     levelFeatrue.level <= stations[currentStationIndex].level ? (
+    //       <p key={index}>{levelFeatrue.textFine}</p>
+    //     ) : (
+    //       ""
+    //     )
+    //   )}
+    //   <button
+    //     className="station--customer--button--ok"
+    //     onClick={buttonOkClikingHandler}
+    //   >
+    //     ok
+    //   </button>
+    // </div>
+    <div className="station station--city--buyers">
+    <div className="station--buyers--column--1">
+      {placeDetails ? (
+        <div>
+          <h2>{placeDetails.name}</h2>
+          <p>Address: {placeDetails.formatted_address}</p>
+          <div className="button--buyers--photo-scroll-container">
+            {placeDetails.photos && placeDetails.photos.length > 0 ? (
+              placeDetails.photos.map((photo, index) => (
+                <img
+                  key={index}
+                  src={photo.getUrl()}
+                  alt={placeDetails.name}
+                  className="place-photo"
+                />
+              ))
+            ) : (
+              <p>No photos available</p>
+            )}
+          </div>
+        </div>
+      ) : (
+        <p>Loading place details...</p>
       )}
-      <p>
-        You spend {currentLevelFeature.scoreFine} in{" "}
-        <b>{currentLevelFeature.cname}</b> for
-      </p>
-      {stationlevels.map((levelFeatrue, index) =>
-        levelFeatrue.level <= stations[currentStationIndex].level ? (
-          <p key={index}>{levelFeatrue.textFine}</p>
-        ) : (
-          ""
-        )
-      )}
-      <button
-        className="station--customer--button--ok"
-        onClick={buttonOkClikingHandler}
-      >
-        ok
-      </button>
     </div>
+    <div className="station--buyers--column--2">
+      {/* <div className="station--buyers--column--2--row--1">for image</div> */}
+      <div className="station--buyers--column--2--row--2">
+        <h2>{currentLevelFeature.cname}</h2>
+        <p>{players[owner].name}</p>
+        <p>{currentLevelFeature.textFine}</p>
+        <p>Level: {currentLevelFeature.level}</p>
+        <p>Credits: {currentLevelFeature.scoreFine}</p>
+      </div>
+      <div className="station--buyers--column--2--row--3">
+        <button
+          className="station--buyers--button station--buyers--button--yes"
+          onClick={buttonOkClickingHandler}
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
   );
 }
 

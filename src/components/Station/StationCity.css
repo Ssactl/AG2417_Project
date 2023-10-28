@@ -133,10 +133,18 @@
   padding: 2rem;
 }
 
+.station--customer p {
+  padding: 2rem;
+}
 /* //////////////////////////////////////////////////// */
 /* station of city which reach max level */
 /* //////////////////////////////////////////////////// */
 .station--max-level {
+  padding: 20px;
+  font-size: 20px;
+}
+
+.station--max-level p{
   padding: 20px;
   font-size: 20px;
 }

@@ -169,9 +169,12 @@ function App() {
     console.log("loading data!");
     axios
       .all([
-        axios.get("http://localhost:5000/player/get_players"),
-        axios.get("http://localhost:5000/stations/get_stations"),
-        axios.get("http://localhost:5000/level/levelfeatures"),
+        // axios.get("http://localhost:5000/player/get_players"),
+        // axios.get("http://localhost:5000/stations/get_stations"),
+        // axios.get("http://localhost:5000/level/levelfeatures"),
+        axios.get("http://130.237.64.7:5000/player/get_players"),
+        axios.get("http://130.237.64.7:5000/stations/get_stations"),
+        axios.get("http://130.237.64.7:5000/level/levelfeatures"),
       ])
       .then(
         axios.spread(
